@@ -8,7 +8,7 @@ import java.awt.event.*;
 public class DegreeWindow extends JFrame {
 
     public static void main(String[] args) {
-        DegreeWindow frameTabel = new DegreeWindow();
+        DegreeWindow frame = new DegreeWindow();
     }
 
     JLabel title = new JLabel("Homepage");
