@@ -13,16 +13,24 @@ public class DegreeWindow extends JFrame {
 
     JLabel title = new JLabel("Homepage");
     JPanel panel = new JPanel();
+    JButton addMajor = new JButton("Add Major");
+    JButton addMinor = new JButton("Add Minor");
+    JButton rmvMajor = new JButton("Remove Major");
+    JButton rmvMinor = new JButton("Remove Minor");
 
     DegreeWindow(){
         super("Degree Planner");
         setSize(500,500);
         setLocation(500,280);
-        panel.setLayout (null);
+        panel.setLayout (new BoxLayout(panel, BoxLayout.PAGE_AXIS));
 
         title.setBounds(230,10,150,20);
 
         panel.add(title);
+        panel.add(addMajor);
+        panel.add(addMinor);
+        panel.add(rmvMajor);
+        panel.add(rmvMinor);
 
         getContentPane().add(panel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
