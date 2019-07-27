@@ -2,30 +2,44 @@ package View;
 import javax.swing.*; 
 import java.awt.*; 
 import java.awt.event.*;
-import Controller.DegreePlannerController;
-import Model.DegreePlannerModel;
+import Controller.LoginController;
+import Model.LoginModel;
 import Model.ModelEvent;
 
 public class LoginView extends JFrameView {
-	private JTextField textField = new JTextField(); 
-	public LoginView(DegreePlannerModel model, DegreePlannerController controller) { 
+	public static final String LOGIN = "Login"; 
+	public static final String REGISTER = "Register"; 
+	private JTextField usernameField = new JTextField(); 
+	private JTextField passwordField = new JTextField(); 
+	
+	public LoginView(LoginModel model, LoginController controller) { 
 		super(model, controller);
+		usernameField.setText("Username");
+		passwordField.setText("Password");
+		this.getContentPane().add(usernameField, BorderLayout.CENTER); JPanel buttonPanel = new JPanel();
+		this.getContentPane().add(passwordField, BorderLayout.CENTER); JPanel buttonPanel = new JPanel();
+		Handler handler = new Handler();
+		JButton loginButton = new JButton("Login");
+		loginButton.addActionListener(handler);
+		JButton registerButton = new JButton("Register");
+		registerButton.addActionListener(handler);
+		buttonPanel.setLayout(new GridLayout(1, 2));
+		this.getContentPane().add(buttonPanel, BorderLayout.CENTER);
+		buttonPanel.add(loginButton, null);
+		buttonPanel.add(registerButton, null);
+		pack();
 	}
 	
-	// Now implement the necessary event handling code 
 	public void modelChanged(ModelEvent event) {
-	String msg = event.getAmount() + "";
-	textField.setText(msg);
+		String msg = event.getAmount() + "";
+		textField.setText(msg);
 	}
-	/*
 
-	// Inner classes for Event Handling 
-	class Handler implements ActionListener { 
-		// Event handling is handled locally
+	class Handler implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			((DegreePlannerController)getController()).operation(e.getActionCommand()); 
-	   } }
+			((LoginController)getController()).operation(e.getActionCommand(), usernameField.getText(), passwordField.getText());
+	    } 
+	}
 	
-	public static void main(String [] args) { new DegreePlannerController(); }
-	*/
+	public static void main(String [] args) { new LoginController(); }
 }
