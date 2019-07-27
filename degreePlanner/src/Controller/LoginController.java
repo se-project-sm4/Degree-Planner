@@ -10,11 +10,11 @@ public class LoginController extends AbstractController {
 		((JFrameView)getView()).setVisible(true);
 	}
 	
-	public void operation(String option){
+	public void operation(String option, String username, String password){
 		if(option == LoginView.LOGIN){
-			((LoginModel)getModel()).login();
+			((LoginModel)getModel()).login(username, password);
 		}else {
-			((LoginModel)getModel()).register();
+			((LoginModel)getModel()).register(username, password);
 		}
 	}
 }
