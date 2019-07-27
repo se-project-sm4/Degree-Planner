@@ -4,7 +4,7 @@ import java.util.List;
 import Model.Student;
 
 public class LoginModel extends AbstractModel {
-	private List<Student> students = new ArrayList<>();
+	private ArrayList<Student> students;
 	
 	public LoginModel() {
 		//read from file

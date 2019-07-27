@@ -3,6 +3,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 public abstract class AbstractModel implements Model {
+	// edit all of this
 	private List<ModelListener> listeners = new ArrayList<ModelListener>(5);
 	
 	public void notifyChanged(ModelEvent event){

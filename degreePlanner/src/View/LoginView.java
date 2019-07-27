@@ -31,6 +31,7 @@ public class LoginView extends JFrameView {
 	}
 	
 	public void modelChanged(ModelEvent event) {
+		//change this
 		String msg = event.getAmount() + "";
 		textField.setText(msg);
 	}

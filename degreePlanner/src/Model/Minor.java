@@ -5,7 +5,7 @@ import Model.Requirement;
 
 public class Minor {
 	private String minorName;
-	private List<Requirement> requirements = new ArrayList<>();
+	private ArrayList<Requirement> requirements;
 	private int writingIntensiveHours;
 	
 	public void setMinorName(String m) {
@@ -16,11 +16,11 @@ public class Minor {
 		return minorName;
 	}
 
-	public void setMajor(List<Requirement> r) {
+	public void setMajor(ArrayList<Requirement> r) {
 		requirements = r;
 	}
 	
-	public List<Requirement> getMajors() {
+	public ArrayList<Requirement> getMajors() {
 		return requirements;
 	}
 	

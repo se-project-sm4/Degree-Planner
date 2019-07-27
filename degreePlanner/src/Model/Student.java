@@ -1,5 +1,4 @@
 package Model;
-import Model.DegreePlan;
 
 public class Student {
 	private String username;
