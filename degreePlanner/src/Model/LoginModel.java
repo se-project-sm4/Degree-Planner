@@ -6,6 +6,10 @@ import Model.Student;
 public class LoginModel extends AbstractModel {
 	private List<Student> students = new ArrayList<>();
 	
+	public LoginModel() {
+		//read from file
+	}
+	
 	public boolean login(String username, String password){
 		Student temp = new Student(username, password);
 		if (students.contains(temp)){

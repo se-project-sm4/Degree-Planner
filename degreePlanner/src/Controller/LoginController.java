@@ -12,9 +12,17 @@ public class LoginController extends AbstractController {
 	
 	public void operation(String option, String username, String password){
 		if(option == LoginView.LOGIN){
-			((LoginModel)getModel()).login(username, password);
+			if (((LoginModel)getModel()).login(username, password)) {
+				//log in
+			} else {
+				// don't log in
+			}
 		}else {
-			((LoginModel)getModel()).register(username, password);
+			if (((LoginModel)getModel()).register(username, password)) {
+				//register
+			} else {
+				//don't register
+			}
 		}
 	}
 }
