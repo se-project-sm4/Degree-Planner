@@ -2,9 +2,13 @@ package Model;
 import Model.DegreePlan;
 
 public class Student {
-	private DegreePlan degreePlan;
 	private String username;
 	private String password;
+	
+	public Student(String u, String p) {
+		username = u;
+		password = p;
+	}
 	
 	public void setUsername(String s) {
 		username = s;
@@ -20,13 +24,5 @@ public class Student {
 	
 	public String getPassword() {
 		return password;
-	}
-	
-	public void setDegreePlan(DegreePlan d) {
-		degreePlan = d;
-	}
-	
-	public DegreePlan getDegreePlan() {
-		return degreePlan;
 	}
 }
