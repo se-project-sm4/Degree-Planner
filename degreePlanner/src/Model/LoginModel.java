@@ -2,6 +2,7 @@ package Model;
 import java.util.ArrayList;
 import java.util.List;
 import Model.Student;
+import Model.ModelEvent;
 
 public class LoginModel extends AbstractModel {
 	private List<Student> students = new ArrayList<>();
@@ -12,10 +13,9 @@ public class LoginModel extends AbstractModel {
 	
 	public boolean login(String username, String password){
 		if (students.contains(new Student(username, password))){
-			System.out.println("true");
+			new ModelEvent(this, 1, "", 0);
 			return true;
 		}else{
-			System.out.println("false");
 			return false;
 		}
 	}

@@ -2,11 +2,13 @@ package Model;
 import java.awt.event.ActionEvent;
 
 public class ModelEvent extends ActionEvent {
-	//change all this
-	private int amount;
-	public ModelEvent(Object obj, int id, String message, int amount){
+	private int type;
+	
+	public ModelEvent(Object obj, int id, String message, int t){
 		super(obj, id, message);
-		this.amount = amount;
+		type = t;
 	}
-	public int getAmount(){return amount;}
+	public int getType(){
+		return type;
+	}
 }

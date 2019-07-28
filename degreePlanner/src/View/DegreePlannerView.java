@@ -59,7 +59,7 @@ public class DegreePlannerView extends JFrameView
 
 	public void modelChanged(ModelEvent event) {
 		//change this
-		String msg = event.getAmount() + "";
+		String msg = event.getType() + "";
 	 }
 	
 	class Handler implements ActionListener { 

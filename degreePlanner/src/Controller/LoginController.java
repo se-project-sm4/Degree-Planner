@@ -14,6 +14,8 @@ public class LoginController extends AbstractController {
 	public void operation(String option, String username, String password){
 		if(option == LoginView.LOGIN){
 			if (((LoginModel)getModel()).login(username, password)) {
+				((LoginView)this.getView()).dispose();
+				setModel(null);
 				new DegreePlannerController(username);
 			} else {
 				// don't log in

@@ -11,13 +11,19 @@ public class LoginView extends JFrameView {
 	public static final String REGISTER = "Register"; 
 	private JTextField usernameField = new JTextField(); 
 	private JTextField passwordField = new JTextField(); 
+	private JLabel notifier = new JLabel(); 
 	
 	public LoginView(LoginModel model, LoginController controller) { 
 		super(model, controller);
 		usernameField.setText("Username");
 		passwordField.setText("Password");
-		this.getContentPane().add(usernameField, BorderLayout.NORTH);
-		this.getContentPane().add(passwordField, BorderLayout.CENTER);
+		notifier.setText("Login/Register");
+		JPanel mainPanel= new JPanel();
+		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+		mainPanel.add(notifier);
+		mainPanel.add(usernameField);
+		mainPanel.add(passwordField);
+		this.getContentPane().add(mainPanel, BorderLayout.NORTH);
 		JPanel buttonPanel = new JPanel();
 		Handler handler = new Handler();
 		JButton loginButton = new JButton(LOGIN);
@@ -32,8 +38,16 @@ public class LoginView extends JFrameView {
 	}
 	
 	public void modelChanged(ModelEvent event) {
-		//change this
-		String msg = event.getAmount() + "";
+		if(event.getType() == 0) {
+			//login success
+			this.dispose();
+		}else if(event.getType() == 1) {
+			//login fail
+		}else if(event.getType() == 2) {
+			//register success
+		}else{
+			//register fail
+		}
 	}
 
 	class Handler implements ActionListener {
