@@ -1,11 +1,13 @@
 package Model;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import Model.Major;
 import Model.Minor;
 import Model.Semester;
 
-public class DegreePlan {
+public class DegreePlan implements Serializable{
+	private static final long serialVersionUID = 1L;
 	private List<Major> majors = new ArrayList<>();
 	private List<Minor> minors = new ArrayList<>();
 	private List<Semester> semesters = new ArrayList<>();
@@ -45,7 +47,7 @@ public class DegreePlan {
 	public void setSemesters(ArrayList<Semester> s) {
 		semesters = s;
 	}
-
+	
 	public List<Semester> getSemesters() {
 		return semesters;
 	}
@@ -57,4 +59,9 @@ public class DegreePlan {
 	public void removeSemester(Semester s) {
 		semesters.remove(s);
 	}
+
+    @Override
+    public String toString() { 
+        return majors + " " + minors + " " + semesters;
+    } 
 }

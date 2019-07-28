@@ -1,6 +1,9 @@
 package Model;
 
-public class Course {
+import java.io.Serializable;
+
+public class Course implements Serializable{
+	private static final long serialVersionUID = 1L;
 	private int courseID;
 	private String subject;
 	private Course prerequisites;
@@ -74,4 +77,9 @@ public class Course {
 	public boolean getWritingIntensive() {
 		return writingIntensive;
 	}
+	
+    @Override
+    public String toString() { 
+        return Integer.toString(courseID) + " " + subject + " " + prerequisites + " " + Integer.toString(hours) + " " + className + " " + classDescription + " " + writingIntensive;
+    } 
 }

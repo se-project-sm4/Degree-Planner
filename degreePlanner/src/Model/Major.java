@@ -1,9 +1,11 @@
 package Model;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import Model.Requirement;
 
-public class Major {
+public class Major implements Serializable{
+	private static final long serialVersionUID = 1L;
 	private String majorName;
 	private List<Requirement> requirements = new ArrayList<>();
 	private int writingIntensiveHours;
@@ -39,4 +41,9 @@ public class Major {
 	public int getWritingIntensiveHours() {
 		return writingIntensiveHours;
 	}
+
+    @Override
+    public String toString() { 
+        return majorName + " " + requirements + Integer.toString(writingIntensiveHours);
+    } 
 }

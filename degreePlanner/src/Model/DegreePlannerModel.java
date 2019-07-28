@@ -1,4 +1,8 @@
 package Model;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 
 import Model.DegreePlan;
@@ -9,8 +13,21 @@ public class DegreePlannerModel  extends AbstractModel{
 	private DegreePlan plan = new DegreePlan();
 	
 	public DegreePlannerModel(String username) {
-		//open file for student
-		catalog = new CourseCatalog();
+		try {
+			String fileName = username + ".bin";
+			FileInputStream fis = new FileInputStream(fileName);
+			ObjectInputStream ois = new ObjectInputStream(fis);
+			plan = (DegreePlan)ois.readObject();
+			ois.close();
+			fis.close();
+		}catch(FileNotFoundException e) {
+			System.out.println("file not found");
+		}catch(IOException e) {
+			e.printStackTrace();
+			System.out.println("io exception");
+		}catch(ClassNotFoundException e) {
+			System.out.println("class not found");
+		}
 	}
 	
 	public void createPlan(){

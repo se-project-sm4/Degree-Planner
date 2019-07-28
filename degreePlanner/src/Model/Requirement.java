@@ -1,8 +1,11 @@
 package Model;
 
-public class Requirement {
+import java.io.Serializable;
+
+public class Requirement implements Serializable{
+	private static final long serialVersionUID = 1L;
 	private String subject;
-	private int numHour;
+	private int numHours;
 	
 	public void setSubject(String s) {
 		subject = s;
@@ -13,10 +16,15 @@ public class Requirement {
 	}
 	
 	public void setNumHour(int n) {
-		numHour = n;
+		numHours = n;
 	}
 	
 	public int getNumHour() {
-		return numHour;
+		return numHours;
 	}
+	
+    @Override
+    public String toString() { 
+        return subject + " " + Integer.toString(numHours);
+    } 
 }

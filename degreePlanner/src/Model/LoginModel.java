@@ -48,6 +48,7 @@ public class LoginModel extends AbstractModel {
 	}
 
 	public boolean register(String username, String password){
+		//make sure file can be created by username
 		if (students.containsKey(username)) {
 			ModelEvent me = new ModelEvent(this, 1, "", 3);
 			notifyChanged(me);
@@ -58,6 +59,21 @@ public class LoginModel extends AbstractModel {
 			FileOutputStream fos = new FileOutputStream(fileName);
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			oos.writeObject(students);
+			oos.flush();
+			oos.close();
+			fos.close();
+		}catch(FileNotFoundException e) {
+			System.out.println("file not found");
+			e.printStackTrace();
+		}catch(IOException e) {
+			System.out.println("io exception");
+			e.printStackTrace();
+		}
+		DegreePlan plan = new DegreePlan();
+		try {
+			FileOutputStream fos = new FileOutputStream(username + ".bin");
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			oos.writeObject(plan);
 			oos.flush();
 			oos.close();
 			fos.close();

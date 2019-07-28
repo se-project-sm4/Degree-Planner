@@ -1,9 +1,11 @@
 package Model;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import Model.Course;
 
-public class Semester {
+public class Semester implements Serializable{
+	private static final long serialVersionUID = 1L;
 	private int maxHours;
 	private int minHours;
 	private List<Course> courses = new ArrayList<>();
@@ -39,4 +41,9 @@ public class Semester {
 	public void removeSemester(Course c) {
 		courses.remove(c);
 	}
+	
+    @Override
+    public String toString() { 
+        return Integer.toString(maxHours) + " " + Integer.toString(minHours) +  " " + courses;
+    } 
 }
