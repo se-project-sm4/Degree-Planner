@@ -16,8 +16,9 @@ public class LoginView extends JFrameView {
 		super(model, controller);
 		usernameField.setText("Username");
 		passwordField.setText("Password");
-		this.getContentPane().add(usernameField, BorderLayout.CENTER); JPanel buttonPanel = new JPanel();
-		this.getContentPane().add(passwordField, BorderLayout.CENTER); JPanel buttonPanel = new JPanel();
+		this.getContentPane().add(usernameField, BorderLayout.CENTER);
+		this.getContentPane().add(passwordField, BorderLayout.CENTER);
+		JPanel buttonPanel = new JPanel();
 		Handler handler = new Handler();
 		JButton loginButton = new JButton("Login");
 		loginButton.addActionListener(handler);
@@ -33,7 +34,6 @@ public class LoginView extends JFrameView {
 	public void modelChanged(ModelEvent event) {
 		//change this
 		String msg = event.getAmount() + "";
-		textField.setText(msg);
 	}
 
 	class Handler implements ActionListener {
