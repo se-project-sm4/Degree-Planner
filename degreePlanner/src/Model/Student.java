@@ -24,4 +24,18 @@ public class Student {
 	public String getPassword() {
 		return password;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+	    if (this == obj)
+	        return true;
+	    if (obj == null)
+	        return false;
+	    if (getClass() != obj.getClass())
+	        return false;
+	    Student student = (Student) obj;
+	    if (this.getUsername() == student.getUsername())
+	    	return true;
+	    return false;
+	}
 }
