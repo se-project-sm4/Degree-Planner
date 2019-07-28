@@ -44,7 +44,6 @@ public class LoginView extends JFrameView {
 		}else if(event.getType() == 2) {
 			notifier.setText("Registration Successful!");
 		}else{
-			System.out.println("hello");
 			notifier.setText("Registration Failed");
 		}
 	}
