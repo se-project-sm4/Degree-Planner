@@ -28,6 +28,7 @@ public class DegreePlannerModel  extends AbstractModel{
 		}catch(ClassNotFoundException e) {
 			System.out.println("class not found");
 		}
+		System.out.println(plan.toString());
 	}
 	
 	public void createPlan(){
