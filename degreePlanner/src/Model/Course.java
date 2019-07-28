@@ -3,13 +3,13 @@ package Model;
 public class Course {
 	private int courseID;
 	private String subject;
-	private int prerequisite;
+	private Course prerequisite;
 	private int hours;
 	private String className;
 	private String classDescription;
 	private boolean writingIntensive;
 	
-	public Course(int i, String s, int p, int h, String n, String d, boolean w) {
+	public Course(int i, String s, Course p, int h, String n, String d, boolean w) {
 		courseID = i;
 		subject = s;
 		prerequisite = p;
@@ -39,7 +39,7 @@ public class Course {
 		prerequisite = p;
 	}
 	
-	public int getPrerequisite() {
+	public Course getPrerequisite() {
 		return prerequisite;
 	}
 	
