@@ -6,15 +6,15 @@ import Model.Minor;
 import Model.Semester;
 
 public class DegreePlan {
-	private ArrayList<Major> majors;
-	private ArrayList<Minor> minors;
-	private ArrayList<Semester> semesters;
+	private List<Major> majors = new ArrayList<>();
+	private List<Minor> minors = new ArrayList<>();
+	private List<Semester> semesters = new ArrayList<>();
 	
 	public void setMajor(ArrayList<Major> m) {
 		majors = m;
 	}
 	
-	public ArrayList<Major> getMajors() {
+	public List<Major> getMajors() {
 		return majors;
 	}
 	
@@ -30,7 +30,7 @@ public class DegreePlan {
 		minors = m;
 	}
 
-	public ArrayList<Minor> getMinors() {
+	public List<Minor> getMinors() {
 		return minors;
 	}
 	
@@ -46,7 +46,7 @@ public class DegreePlan {
 		semesters = s;
 	}
 
-	public ArrayList<Semester> getSemesters() {
+	public List<Semester> getSemesters() {
 		return semesters;
 	}
 	

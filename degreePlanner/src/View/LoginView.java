@@ -7,6 +7,7 @@ import Model.LoginModel;
 import Model.ModelEvent;
 
 public class LoginView extends JFrameView {
+	private static final long serialVersionUID = 1L;
 	private JTextField usernameField = new JTextField(); 
 	private JTextField passwordField = new JTextField(); 
 	private JLabel notifier = new JLabel(); 

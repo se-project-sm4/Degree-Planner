@@ -5,7 +5,7 @@ import java.util.List;
 import Model.Course;
 
 public class CourseCatalog {
-	private ArrayList<Course> catalog;
+	private List<Course> catalog = new ArrayList<>();
 	
 	public CourseCatalog() {
 		//create course catalog

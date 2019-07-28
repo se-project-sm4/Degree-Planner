@@ -6,7 +6,7 @@ import Model.Course;
 public class Semester {
 	private int maxHours;
 	private int minHours;
-	private ArrayList<Course> courses;
+	private List<Course> courses = new ArrayList<>();
 	
 	public void setMaxHours(int m) {
 		maxHours = m;
@@ -28,7 +28,7 @@ public class Semester {
 		courses = c;
 	}
 
-	public ArrayList<Course> getCourses() {
+	public List<Course> getCourses() {
 		return courses;
 	}
 	

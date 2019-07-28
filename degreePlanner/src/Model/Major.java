@@ -5,7 +5,7 @@ import Model.Requirement;
 
 public class Major {
 	private String majorName;
-	private ArrayList<Requirement> requirements;
+	private List<Requirement> requirements = new ArrayList<>();
 	private int writingIntensiveHours;
 	
 	public void setMajorName(String m) {
@@ -20,7 +20,7 @@ public class Major {
 		requirements = r;
 	}
 	
-	public ArrayList<Requirement> getMajors() {
+	public List<Requirement> getMajors() {
 		return requirements;
 	}
 	

@@ -6,8 +6,8 @@ import Controller.MainController;
 import Model.DegreePlannerModel;
 import Model.ModelEvent;
 
-public class DegreePlannerView extends JFrameView
-{
+public class DegreePlannerView extends JFrameView{
+	private static final long serialVersionUID = 1L;
 	private JTextField courseIDField = new JTextField(); 
     public DegreePlannerView(DegreePlannerModel model, MainController controller){
 		super(model, controller); 
@@ -56,8 +56,7 @@ public class DegreePlannerView extends JFrameView
     }
 
 	public void modelChanged(ModelEvent event) {
-		//change this
-		String msg = event.getType() + "";
+		///add degreePlanner change reactions
 	 }
 	
 	class CreatePlanHandler implements ActionListener { 

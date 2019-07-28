@@ -1,13 +1,11 @@
 package Model;
 import java.util.ArrayList;
-import java.util.List;
 
 import Model.DegreePlan;
 import Model.CourseCatalog;
-import View.DegreePlannerView;
 
 public class DegreePlannerModel  extends AbstractModel{
-	private CourseCatalog catalog;
+	private CourseCatalog catalog = new CourseCatalog();;
 	private DegreePlan plan = new DegreePlan();
 	
 	public DegreePlannerModel(String username) {
