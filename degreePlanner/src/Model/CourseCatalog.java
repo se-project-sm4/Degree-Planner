@@ -12,6 +12,11 @@ public class CourseCatalog {
 	}
 	
 	public Course findCourse(int id) {
-		for(int i = 0; i < )
+		for(int i = 0; i < catalog.size(); ++i) {
+			if(catalog.get(i).getCourseID() == id) {
+				return catalog.get(i);
+			}
+		}
+		return null;
 	}
 }
