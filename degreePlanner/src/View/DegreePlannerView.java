@@ -2,7 +2,7 @@ package View;
 import javax.swing.*; 
 import java.awt.*; 
 import java.awt.event.*;
-import Controller.DegreePlannerController;
+import Controller.MainController;
 import Model.DegreePlannerModel;
 import Model.ModelEvent;
 import View.LoginView.Handler;
@@ -19,7 +19,7 @@ public class DegreePlannerView extends JFrameView
 	public static final String REMOVE_MINOR = "Remove Minor";
 	public static final String LOGOUT = "Log Out";
 	private JTextField courseIDField = new JTextField(); 
-    public DegreePlannerView(DegreePlannerModel model, DegreePlannerController controller){
+    public DegreePlannerView(DegreePlannerModel model, MainController controller){
 		super(model, controller); 
 		courseIDField.setText("Course ID");
 		this.getContentPane().add(courseIDField, BorderLayout.NORTH);
@@ -65,7 +65,7 @@ public class DegreePlannerView extends JFrameView
 	class Handler implements ActionListener { 
 		public void actionPerformed(ActionEvent e) {
 			//add more commands (and probably change this one too)
-			((DegreePlannerController)getController()).operation(e.getActionCommand(), Integer.parseInt(courseIDField.getText())); 
+			((MainController)getController()).operation(e.getActionCommand(), "", "", courseIDField.getText()); 
 	    } 
 	}
 }

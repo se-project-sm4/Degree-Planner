@@ -2,7 +2,7 @@ package View;
 import javax.swing.*; 
 import java.awt.*; 
 import java.awt.event.*;
-import Controller.LoginController;
+import Controller.MainController;
 import Model.LoginModel;
 import Model.ModelEvent;
 
@@ -13,7 +13,7 @@ public class LoginView extends JFrameView {
 	private JTextField passwordField = new JTextField(); 
 	private JLabel notifier = new JLabel(); 
 	
-	public LoginView(LoginModel model, LoginController controller) { 
+	public LoginView(LoginModel model, MainController controller) { 
 		super(model, controller);
 		usernameField.setText("Username");
 		passwordField.setText("Password");
@@ -52,9 +52,9 @@ public class LoginView extends JFrameView {
 
 	class Handler implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			((LoginController)getController()).operation(e.getActionCommand(), usernameField.getText(), passwordField.getText());
+			((MainController)getController()).operation(e.getActionCommand(), usernameField.getText(), passwordField.getText(), "");
 	    } 
 	}
 	
-	public static void main(String [] args) { new LoginController(); }
+	public static void main(String [] args) { new MainController(); }
 }
