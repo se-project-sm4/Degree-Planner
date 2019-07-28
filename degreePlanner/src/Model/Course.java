@@ -9,6 +9,16 @@ public class Course {
 	private String classDescription;
 	private boolean writingIntensive;
 	
+	public Course(int i, String s, int p, int h, String n, String d, boolean w) {
+		courseID = i;
+		subject = s;
+		prerequisite = p;
+		hours = h;
+		className = n;
+		classDescription = d;
+		writingIntensive = w;
+	}
+	
 	public void setCourseID(int c) {
 		courseID = c;
 	}
