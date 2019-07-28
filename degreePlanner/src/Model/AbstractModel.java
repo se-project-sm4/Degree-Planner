@@ -10,7 +10,6 @@ public abstract class AbstractModel implements Model {
 		for(ModelListener ml : listeners) {
 			ml.modelChanged(event);
 		}
-		
 	}
 	public void addModelListener(ModelListener l){
 		listeners.add(l);

@@ -39,14 +39,14 @@ public class LoginView extends JFrameView {
 	
 	public void modelChanged(ModelEvent event) {
 		if(event.getType() == 0) {
-			//login success
-			this.dispose();
+			notifier.setText("Login Successful!");
 		}else if(event.getType() == 1) {
-			//login fail
+			notifier.setText("Login Failed");
 		}else if(event.getType() == 2) {
-			//register success
+			notifier.setText("Registration Successful!");
 		}else{
-			//register fail
+			System.out.println("hello");
+			notifier.setText("Registration Failed");
 		}
 	}
 

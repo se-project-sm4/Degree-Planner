@@ -8,6 +8,7 @@ public class ModelEvent extends ActionEvent {
 		super(obj, id, message);
 		type = t;
 	}
+	
 	public int getType(){
 		return type;
 	}

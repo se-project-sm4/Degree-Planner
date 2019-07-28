@@ -43,15 +43,9 @@ public class MainController extends AbstractController {
 					((LoginView)getView()).dispose();
 					setView(new DegreePlannerView((DegreePlannerModel)getModel(), this));
 					((JFrameView)getView()).setVisible(true);
-				} else {
-					// don't log in
 				}
 			}else {
-				if (((LoginModel)getModel()).register(username, password)) {
-					//register
-				} else {
-					//don't register
-				}
+				((LoginModel)getModel()).register(username, password);
 			}
 		}
 	}
