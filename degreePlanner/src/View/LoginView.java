@@ -25,11 +25,12 @@ public class LoginView extends JFrameView {
 		mainPanel.add(passwordField);
 		this.getContentPane().add(mainPanel, BorderLayout.NORTH);
 		JPanel buttonPanel = new JPanel();
-		Handler handler = new Handler();
+		LoginHandler loginHandler = new LoginHandler();
 		JButton loginButton = new JButton(LOGIN);
-		loginButton.addActionListener(handler);
+		loginButton.addActionListener(loginHandler);
+		RegisterHandler registerHandler = new RegisterHandler();
 		JButton registerButton = new JButton(REGISTER);
-		registerButton.addActionListener(handler);
+		registerButton.addActionListener(registerHandler);
 		buttonPanel.setLayout(new GridLayout(1, 2));
 		this.getContentPane().add(buttonPanel, BorderLayout.SOUTH);
 		buttonPanel.add(loginButton, null);
@@ -50,9 +51,15 @@ public class LoginView extends JFrameView {
 		}
 	}
 
-	class Handler implements ActionListener {
+	class LoginHandler implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			((MainController)getController()).operation(e.getActionCommand(), usernameField.getText(), passwordField.getText(), "");
+			((MainController)getController()).loginOperation(usernameField.getText(), passwordField.getText());
+	    } 
+	}
+
+	class RegisterHandler implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			((MainController)getController()).registerOperation(usernameField.getText(), passwordField.getText());
 	    } 
 	}
 	

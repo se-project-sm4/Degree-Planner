@@ -5,7 +5,6 @@ import java.awt.event.*;
 import Controller.MainController;
 import Model.DegreePlannerModel;
 import Model.ModelEvent;
-import View.LoginView.Handler;
 
 public class DegreePlannerView extends JFrameView
 {
@@ -65,7 +64,7 @@ public class DegreePlannerView extends JFrameView
 	class Handler implements ActionListener { 
 		public void actionPerformed(ActionEvent e) {
 			//add more commands (and probably change this one too)
-			((MainController)getController()).operation(e.getActionCommand(), "", "", courseIDField.getText()); 
+			((MainController)getController()).operation(e.getActionCommand(), courseIDField.getText()); 
 	    } 
 	}
 }
