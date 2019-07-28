@@ -41,7 +41,7 @@ public class DegreePlannerView extends JFrameView
 		LogoutHandler logoutHandler = new LogoutHandler();
 		JButton logoutButton = new JButton("Log Out");
 		logoutButton.addActionListener(logoutHandler);
-		buttonPanel.setLayout(new GridLayout(1, 2));
+		buttonPanel.setLayout(new GridLayout(3, 3));
 		this.getContentPane().add(buttonPanel, BorderLayout.SOUTH);
 		buttonPanel.add(createPlanButton, null);
 		buttonPanel.add(clearPlanButton, null);
