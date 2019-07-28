@@ -85,25 +85,25 @@ public class DegreePlannerView extends JFrameView{
 	
 	class AddMajorHandler implements ActionListener { 
 		public void actionPerformed(ActionEvent e) {
-			((MainController)getController()).addMajor(); 
+			((MainController)getController()).addMajor(courseIDField.getText()); 
 	    } 
 	}
 	
 	class RemoveMajorHandler implements ActionListener { 
 		public void actionPerformed(ActionEvent e) {
-			((MainController)getController()).removeMajor(); 
+			((MainController)getController()).removeMajor(courseIDField.getText()); 
 	    } 
 	}
 	
 	class AddMinorHandler implements ActionListener { 
 		public void actionPerformed(ActionEvent e) {
-			((MainController)getController()).addMinor(); 
+			((MainController)getController()).addMinor(courseIDField.getText()); 
 	    } 
 	}
 	
 	class RemoveMinorHandler implements ActionListener { 
 		public void actionPerformed(ActionEvent e) {
-			((MainController)getController()).removeMinor(); 
+			((MainController)getController()).removeMinor(courseIDField.getText()); 
 	    } 
 	}
 	
