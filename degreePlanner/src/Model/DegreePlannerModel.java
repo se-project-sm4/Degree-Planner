@@ -38,27 +38,38 @@ public class DegreePlannerModel  extends AbstractModel{
 		plan.setSemesters(new ArrayList<Semester>());
 	}
 
-	public void addCourse(int id){
-		catalog.findCourse(id);
+	public boolean addCourse(Course course, int semester){
+		for(int i = 0; i < plan.getSemesters().size(); ++i) {
+			if(plan.getSemesters().get(i).getCourses().contains(course)) {
+				return false;
+			}
+		}
+		return plan.getSemesters().get(semester).getCourses().add(course);
 	}
 
-	public void removeCourse(int id){
-		
+	public boolean removeCourse(Course course, int semester){
+		return plan.getSemesters().get(semester).getCourses().remove(course);
 	}
 
-	public void addMajor(){
-		
+	public boolean addMajor(Major major){
+		if(!plan.getMajors().contains(major)) {
+			return plan.getMajors().add(major);
+		}
+		return false;
 	}
 
-	public void removeMajor(){
-		
+	public boolean removeMajor(Major major){
+		return plan.getMajors().remove(major);
 	}
 
-	public void addMinor(){
-		
+	public boolean addMinor(Minor minor){
+		if(!plan.getMinors().contains(minor)) {
+			return plan.getMinors().add(minor);
+		}
+		return false;
 	}
 
-	public void removeMinor(){
-		
+	public boolean removeMinor(Minor minor){
+		return plan.getMinors().remove(minor);
 	}
 }
