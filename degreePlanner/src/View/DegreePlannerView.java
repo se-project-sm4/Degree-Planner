@@ -18,8 +18,11 @@ public class DegreePlannerView extends JFrameView
 	public static final String ADD_MINOR = "Add Minor";
 	public static final String REMOVE_MINOR = "Remove Minor";
 	public static final String LOGOUT = "Log Out";
+	private JTextField courseIDField = new JTextField(); 
     public DegreePlannerView(DegreePlannerModel model, DegreePlannerController controller){
 		super(model, controller); 
+		courseIDField.setText("Course ID");
+		this.getContentPane().add(courseIDField, BorderLayout.NORTH);
 		JPanel buttonPanel = new JPanel();
 		Handler handler = new Handler();
 		JButton createPlanButton = new JButton(CREATE_PLAN);
@@ -62,7 +65,7 @@ public class DegreePlannerView extends JFrameView
 	class Handler implements ActionListener { 
 		public void actionPerformed(ActionEvent e) {
 			//add more commands (and probably change this one too)
-			((DegreePlannerController)getController()).operation(e.getActionCommand()); 
+			((DegreePlannerController)getController()).operation(e.getActionCommand(), Integer.parseInt(courseIDField.getText())); 
 	    } 
 	}
 }
