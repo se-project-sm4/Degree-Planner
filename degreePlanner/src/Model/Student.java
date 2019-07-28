@@ -34,7 +34,7 @@ public class Student {
 	    if (getClass() != obj.getClass())
 	        return false;
 	    Student student = (Student) obj;
-	    if (this.getUsername() == student.getUsername())
+	    if (this.getUsername().contentEquals(student.getUsername()))
 	    	return true;
 	    return false;
 	}

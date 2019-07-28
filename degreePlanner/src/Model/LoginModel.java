@@ -4,19 +4,18 @@ import java.util.List;
 import Model.Student;
 
 public class LoginModel extends AbstractModel {
-	private ArrayList<Student> students;
+	private List<Student> students = new ArrayList<>();
 	
 	public LoginModel() {
-		ArrayList<Student> students = new ArrayList<Student>();
 		students.add(new Student("Username", "Password"));
-		//read from file
 	}
 	
 	public boolean login(String username, String password){
-		Student temp = new Student(username, password);
-		if (students.contains(temp)){
+		if (students.contains(new Student(username, password))){
+			System.out.println("true");
 			return true;
 		}else{
+			System.out.println("false");
 			return false;
 		}
 	}
