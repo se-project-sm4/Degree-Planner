@@ -10,15 +10,15 @@ public class DegreePlannerController extends AbstractController {
 		((JFrameView)getView()).setVisible(true);
 	}
 	
-	public void operation(String option){
+	public void operation(String option, int id){
 		if (option == DegreePlannerView.CREATE_PLAN){
 			((DegreePlannerModel)getModel()).createPlan();
 		} else if (option == DegreePlannerView.CLEAR_PLAN){
 				((DegreePlannerModel)getModel()).clearPlan();
 		} else if (option == DegreePlannerView.ADD_COURSE){
-			((DegreePlannerModel)getModel()).addCourse();
+			((DegreePlannerModel)getModel()).addCourse(id);
 		} else if (option == DegreePlannerView.REMOVE_COURSE){
-			((DegreePlannerModel)getModel()).removeCourse();
+			((DegreePlannerModel)getModel()).removeCourse(id);
 		} else if (option == DegreePlannerView.ADD_MAJOR){
 			((DegreePlannerModel)getModel()).addMajor();
 		} else if (option == DegreePlannerView.REMOVE_MAJOR){
