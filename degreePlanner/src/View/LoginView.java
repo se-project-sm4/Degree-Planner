@@ -7,8 +7,6 @@ import Model.LoginModel;
 import Model.ModelEvent;
 
 public class LoginView extends JFrameView {
-	public static final String LOGIN = "Login"; 
-	public static final String REGISTER = "Register"; 
 	private JTextField usernameField = new JTextField(); 
 	private JTextField passwordField = new JTextField(); 
 	private JLabel notifier = new JLabel(); 
@@ -26,10 +24,10 @@ public class LoginView extends JFrameView {
 		this.getContentPane().add(mainPanel, BorderLayout.NORTH);
 		JPanel buttonPanel = new JPanel();
 		LoginHandler loginHandler = new LoginHandler();
-		JButton loginButton = new JButton(LOGIN);
+		JButton loginButton = new JButton("Login");
 		loginButton.addActionListener(loginHandler);
 		RegisterHandler registerHandler = new RegisterHandler();
-		JButton registerButton = new JButton(REGISTER);
+		JButton registerButton = new JButton("Register");
 		registerButton.addActionListener(registerHandler);
 		buttonPanel.setLayout(new GridLayout(1, 2));
 		this.getContentPane().add(buttonPanel, BorderLayout.SOUTH);
@@ -53,13 +51,13 @@ public class LoginView extends JFrameView {
 
 	class LoginHandler implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			((MainController)getController()).loginOperation(usernameField.getText(), passwordField.getText());
+			((MainController)getController()).login(usernameField.getText(), passwordField.getText());
 	    } 
 	}
 
 	class RegisterHandler implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			((MainController)getController()).registerOperation(usernameField.getText(), passwordField.getText());
+			((MainController)getController()).register(usernameField.getText(), passwordField.getText());
 	    } 
 	}
 	

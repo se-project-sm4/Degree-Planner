@@ -12,7 +12,7 @@ public class MainController extends AbstractController {
 		((JFrameView)getView()).setVisible(true);
 	}
 
-	public void loginOperation(String username, String password){
+	public void login(String username, String password){
 		if(((LoginModel)getModel()).login(username, password)) {
 			setModel(new DegreePlannerModel(username));
 			((LoginView)getView()).dispose();
@@ -21,32 +21,46 @@ public class MainController extends AbstractController {
 		}
 	}
 	
-	public void registerOperation(String username, String password){
+	public void register(String username, String password){
 		((LoginModel)getModel()).register(username, password);
 	}
 
-	public void operation(String option, String id){
-		if (option == DegreePlannerView.CREATE_PLAN){
-			((DegreePlannerModel)getModel()).createPlan();
-		} else if (option == DegreePlannerView.CLEAR_PLAN){
-				((DegreePlannerModel)getModel()).clearPlan();
-		} else if (option == DegreePlannerView.ADD_COURSE){
-			((DegreePlannerModel)getModel()).addCourse(Integer.parseInt(id));
-		} else if (option == DegreePlannerView.REMOVE_COURSE){
-			((DegreePlannerModel)getModel()).removeCourse(Integer.parseInt(id));
-		} else if (option == DegreePlannerView.ADD_MAJOR){
-			((DegreePlannerModel)getModel()).addMajor();
-		} else if (option == DegreePlannerView.REMOVE_MAJOR){
-			((DegreePlannerModel)getModel()).removeMajor();
-		} else if (option == DegreePlannerView.ADD_MINOR){
-			((DegreePlannerModel)getModel()).addMinor();
-		} else if (option == DegreePlannerView.REMOVE_MINOR){
-			((DegreePlannerModel)getModel()).removeMinor();
-		} else {
-			setModel(new LoginModel());
-			((DegreePlannerView)getView()).dispose();
-			setView(new LoginView((LoginModel)getModel(), this));
-			((JFrameView)getView()).setVisible(true);
-		}
+	public void createPlan() {
+		((DegreePlannerModel)getModel()).createPlan();
+	}
+	
+	public void clearPlan() {
+		((DegreePlannerModel)getModel()).clearPlan();
+	}
+	
+	public void addCourse(int id) {
+		((DegreePlannerModel)getModel()).addCourse(id);
+	}
+	
+	public void removeCourse(int id) {
+		((DegreePlannerModel)getModel()).removeCourse(id);
+	}
+	
+	public void addMajor() {
+		((DegreePlannerModel)getModel()).addMajor();
+	}
+	
+	public void removeMajor() {
+		((DegreePlannerModel)getModel()).removeMajor();
+	}
+	
+	public void addMinor() {
+		((DegreePlannerModel)getModel()).addMinor();
+	}
+	
+	public void removeMinor() {
+		((DegreePlannerModel)getModel()).removeMinor();
+	}
+	
+	public void logout() {
+		setModel(new LoginModel());
+		((DegreePlannerView)getView()).dispose();
+		setView(new LoginView((LoginModel)getModel(), this));
+		((JFrameView)getView()).setVisible(true);
 	}
 }

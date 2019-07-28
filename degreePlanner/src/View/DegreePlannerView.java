@@ -8,40 +8,39 @@ import Model.ModelEvent;
 
 public class DegreePlannerView extends JFrameView
 {
-	public static final String CREATE_PLAN = "Create Plan";
-	public static final String CLEAR_PLAN = "Clear Plan";
-	public static final String ADD_COURSE = "Add Course";
-	public static final String REMOVE_COURSE = "Remove Course";
-	public static final String ADD_MAJOR = "Add Major";
-	public static final String REMOVE_MAJOR = "Remove Major";
-	public static final String ADD_MINOR = "Add Minor";
-	public static final String REMOVE_MINOR = "Remove Minor";
-	public static final String LOGOUT = "Log Out";
 	private JTextField courseIDField = new JTextField(); 
     public DegreePlannerView(DegreePlannerModel model, MainController controller){
 		super(model, controller); 
 		courseIDField.setText("Course ID");
 		this.getContentPane().add(courseIDField, BorderLayout.NORTH);
 		JPanel buttonPanel = new JPanel();
-		Handler handler = new Handler();
-		JButton createPlanButton = new JButton(CREATE_PLAN);
-		createPlanButton.addActionListener(handler);
-		JButton clearPlanButton = new JButton(CLEAR_PLAN);
-		clearPlanButton.addActionListener(handler);
-		JButton addCourseButton = new JButton(ADD_COURSE);
-		addCourseButton.addActionListener(handler);
-		JButton removeCourseButton = new JButton(REMOVE_COURSE);
-		removeCourseButton.addActionListener(handler);
-		JButton addMajorButton = new JButton(ADD_MAJOR);
-		addMajorButton.addActionListener(handler);
-		JButton removeMajorButton = new JButton(REMOVE_MAJOR);
-		removeMajorButton.addActionListener(handler);
-		JButton addMinorButton = new JButton(ADD_MINOR);
-		addMinorButton.addActionListener(handler);
-		JButton removeMinorButton = new JButton(REMOVE_MINOR);
-		removeMinorButton.addActionListener(handler);
-		JButton logoutButton = new JButton(LOGOUT);
-		logoutButton.addActionListener(handler);
+		CreatePlanHandler createPlanHandler = new CreatePlanHandler();
+		JButton createPlanButton = new JButton("Create Plan");
+		createPlanButton.addActionListener(createPlanHandler);
+		ClearPlanHandler clearPlanHandler = new ClearPlanHandler();
+		JButton clearPlanButton = new JButton("Clear Plan");
+		clearPlanButton.addActionListener(clearPlanHandler);
+		AddCourseHandler addCourseHandler = new AddCourseHandler();
+		JButton addCourseButton = new JButton("Add Course");
+		addCourseButton.addActionListener(addCourseHandler);
+		RemoveCourseHandler removeCourseHandler = new RemoveCourseHandler();
+		JButton removeCourseButton = new JButton("Remove Course");
+		removeCourseButton.addActionListener(removeCourseHandler);
+		AddMajorHandler addMajorHandler = new AddMajorHandler();
+		JButton addMajorButton = new JButton("Add Major");
+		addMajorButton.addActionListener(addMajorHandler);
+		RemoveMajorHandler removeMajorHandler = new RemoveMajorHandler();
+		JButton removeMajorButton = new JButton("Remove Major");
+		removeMajorButton.addActionListener(removeMajorHandler);
+		AddMinorHandler addMinorHandler = new AddMinorHandler();
+		JButton addMinorButton = new JButton("Add Minor");
+		addMinorButton.addActionListener(addMinorHandler);
+		RemoveMinorHandler removeMinorHandler = new RemoveMinorHandler();
+		JButton removeMinorButton = new JButton("Remove Minor");
+		removeMinorButton.addActionListener(removeMinorHandler);
+		LogoutHandler logoutHandler = new LogoutHandler();
+		JButton logoutButton = new JButton("Log Out");
+		logoutButton.addActionListener(logoutHandler);
 		buttonPanel.setLayout(new GridLayout(1, 2));
 		this.getContentPane().add(buttonPanel, BorderLayout.SOUTH);
 		buttonPanel.add(createPlanButton, null);
@@ -61,10 +60,57 @@ public class DegreePlannerView extends JFrameView
 		String msg = event.getType() + "";
 	 }
 	
-	class Handler implements ActionListener { 
+	class CreatePlanHandler implements ActionListener { 
 		public void actionPerformed(ActionEvent e) {
-			//add more commands (and probably change this one too)
-			((MainController)getController()).operation(e.getActionCommand(), courseIDField.getText()); 
+			((MainController)getController()).createPlan(); 
+	    } 
+	}
+	
+	class ClearPlanHandler implements ActionListener { 
+		public void actionPerformed(ActionEvent e) {
+			((MainController)getController()).clearPlan(); 
+	    } 
+	}
+	
+	class AddCourseHandler implements ActionListener { 
+		public void actionPerformed(ActionEvent e) {
+			((MainController)getController()).addCourse(Integer.parseInt(courseIDField.getText())); 
+	    } 
+	}
+	
+	class RemoveCourseHandler implements ActionListener { 
+		public void actionPerformed(ActionEvent e) {
+			((MainController)getController()).removeCourse(Integer.parseInt(courseIDField.getText())); 
+	    } 
+	}
+	
+	class AddMajorHandler implements ActionListener { 
+		public void actionPerformed(ActionEvent e) {
+			((MainController)getController()).addMajor(); 
+	    } 
+	}
+	
+	class RemoveMajorHandler implements ActionListener { 
+		public void actionPerformed(ActionEvent e) {
+			((MainController)getController()).removeMajor(); 
+	    } 
+	}
+	
+	class AddMinorHandler implements ActionListener { 
+		public void actionPerformed(ActionEvent e) {
+			((MainController)getController()).addMinor(); 
+	    } 
+	}
+	
+	class RemoveMinorHandler implements ActionListener { 
+		public void actionPerformed(ActionEvent e) {
+			((MainController)getController()).removeMinor(); 
+	    } 
+	}
+	
+	class LogoutHandler implements ActionListener { 
+		public void actionPerformed(ActionEvent e) {
+			((MainController)getController()).logout(); 
 	    } 
 	}
 }
