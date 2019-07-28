@@ -1,18 +1,15 @@
 package Model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Course {
 	private int courseID;
 	private String subject;
-	private List<Course> prerequisites = new ArrayList<>();
+	private Course prerequisites;
 	private int hours;
 	private String className;
 	private String classDescription;
 	private boolean writingIntensive;
 	
-	public Course(int i, String s, List<Course> p, int h, String n, String d, boolean w) {
+	public Course(int i, String s, Course p, int h, String n, String d, boolean w) {
 		courseID = i;
 		subject = s;
 		prerequisites = p;
@@ -38,11 +35,11 @@ public class Course {
 		return subject;
 	}
 	
-	public void setPrerequisite(List<Course> p) {
+	public void setPrerequisite(Course p) {
 		prerequisites = p;
 	}
 	
-	public List<Course> getPrerequisite() {
+	public Course getPrerequisite() {
 		return prerequisites;
 	}
 	
