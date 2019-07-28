@@ -15,7 +15,7 @@ public class Course {
 	public Course(int i, String s, List<Course> p, int h, String n, String d, boolean w) {
 		courseID = i;
 		subject = s;
-		prerequisite = p;
+		prerequisites = p;
 		hours = h;
 		className = n;
 		classDescription = d;
