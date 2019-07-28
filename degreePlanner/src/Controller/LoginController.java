@@ -2,6 +2,7 @@ package Controller;
 import Model.LoginModel;
 import View.LoginView;
 import View.JFrameView;
+import Controller.DegreePlannerController;
 
 public class LoginController extends AbstractController {
 	public LoginController(){
@@ -13,7 +14,7 @@ public class LoginController extends AbstractController {
 	public void operation(String option, String username, String password){
 		if(option == LoginView.LOGIN){
 			if (((LoginModel)getModel()).login(username, password)) {
-				//log in
+				new DegreePlannerController(username);
 			} else {
 				// don't log in
 			}

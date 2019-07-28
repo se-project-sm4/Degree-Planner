@@ -2,6 +2,7 @@ package Controller;
 import Model.DegreePlannerModel;
 import View.DegreePlannerView;
 import View.JFrameView;
+import Controller.LoginController;
 
 public class DegreePlannerController extends AbstractController {
 	public DegreePlannerController(String username){
@@ -28,7 +29,7 @@ public class DegreePlannerController extends AbstractController {
 		} else if (option == DegreePlannerView.REMOVE_MINOR){
 			((DegreePlannerModel)getModel()).removeMinor();
 		} else {
-			//logout
+			new LoginController();
 		}
 	}
 }

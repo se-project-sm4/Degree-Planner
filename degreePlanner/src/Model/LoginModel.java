@@ -7,6 +7,8 @@ public class LoginModel extends AbstractModel {
 	private ArrayList<Student> students;
 	
 	public LoginModel() {
+		ArrayList<Student> students = new ArrayList<Student>();
+		students.add(new Student("Username", "Password"));
 		//read from file
 	}
 	
