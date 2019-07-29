@@ -35,15 +35,18 @@ public class DegreePlannerModel  extends AbstractModel{
 			System.out.println("class \"DegreePlan\" not found");
 			e.printStackTrace();
 		}
-		//System.out.println(plan.toString());
 	}
 	
 	public void createPlan(){
 		//automate a degree plan
+		save();
 	}
 
 	public void clearPlan(){
 		plan.setSemesters(new ArrayList<Semester>());
+		plan.setMajors(new ArrayList<Major>());
+		plan.setMinors(new ArrayList<Minor>());
+		save();
 	}
 
 	public boolean addCourse(String courseName){
@@ -62,10 +65,14 @@ public class DegreePlannerModel  extends AbstractModel{
 					return false;
 				}
 			}
-			return plan.getSemesters().get(semester).getCourses().add(course);
+			if(plan.getSemesters().get(semester).getCourses().add(course)) {
+				save();
+				return true;
+			}
 		}catch(NumberFormatException e) {
 			return false;
 		}
+		return false;
 	}
 
 	public boolean removeCourse(String course){
@@ -76,10 +83,14 @@ public class DegreePlannerModel  extends AbstractModel{
 		try {
 			int id = Integer.parseInt(split[1]);
 			int semester = Integer.parseInt(split[2]);
-			return plan.getSemesters().get(semester).getCourses().remove(new Course(id, subject, null, 0, null, null, false));
+			if(plan.getSemesters().get(semester).getCourses().remove(new Course(id, subject, null, 0, null, null, false))) {
+				save();
+				return true;
+			}
 		}catch(NumberFormatException e) {
 			return false;
 		}
+		return false;
 	}
 
 	public boolean addMajor(String major){
@@ -89,13 +100,20 @@ public class DegreePlannerModel  extends AbstractModel{
 			return false;
 		}
 		if(!plan.getMajors().contains(m)) {
-			return plan.getMajors().add(m);
+			if(plan.getMajors().add(m)) {
+				save();
+				return true;
+			}
 		}
 		return false;
 	}
 
 	public boolean removeMajor(String major){
-		return plan.getMajors().remove(disciplines.findMajor(major));
+		if(plan.getMajors().remove(disciplines.findMajor(major))) {
+			save();
+			return true;
+		}
+		return false;
 	}
 
 	public boolean addMinor(String minor){
@@ -105,16 +123,27 @@ public class DegreePlannerModel  extends AbstractModel{
 			return false;
 		}
 		if(!plan.getMinors().contains(m)) {
-			return plan.getMinors().add(m);
+			if(plan.getMinors().add(m)) {
+				save();
+				return true;
+			}
 		}
 		return false;
 	}
 
 	public boolean removeMinor(String minor){
-		return plan.getMinors().remove(disciplines.findMinor(minor));
+		if(plan.getMinors().remove(disciplines.findMinor(minor))) {
+			save();
+			return true;
+		}
+		return false;
 	}
 	
 	public void logout() {
+		save();
+	}
+	
+	public void save() {
 		try {
 			FileOutputStream fos = new FileOutputStream(fileName);
 			ObjectOutputStream oos = new ObjectOutputStream(fos);

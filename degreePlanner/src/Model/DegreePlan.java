@@ -12,7 +12,7 @@ public class DegreePlan implements Serializable{
 	private List<Minor> minors = new ArrayList<>();
 	private List<Semester> semesters = new ArrayList<>();
 	
-	public void setMajor(ArrayList<Major> m) {
+	public void setMajors(ArrayList<Major> m) {
 		majors = m;
 	}
 	
