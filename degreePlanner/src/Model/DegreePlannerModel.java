@@ -1,8 +1,10 @@
 package Model;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import Model.DegreePlan;
@@ -13,17 +15,18 @@ public class DegreePlannerModel  extends AbstractModel{
 	private CourseCatalog catalog = new CourseCatalog();;
 	private DisciplineCatalog disciplines = new DisciplineCatalog();;
 	private DegreePlan plan = new DegreePlan();
+	String fileName;
 	
 	public DegreePlannerModel(String username) {
 		try {
-			String fileName = username + ".bin";
+			fileName = username + ".bin";
 			FileInputStream fis = new FileInputStream(fileName);
 			ObjectInputStream ois = new ObjectInputStream(fis);
 			plan = (DegreePlan)ois.readObject();
 			ois.close();
 			fis.close();
 		}catch(FileNotFoundException e) {
-			System.out.println("file \"" + username + ".bin\" not found");
+			System.out.println("file \"" + fileName + "\" not found");
 			e.printStackTrace();
 		}catch(IOException e) {
 			System.out.println("io exception");
@@ -109,5 +112,22 @@ public class DegreePlannerModel  extends AbstractModel{
 
 	public boolean removeMinor(String minor){
 		return plan.getMinors().remove(disciplines.findMinor(minor));
+	}
+	
+	public void logout() {
+		try {
+			FileOutputStream fos = new FileOutputStream(fileName);
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			oos.writeObject(plan);
+			oos.flush();
+			oos.close();
+			fos.close();
+		}catch(FileNotFoundException e) {
+			System.out.println("file \"" + fileName + "\"not found");
+			e.printStackTrace();
+		}catch(IOException e) {
+			System.out.println("io exception");
+			e.printStackTrace();
+		}
 	}
 }

@@ -58,6 +58,7 @@ public class MainController extends AbstractController {
 	}
 	
 	public void logout() {
+		((DegreePlannerModel)getModel()).logout();
 		setModel(new LoginModel());
 		((DegreePlannerView)getView()).dispose();
 		setView(new LoginView((LoginModel)getModel(), this));

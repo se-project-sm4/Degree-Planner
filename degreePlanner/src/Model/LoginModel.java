@@ -65,7 +65,7 @@ public class LoginModel extends AbstractModel {
 			oos.close();
 			fos.close();
 		}catch(FileNotFoundException e) {
-			System.out.println("file not found");
+			System.out.println("file \"" + fileName + "\"not found");
 			e.printStackTrace();
 		}catch(IOException e) {
 			System.out.println("io exception");
