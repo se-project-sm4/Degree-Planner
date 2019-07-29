@@ -9,6 +9,10 @@ public class Major implements Serializable{
 	private String majorName;
 	private List<Requirement> requirements = new ArrayList<>();
 	private int writingIntensiveHours;
+
+	public Major() {
+		
+	}
 	
 	public Major(String m, List<Requirement> r, int w ) {
 		majorName = m;

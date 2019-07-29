@@ -43,49 +43,69 @@ public class DegreePlannerModel  extends AbstractModel{
 
 	public boolean addCourse(String courseName){
 		String[] split = courseName.split("\\s+");
-		String subject = split[0];
-		int id = Integer.parseInt(split[1]);
-		int semester = Integer.parseInt(split[2]);
-		Course course = catalog.findCourse(id, subject);
-		if(course == null)
+		if(split.length != 3)
 			return false;
-		for(int i = 0; i < plan.getSemesters().size(); ++i) {
-			if(plan.getSemesters().get(i).getCourses().contains(new Course(id, subject, null, 0, null, null, false))) {
+		String subject = split[0];
+		try {
+			int id = Integer.parseInt(split[1]);
+			int semester = Integer.parseInt(split[2]);
+			Course course = catalog.findCourse(id, subject);
+			if(course == null)
 				return false;
+			for(int i = 0; i < plan.getSemesters().size(); ++i) {
+				if(plan.getSemesters().get(i).getCourses().contains(new Course(id, subject, null, 0, null, null, false))) {
+					return false;
+				}
 			}
+			return plan.getSemesters().get(semester).getCourses().add(course);
+		}catch(NumberFormatException e) {
+			return false;
 		}
-		return plan.getSemesters().get(semester).getCourses().add(course);
 	}
 
 	public boolean removeCourse(String course){
 		String[] split = course.split("\\s+");
+		if(split.length != 2)
+			return false;
 		String subject = split[0];
-		int id = Integer.parseInt(split[1]);
-		int semester = Integer.parseInt(split[2]);
-		return plan.getSemesters().get(semester).getCourses().remove(new Course(id, subject, null, 0, null, null, false));
+		try {
+			int id = Integer.parseInt(split[1]);
+			int semester = Integer.parseInt(split[2]);
+			return plan.getSemesters().get(semester).getCourses().remove(new Course(id, subject, null, 0, null, null, false));
+		}catch(NumberFormatException e) {
+			return false;
+		}
 	}
 
 	public boolean addMajor(String major){
-		
-		//if(!plan.getMajors().contains(major)) {
-		//	return plan.getMajors().add(major);
-		//}
+		Major m = new Major();
+		m = disciplines.findMajor(major);
+		if(m == null){
+			return false;
+		}
+		if(!plan.getMajors().contains(m)) {
+			return plan.getMajors().add(m);
+		}
 		return false;
-		
 	}
 
 	public boolean removeMajor(String major){
-		return plan.getMajors().remove(major);
+		return plan.getMajors().remove(disciplines.findMajor(major));
 	}
 
 	public boolean addMinor(String minor){
-		//if(!plan.getMinors().contains(minor)) {
-		//	return plan.getMinors().add(minor);
-		//}
+		Minor m = new Minor();
+		m = disciplines.findMinor(minor);
+		if(m == null){
+			return false;
+		}
+		if(!plan.getMinors().contains(m)) {
+			return plan.getMinors().add(m);
+		}
 		return false;
 	}
 
 	public boolean removeMinor(String minor){
-		return plan.getMinors().remove(minor);
+		return plan.getMinors().remove(disciplines.findMinor(minor));
 	}
 }

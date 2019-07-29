@@ -10,6 +10,10 @@ public class Minor implements Serializable{
 	private List<Requirement> requirements = new ArrayList<>();
 	private int writingIntensiveHours;
 
+	public Minor() {
+		
+	}
+	
 	public Minor(String m, List<Requirement> r, int w ) {
 		minorName = m;
 		requirements = r;
