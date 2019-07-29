@@ -23,14 +23,16 @@ public class DegreePlannerModel  extends AbstractModel{
 			ois.close();
 			fis.close();
 		}catch(FileNotFoundException e) {
-			System.out.println("file not found");
-		}catch(IOException e) {
+			System.out.println("file \"" + username + ".bin\" not found");
 			e.printStackTrace();
+		}catch(IOException e) {
 			System.out.println("io exception");
+			e.printStackTrace();
 		}catch(ClassNotFoundException e) {
-			System.out.println("class not found");
+			System.out.println("class \"DegreePlan\" not found");
+			e.printStackTrace();
 		}
-		System.out.println(plan.toString());
+		//System.out.println(plan.toString());
 	}
 	
 	public void createPlan(){
