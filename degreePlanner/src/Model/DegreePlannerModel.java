@@ -19,11 +19,7 @@ public class DegreePlannerModel  extends AbstractModel{
 	
 	public DegreePlannerModel(String username) {
 		for(int i = 0; i < 12; ++i) {
-			if(plan.getSemesters().size() % 3 == 2) {
-				plan.addSemester(new Semester(16));
-			}else {
-				plan.addSemester(new Semester(18));
-			}
+			addSemester();
 		}
 		try {
 			fileName = username + ".bin";
@@ -67,16 +63,17 @@ public class DegreePlannerModel  extends AbstractModel{
 			Course course = catalog.findCourse(id, subject);
 			if(course == null)
 				return false;
-			if(plan.getSemesters().size() < semester) {
-				
-			}
-			if(plan.getSemesters().get(semester).getMaxHours() < plan.getSemesters().get(semester).getHours() + course.getHours()) {
-				return false;
-			}
 			for(int i = 0; i < plan.getSemesters().size(); ++i) {
 				if(plan.getSemesters().get(i).getCourses().contains(new Course(id, subject, null, 0, null, null, false))) {
 					return false;
 				}
+			}
+			if(plan.getSemesters().size() < semester) {
+				while(plan.getSemesters().size() < semester) {
+					addSemester();
+				}
+			}else if(plan.getSemesters().get(semester).getMaxHours() < plan.getSemesters().get(semester).getHours() + course.getHours()) {
+				return false;
 			}
 			if(plan.getSemesters().get(semester).getCourses().add(course)) {
 				save();
@@ -152,11 +149,19 @@ public class DegreePlannerModel  extends AbstractModel{
 		return false;
 	}
 	
+	private void addSemester(){
+		if(plan.getSemesters().size() % 3 == 2) {
+			plan.addSemester(new Semester(16));
+		}else {
+			plan.addSemester(new Semester(18));
+		}
+	}
+	
 	public void logout() {
 		save();
 	}
 	
-	public void save() {
+	private void save() {
 		try {
 			FileOutputStream fos = new FileOutputStream(fileName);
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
