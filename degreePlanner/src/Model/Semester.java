@@ -7,16 +7,10 @@ import Model.Course;
 public class Semester implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private int maxHours;
-	private int minHours;
 	private List<Course> courses = new ArrayList<>();
-	private String name;
 	
-	public void setName(String n) {
-		name = n;
-	}
-	
-	public String getName() {
-		return name;
+	public Semester(int m) {
+		maxHours = m;
 	}
 	
 	public void setMaxHours(int m) {
@@ -25,14 +19,6 @@ public class Semester implements Serializable{
 	
 	public int getMaxHours() {
 		return maxHours;
-	}
-	
-	public void setMinHours(int m) {
-		minHours = m;
-	}
-	
-	public int getMinHours() {
-		return minHours;
 	}
 	
 	public void setCourses(ArrayList<Course> c) {
@@ -61,6 +47,6 @@ public class Semester implements Serializable{
 	
     @Override
     public String toString() { 
-        return Integer.toString(maxHours) + " " + Integer.toString(minHours) +  " " + courses;
+        return Integer.toString(maxHours) + " " + courses;
     } 
 }

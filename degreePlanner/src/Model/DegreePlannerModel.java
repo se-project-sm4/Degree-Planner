@@ -18,6 +18,13 @@ public class DegreePlannerModel  extends AbstractModel{
 	String fileName;
 	
 	public DegreePlannerModel(String username) {
+		for(int i = 0; i < 12; ++i) {
+			if(plan.getSemesters().size() % 3 == 2) {
+				plan.addSemester(new Semester(16));
+			}else {
+				plan.addSemester(new Semester(18));
+			}
+		}
 		try {
 			fileName = username + ".bin";
 			FileInputStream fis = new FileInputStream(fileName);
@@ -60,6 +67,9 @@ public class DegreePlannerModel  extends AbstractModel{
 			Course course = catalog.findCourse(id, subject);
 			if(course == null)
 				return false;
+			if(plan.getSemesters().size() < semester) {
+				
+			}
 			if(plan.getSemesters().get(semester).getMaxHours() < plan.getSemesters().get(semester).getHours() + course.getHours()) {
 				return false;
 			}
