@@ -34,6 +34,7 @@ public class LoginView extends JFrameView {
 		this.getContentPane().add(buttonPanel, BorderLayout.SOUTH);
 		buttonPanel.add(loginButton, null);
 		buttonPanel.add(registerButton, null);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		pack();
 	}
 	
