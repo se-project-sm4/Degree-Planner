@@ -10,6 +10,12 @@ public class Major implements Serializable{
 	private List<Requirement> requirements = new ArrayList<>();
 	private int writingIntensiveHours;
 	
+	public Major(String m, List<Requirement> r, int w ) {
+		majorName = m;
+		requirements = r;
+		writingIntensiveHours = w;
+	}
+	
 	public void setMajorName(String m) {
 		majorName = m;
 	}
@@ -45,5 +51,19 @@ public class Major implements Serializable{
     @Override
     public String toString() { 
         return majorName + " " + requirements + Integer.toString(writingIntensiveHours);
+    } 
+	
+    @Override
+    public boolean equals(Object obj) { 
+    	if (obj == this) { 
+    		return true; 
+    	} 
+    	if (obj == null || obj.getClass() != this.getClass()) { 
+    		return false; 
+    	}
+    	if(((Major)obj).getMajorName().equals(this.getMajorName())) {
+    		return true;
+    	}
+    	return false;
     } 
 }

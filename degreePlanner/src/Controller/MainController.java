@@ -33,28 +33,28 @@ public class MainController extends AbstractController {
 		((DegreePlannerModel)getModel()).clearPlan();
 	}
 	
-	public void addCourse(int id) {
-		((DegreePlannerModel)getModel()).addCourse(id);
+	public void addCourse(String course) {
+		((DegreePlannerModel)getModel()).addCourse(course);
 	}
 	
-	public void removeCourse(int id) {
-		((DegreePlannerModel)getModel()).removeCourse(id);
+	public void removeCourse(String course) {
+		((DegreePlannerModel)getModel()).removeCourse(course);
 	}
 	
-	public void addMajor(String name) {
-		((DegreePlannerModel)getModel()).addMajor(name);
+	public void addMajor(String major) {
+		((DegreePlannerModel)getModel()).addMajor(major);
 	}
 	
-	public void removeMajor(String name) {
-		((DegreePlannerModel)getModel()).removeMajor(name);
+	public void removeMajor(String major) {
+		((DegreePlannerModel)getModel()).removeMajor(major);
 	}
 	
-	public void addMinor(String name) {
-		((DegreePlannerModel)getModel()).addMinor(name);
+	public void addMinor(String minor) {
+		((DegreePlannerModel)getModel()).addMinor(minor);
 	}
 	
-	public void removeMinor(String name) {
-		((DegreePlannerModel)getModel()).removeMinor(name);
+	public void removeMinor(String minor) {
+		((DegreePlannerModel)getModel()).removeMinor(minor);
 	}
 	
 	public void logout() {

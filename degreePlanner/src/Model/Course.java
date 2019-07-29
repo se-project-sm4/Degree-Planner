@@ -82,4 +82,18 @@ public class Course implements Serializable{
     public String toString() { 
         return Integer.toString(courseID) + " " + subject + " " + prerequisites + " " + Integer.toString(hours) + " " + className + " " + classDescription + " " + writingIntensive;
     } 
+	
+    @Override
+    public boolean equals(Object obj) { 
+    	if (obj == this) { 
+    		return true; 
+    	} 
+    	if (obj == null || obj.getClass() != this.getClass()) { 
+    		return false; 
+    	}
+    	if(((Course)obj).getCourseID() == this.getCourseID() && ((Course)obj).getSubject().equals(this.getSubject())) {
+    		return true;
+    	}
+    	return false;
+    } 
 }

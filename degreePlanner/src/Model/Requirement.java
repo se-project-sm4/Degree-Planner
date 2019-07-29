@@ -7,6 +7,10 @@ public class Requirement implements Serializable{
 	private String subject;
 	private int numHours;
 	
+	public Requirement(String s, int n) {
+		subject = s;
+		numHours = n;
+	}
 	public void setSubject(String s) {
 		subject = s;
 	}

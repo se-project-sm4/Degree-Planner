@@ -9,9 +9,11 @@ public class Minor implements Serializable{
 	private String minorName;
 	private List<Requirement> requirements = new ArrayList<>();
 	private int writingIntensiveHours;
-	
-	public void setMinorName(String m) {
+
+	public Minor(String m, List<Requirement> r, int w ) {
 		minorName = m;
+		requirements = r;
+		writingIntensiveHours = w;
 	}
 	
 	public String getMinorName() {
@@ -45,5 +47,19 @@ public class Minor implements Serializable{
     @Override
     public String toString() { 
         return minorName + " " + requirements + Integer.toString(writingIntensiveHours);
+    } 
+	
+    @Override
+    public boolean equals(Object obj) { 
+    	if (obj == this) { 
+    		return true; 
+    	} 
+    	if (obj == null || obj.getClass() != this.getClass()) { 
+    		return false; 
+    	}
+    	if(((Minor)obj).getMinorName().equals(this.getMinorName())) {
+    		return true;
+    	}
+    	return false;
     } 
 }

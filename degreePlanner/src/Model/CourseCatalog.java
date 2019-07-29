@@ -23,12 +23,11 @@ public class CourseCatalog {
 		catalog.add(cs4398);
 	}
 	
-	public Course findCourse(int id) {
-		for(int i = 0; i < catalog.size(); ++i) {
-			if(catalog.get(i).getCourseID() == id) {
-				return catalog.get(i);
-			}
+	public Course findCourse(int id, String subject){
+		int index  = catalog.indexOf(new Course(id, subject, null, 0, null, null, false));
+		if(index == -1) {
+			return null;
 		}
-		return null;
+		return catalog.get(index);
 	}
 }

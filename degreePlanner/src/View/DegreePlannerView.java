@@ -73,13 +73,13 @@ public class DegreePlannerView extends JFrameView{
 	
 	class AddCourseHandler implements ActionListener { 
 		public void actionPerformed(ActionEvent e) {
-			((MainController)getController()).addCourse(Integer.parseInt(courseIDField.getText())); 
+			((MainController)getController()).addCourse(courseIDField.getText()); 
 	    } 
 	}
 	
 	class RemoveCourseHandler implements ActionListener { 
 		public void actionPerformed(ActionEvent e) {
-			((MainController)getController()).removeCourse(Integer.parseInt(courseIDField.getText())); 
+			((MainController)getController()).removeCourse(courseIDField.getText()); 
 	    } 
 	}
 	
