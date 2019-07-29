@@ -5,7 +5,9 @@ import java.awt.event.*;
 import Controller.MainController;
 import Model.LoginModel;
 import Model.ModelEvent;
-
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.Toolkit;
 public class LoginView extends JFrameView {
 	private static final long serialVersionUID = 1L;
 	private JTextField usernameField = new JTextField(); 
@@ -14,15 +16,22 @@ public class LoginView extends JFrameView {
 	
 	public LoginView(LoginModel model, MainController controller) { 
 		super(model, controller);
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		int width = (int)screenSize.getWidth();
+		int height = (int)screenSize.getHeight();
+		setPreferredSize(new Dimension(400 , 200));
+		setBounds(width/2 - 200, height/2 - 100, 400, 200);
 		usernameField.setText("Username");
 		passwordField.setText("Password");
 		notifier.setText("Login/Register");
+		JPanel infoPanel= new JPanel();
+		infoPanel.add(notifier);
+		this.getContentPane().add(infoPanel, BorderLayout.NORTH);
 		JPanel mainPanel= new JPanel();
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
-		mainPanel.add(notifier);
 		mainPanel.add(usernameField);
 		mainPanel.add(passwordField);
-		this.getContentPane().add(mainPanel, BorderLayout.NORTH);
+		this.getContentPane().add(mainPanel, BorderLayout.CENTER);
 		JPanel buttonPanel = new JPanel();
 		LoginHandler loginHandler = new LoginHandler();
 		JButton loginButton = new JButton("Login");
