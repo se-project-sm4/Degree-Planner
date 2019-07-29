@@ -51,6 +51,14 @@ public class Semester implements Serializable{
 		courses.remove(c);
 	}
 	
+	public int getHours() {
+		int hours = 0;
+		for(int i = 0; i < courses.size(); ++i) {
+			hours += courses.get(i).getHours();
+		}
+		return hours;
+	}
+	
     @Override
     public String toString() { 
         return Integer.toString(maxHours) + " " + Integer.toString(minHours) +  " " + courses;
