@@ -60,6 +60,9 @@ public class DegreePlannerModel  extends AbstractModel{
 			Course course = catalog.findCourse(id, subject);
 			if(course == null)
 				return false;
+			if(plan.getSemesters().get(semester).getMaxHours() < plan.getSemesters().get(semester).getHours() + course.getHours()) {
+				return false;
+			}
 			for(int i = 0; i < plan.getSemesters().size(); ++i) {
 				if(plan.getSemesters().get(i).getCourses().contains(new Course(id, subject, null, 0, null, null, false))) {
 					return false;
