@@ -80,7 +80,7 @@ public class Course implements Serializable{
 	
     @Override
     public String toString() { 
-        return Integer.toString(courseID) + " " + subject + " " + prerequisites + " " + Integer.toString(hours) + " " + className + " " + classDescription + " " + writingIntensive;
+        return "[courseID=" + Integer.toString(courseID) + ", subject=" + subject + ", prerequisites=" + prerequisites + ", hours=" + Integer.toString(hours) + ", className=" + className + ", classDescription=" + classDescription + ", writingIntensive=" + writingIntensive + "]";
     } 
 	
     @Override

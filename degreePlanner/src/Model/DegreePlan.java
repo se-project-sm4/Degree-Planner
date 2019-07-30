@@ -62,6 +62,6 @@ public class DegreePlan implements Serializable{
 
     @Override
     public String toString() { 
-        return majors + " " + minors + " " + semesters;
+        return "[majors=" + majors + ", minors=" + minors + ", semesters=" + semesters + "]";
     } 
 }

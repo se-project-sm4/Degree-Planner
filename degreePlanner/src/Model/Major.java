@@ -54,7 +54,7 @@ public class Major implements Serializable{
 
     @Override
     public String toString() { 
-        return majorName + " " + requirements + Integer.toString(writingIntensiveHours);
+        return "[majorName=" + majorName + ", requirements=" + requirements + ", writingIntensiveHours=" + Integer.toString(writingIntensiveHours) + "]";
     } 
 	
     @Override

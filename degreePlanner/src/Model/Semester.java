@@ -47,6 +47,6 @@ public class Semester implements Serializable{
 	
     @Override
     public String toString() { 
-        return Integer.toString(maxHours) + " " + courses;
+        return "[maxHours=" + Integer.toString(maxHours) + ", courses=" + courses + "]";
     } 
 }

@@ -54,7 +54,7 @@ public class Minor implements Serializable{
 	
     @Override
     public String toString() { 
-        return minorName + " " + requirements + Integer.toString(writingIntensiveHours);
+        return "[minorName=" + minorName + ", requirements=" + requirements + ", writingIntensiveHours=" + Integer.toString(writingIntensiveHours) + "]";
     } 
 	
     @Override

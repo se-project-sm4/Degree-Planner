@@ -32,6 +32,6 @@ public class Requirement implements Serializable{
 	
     @Override
     public String toString() { 
-        return subject + " " + Integer.toString(numHours);
+        return "[subject=" + subject + ", numHours=" + Integer.toString(numHours) + "]";
     } 
 }
