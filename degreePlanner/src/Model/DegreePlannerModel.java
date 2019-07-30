@@ -86,7 +86,7 @@ public class DegreePlannerModel  extends AbstractModel{
 
 	public boolean removeCourse(String course){
 		String[] split = course.split("\\s+");
-		if(split.length != 2)
+		if(split.length != 3)
 			return false;
 		String subject = split[0];
 		try {
