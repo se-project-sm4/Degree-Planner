@@ -16,34 +16,45 @@ public class LoginView extends JFrameView {
 	
 	public LoginView(LoginModel model, MainController controller) { 
 		super(model, controller);
+
+		setTitle("Login/Registration Menu");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int width = (int)screenSize.getWidth();
 		int height = (int)screenSize.getHeight();
-		setPreferredSize(new Dimension(400 , 200));
-		setBounds(width/2 - 200, height/2 - 100, 400, 200);
-		usernameField.setText("Username");
-		passwordField.setText("Password");
-		notifier.setText("Login/Register");
-		JPanel infoPanel= new JPanel();
-		infoPanel.add(notifier);
-		this.getContentPane().add(infoPanel, BorderLayout.NORTH);
-		JPanel mainPanel= new JPanel();
-		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
-		mainPanel.add(usernameField);
-		mainPanel.add(passwordField);
-		this.getContentPane().add(mainPanel, BorderLayout.CENTER);
+		setPreferredSize(new Dimension(300 , 140));
+		setLocation(width/2 - 150, height/2 - 70);
+
+		JPanel titlePanel = new JPanel();
+		notifier.setText("Login or Register");
+		notifier.setHorizontalAlignment(JLabel.CENTER);
+		notifier.setVerticalAlignment(JLabel.CENTER);
+		titlePanel.add(notifier);
+
+		JPanel infoPanel = new JPanel();
+		infoPanel.setLayout(new GridLayout(2, 2));
+		JLabel usernameLabel = new JLabel("Username:", SwingConstants.CENTER);
+		JLabel passwordLabel = new JLabel("Password:", SwingConstants.CENTER);
+		infoPanel.add(usernameLabel);
+		infoPanel.add(usernameField);
+		infoPanel.add(passwordLabel);
+		infoPanel.add(passwordField);
+		
 		JPanel buttonPanel = new JPanel();
+		buttonPanel.setLayout(new GridLayout(1, 2));
 		LoginHandler loginHandler = new LoginHandler();
 		JButton loginButton = new JButton("Login");
 		loginButton.addActionListener(loginHandler);
 		RegisterHandler registerHandler = new RegisterHandler();
 		JButton registerButton = new JButton("Register");
 		registerButton.addActionListener(registerHandler);
-		buttonPanel.setLayout(new GridLayout(1, 2));
-		this.getContentPane().add(buttonPanel, BorderLayout.SOUTH);
 		buttonPanel.add(loginButton, null);
 		buttonPanel.add(registerButton, null);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		this.getContentPane().add(titlePanel, BorderLayout.NORTH);
+		this.getContentPane().add(infoPanel, BorderLayout.CENTER);
+		this.getContentPane().add(buttonPanel, BorderLayout.SOUTH);
+		
 		pack();
 	}
 	

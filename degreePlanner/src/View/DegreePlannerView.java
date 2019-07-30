@@ -12,7 +12,9 @@ public class DegreePlannerView extends JFrameView{
 	
     public DegreePlannerView(DegreePlannerModel model, MainController controller){
 		super(model, controller); 
-		
+
+		setTitle("Degree Planner Menu");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int width = (int)screenSize.getWidth();
 		int height = (int)screenSize.getHeight();
@@ -57,7 +59,6 @@ public class DegreePlannerView extends JFrameView{
 		LogoutHandler logoutHandler = new LogoutHandler();
 		JButton logoutButton = new JButton("Log Out");
 		logoutButton.addActionListener(logoutHandler);
-		
 		buttonPanel.add(createPlanButton, null);
 		buttonPanel.add(clearPlanButton, null);
 		buttonPanel.add(addCourseButton, null);

@@ -50,26 +50,15 @@ public class LoginModel extends AbstractModel {
 	}
 
 	public boolean register(String username, String password){
-		//make sure file can be created by username
-		if (students.containsKey(username)) {
+		if(username.equals("")) {
 			ModelEvent me = new ModelEvent(this, 1, "", 3);
 			notifyChanged(me);
 			return false;
 		}
-		students.put(username, password);
-		try {
-			FileOutputStream fos = new FileOutputStream(fileName);
-			ObjectOutputStream oos = new ObjectOutputStream(fos);
-			oos.writeObject(students);
-			oos.flush();
-			oos.close();
-			fos.close();
-		}catch(FileNotFoundException e) {
-			System.out.println("file \"" + fileName + "\"not found");
-			e.printStackTrace();
-		}catch(IOException e) {
-			System.out.println("io exception");
-			e.printStackTrace();
+		if (students.containsKey(username)) {
+			ModelEvent me = new ModelEvent(this, 1, "", 3);
+			notifyChanged(me);
+			return false;
 		}
 		DegreePlan plan = new DegreePlan();
 		try {
@@ -82,9 +71,36 @@ public class LoginModel extends AbstractModel {
 		}catch(FileNotFoundException e) {
 			System.out.println("file \"" + username + ".bin\"not found");
 			e.printStackTrace();
+			ModelEvent me = new ModelEvent(this, 1, "", 3);
+			notifyChanged(me);
+			return false;
 		}catch(IOException e) {
 			System.out.println("io exception");
 			e.printStackTrace();
+			ModelEvent me = new ModelEvent(this, 1, "", 3);
+			notifyChanged(me);
+			return false;
+		}
+		try {
+			FileOutputStream fos = new FileOutputStream(fileName);
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			students.put(username, password);
+			oos.writeObject(students);
+			oos.flush();
+			oos.close();
+			fos.close();
+		}catch(FileNotFoundException e) {
+			System.out.println("file \"" + fileName + "\"not found");
+			e.printStackTrace();
+			ModelEvent me = new ModelEvent(this, 1, "", 3);
+			notifyChanged(me);
+			return false;
+		}catch(IOException e) {
+			System.out.println("io exception");
+			e.printStackTrace();
+			ModelEvent me = new ModelEvent(this, 1, "", 3);
+			notifyChanged(me);
+			return false;
 		}
 		ModelEvent me = new ModelEvent(this, 1, "", 2);
 		notifyChanged(me);
