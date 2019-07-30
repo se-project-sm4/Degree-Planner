@@ -11,6 +11,11 @@ public class DegreePlannerView extends JFrameView{
 	private JTextField courseIDField = new JTextField(); 
     public DegreePlannerView(DegreePlannerModel model, MainController controller){
 		super(model, controller); 
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		int width = (int)screenSize.getWidth();
+		int height = (int)screenSize.getHeight();
+		setPreferredSize(new Dimension(400 , 400));
+		setBounds(width/2 - 200, height/2 - 200, 400, 400);
 		courseIDField.setText("Course ID");
 		this.getContentPane().add(courseIDField, BorderLayout.NORTH);
 		JPanel buttonPanel = new JPanel();
@@ -42,7 +47,7 @@ public class DegreePlannerView extends JFrameView{
 		JButton logoutButton = new JButton("Log Out");
 		logoutButton.addActionListener(logoutHandler);
 		buttonPanel.setLayout(new GridLayout(3, 3));
-		this.getContentPane().add(buttonPanel, BorderLayout.SOUTH);
+		this.getContentPane().add(buttonPanel, BorderLayout.CENTER);
 		buttonPanel.add(createPlanButton, null);
 		buttonPanel.add(clearPlanButton, null);
 		buttonPanel.add(addCourseButton, null);
