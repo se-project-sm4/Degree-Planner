@@ -45,11 +45,21 @@ public class DegreePlannerModel  extends AbstractModel{
 		save();
 	}
 
-	public void clearPlan(){
-		plan.setSemesters(new ArrayList<Semester>());
-		plan.setMajors(new ArrayList<Major>());
-		plan.setMinors(new ArrayList<Minor>());
-		save();
+	public boolean removeSemester(String semester){
+		String[] split = semester.split("\\s+");
+		if(split.length != 1)
+			return false;
+		try {
+			int index = Integer.parseInt(split[0]) - 1;
+			if(plan.getSemesters().size() > index)
+				plan.getSemesters().remove(index);
+			else
+				return false;
+			save();
+			return true;
+		}catch(NumberFormatException e) {
+			return false;
+		}
 	}
 
 	public boolean addCourse(String courseName){
