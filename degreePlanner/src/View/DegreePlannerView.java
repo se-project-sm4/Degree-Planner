@@ -5,13 +5,11 @@ import java.awt.event.*;
 import Controller.MainController;
 import Model.DegreePlannerModel;
 import Model.ModelEvent;
-import java.util.ArrayList;
-import java.util.List;
 
 public class DegreePlannerView extends JFrameView{
 	private static final long serialVersionUID = 1L;
-	private JTextField courseIDField = new JTextField("Course ID"); 
-	private List<JLabel> semesters = new ArrayList<>();
+	private JTextField courseIDField = new JTextField();
+	
     public DegreePlannerView(DegreePlannerModel model, MainController controller){
 		super(model, controller); 
 		
@@ -23,7 +21,7 @@ public class DegreePlannerView extends JFrameView{
 
 		JPanel inputPanel = new JPanel();
 		inputPanel.setLayout(new GridLayout(1, 2));
-		inputPanel.add(new JLabel("Input: "));
+		inputPanel.add(new JLabel("Input:", SwingConstants.CENTER));
 		inputPanel.add(courseIDField);
 		
 		JPanel semesterPanel = new JPanel();
@@ -59,6 +57,7 @@ public class DegreePlannerView extends JFrameView{
 		LogoutHandler logoutHandler = new LogoutHandler();
 		JButton logoutButton = new JButton("Log Out");
 		logoutButton.addActionListener(logoutHandler);
+		
 		buttonPanel.add(createPlanButton, null);
 		buttonPanel.add(clearPlanButton, null);
 		buttonPanel.add(addCourseButton, null);
