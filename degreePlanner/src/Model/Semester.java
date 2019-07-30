@@ -9,6 +9,15 @@ public class Semester implements Serializable{
 	private int maxHours;
 	private int minHours;
 	private List<Course> courses = new ArrayList<>();
+	private String name;
+	
+	public void setName(String n) {
+		name = n;
+	}
+	
+	public String getName() {
+		return name;
+	}
 	
 	public void setMaxHours(int m) {
 		maxHours = m;

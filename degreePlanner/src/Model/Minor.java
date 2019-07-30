@@ -23,6 +23,10 @@ public class Minor implements Serializable{
 	public String getMinorName() {
 		return minorName;
 	}
+	
+	public void setMinorName(String n) {
+		minorName = n;
+	}
 
 	public void setMajor(ArrayList<Requirement> r) {
 		requirements = r;
