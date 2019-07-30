@@ -9,17 +9,17 @@ import Model.Requirement;
 public class DisciplineCatalog {
 	private List<Major> majors = new ArrayList<>();
 	private List<Minor> minors = new ArrayList<>();
-	private List<Requirement> defaultDequirements = new ArrayList<>();
+	private List<Requirement> defaultRequirements = new ArrayList<>();
 	
 	public DisciplineCatalog() {
-		defaultDequirements.add(new Requirement("ENG", 6));
-		defaultDequirements.add(new Requirement("MATH", 3));
-		defaultDequirements.add(new Requirement("SCI", 6));
-		defaultDequirements.add(new Requirement("PHIL", 3));
-		defaultDequirements.add(new Requirement("ART", 3));
-		defaultDequirements.add(new Requirement("HIST", 6));
-		defaultDequirements.add(new Requirement("POSI", 6));
-		defaultDequirements.add(new Requirement("SOCI", 3));
+		defaultRequirements.add(new Requirement("ENG", 6));
+		defaultRequirements.add(new Requirement("MATH", 3));
+		defaultRequirements.add(new Requirement("SCI", 6));
+		defaultRequirements.add(new Requirement("PHIL", 3));
+		defaultRequirements.add(new Requirement("ART", 3));
+		defaultRequirements.add(new Requirement("HIST", 6));
+		defaultRequirements.add(new Requirement("POSI", 6));
+		defaultRequirements.add(new Requirement("SOCI", 3));
 
 		List<Requirement> csMajorReqs = new ArrayList<>();
 		csMajorReqs.add(new Requirement("ENG", 3));
@@ -50,6 +50,6 @@ public class DisciplineCatalog {
 	}
 	
 	public List<Requirement> getDefaultRequirements(){
-		return defaultDequirements;
+		return defaultRequirements;
 	}
 }
