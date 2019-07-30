@@ -68,11 +68,10 @@ public class DegreePlannerModel  extends AbstractModel{
 					return false;
 				}
 			}
-			if(plan.getSemesters().size() < semester) {
-				while(plan.getSemesters().size() < semester) {
+			while(plan.getSemesters().size() <= semester) {
 					addSemester();
-				}
-			}else if(plan.getSemesters().get(semester).getMaxHours() < plan.getSemesters().get(semester).getHours() + course.getHours()) {
+			}
+			if(plan.getSemesters().get(semester).getMaxHours() < plan.getSemesters().get(semester).getHours() + course.getHours()) {
 				return false;
 			}
 			if(plan.getSemesters().get(semester).getCourses().add(course)) {
@@ -162,6 +161,7 @@ public class DegreePlannerModel  extends AbstractModel{
 	}
 	
 	private void save() {
+		System.out.println(plan);
 		try {
 			FileOutputStream fos = new FileOutputStream(fileName);
 			ObjectOutputStream oos = new ObjectOutputStream(fos);

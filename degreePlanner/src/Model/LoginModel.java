@@ -23,14 +23,10 @@ public class LoginModel extends AbstractModel {
 			ois.close();
 			fis.close();
 		}catch(FileNotFoundException e) {
-			System.out.println("file \"" + fileName + "\" not found");
-			e.printStackTrace();
 		}catch(IOException e) {
-			System.out.println("io exception");
 			e.printStackTrace();
 		}catch(ClassNotFoundException e) {
 			System.out.println("class \"Map<String, String>\"not found");
-			e.printStackTrace();
 		}
 	}
 
@@ -69,14 +65,10 @@ public class LoginModel extends AbstractModel {
 			oos.close();
 			fos.close();
 		}catch(FileNotFoundException e) {
-			System.out.println("file \"" + username + ".bin\"not found");
-			e.printStackTrace();
 			ModelEvent me = new ModelEvent(this, 1, "", 3);
 			notifyChanged(me);
 			return false;
 		}catch(IOException e) {
-			System.out.println("io exception");
-			e.printStackTrace();
 			ModelEvent me = new ModelEvent(this, 1, "", 3);
 			notifyChanged(me);
 			return false;
@@ -90,14 +82,10 @@ public class LoginModel extends AbstractModel {
 			oos.close();
 			fos.close();
 		}catch(FileNotFoundException e) {
-			System.out.println("file \"" + fileName + "\"not found");
-			e.printStackTrace();
 			ModelEvent me = new ModelEvent(this, 1, "", 3);
 			notifyChanged(me);
 			return false;
 		}catch(IOException e) {
-			System.out.println("io exception");
-			e.printStackTrace();
 			ModelEvent me = new ModelEvent(this, 1, "", 3);
 			notifyChanged(me);
 			return false;
