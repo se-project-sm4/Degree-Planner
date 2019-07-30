@@ -5,20 +5,33 @@ import java.awt.event.*;
 import Controller.MainController;
 import Model.DegreePlannerModel;
 import Model.ModelEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DegreePlannerView extends JFrameView{
 	private static final long serialVersionUID = 1L;
-	private JTextField courseIDField = new JTextField(); 
+	private JTextField courseIDField = new JTextField("Course ID"); 
+	private List<JLabel> semesters = new ArrayList<>();
     public DegreePlannerView(DegreePlannerModel model, MainController controller){
 		super(model, controller); 
+		
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int width = (int)screenSize.getWidth();
 		int height = (int)screenSize.getHeight();
-		setPreferredSize(new Dimension(400 , 400));
-		setBounds(width/2 - 200, height/2 - 200, 400, 400);
-		courseIDField.setText("Course ID");
-		this.getContentPane().add(courseIDField, BorderLayout.NORTH);
+		setPreferredSize(new Dimension(width/2 , height/2));
+		setLocation(width/4, height/4);
+
+		JPanel inputPanel = new JPanel();
+		inputPanel.setLayout(new GridLayout(1, 2));
+		inputPanel.add(new JLabel("Input: "));
+		inputPanel.add(courseIDField);
+		
+		JPanel semesterPanel = new JPanel();
+		semesterPanel.setPreferredSize(new Dimension(1000 , 0));
+        JScrollPane scroll = new JScrollPane(semesterPanel);
+		
 		JPanel buttonPanel = new JPanel();
+		buttonPanel.setLayout(new GridLayout(2, 5));
 		CreatePlanHandler createPlanHandler = new CreatePlanHandler();
 		JButton createPlanButton = new JButton("Create Plan");
 		createPlanButton.addActionListener(createPlanHandler);
@@ -46,8 +59,6 @@ public class DegreePlannerView extends JFrameView{
 		LogoutHandler logoutHandler = new LogoutHandler();
 		JButton logoutButton = new JButton("Log Out");
 		logoutButton.addActionListener(logoutHandler);
-		buttonPanel.setLayout(new GridLayout(3, 3));
-		this.getContentPane().add(buttonPanel, BorderLayout.CENTER);
 		buttonPanel.add(createPlanButton, null);
 		buttonPanel.add(clearPlanButton, null);
 		buttonPanel.add(addCourseButton, null);
@@ -57,6 +68,11 @@ public class DegreePlannerView extends JFrameView{
 		buttonPanel.add(addMinorButton, null);
 		buttonPanel.add(removeMinorButton, null);
 		buttonPanel.add(logoutButton, null);
+		
+		this.getContentPane().add(inputPanel, BorderLayout.NORTH);
+		this.getContentPane().add(scroll, BorderLayout.CENTER);
+		this.getContentPane().add(buttonPanel, BorderLayout.SOUTH);
+		
 		pack();
     }
 
