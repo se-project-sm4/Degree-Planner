@@ -29,7 +29,7 @@ public class MainController extends AbstractController {
 		((DegreePlannerModel)getModel()).createPlan();
 	}
 	
-	public void clearPlan(String semester) {
+	public void removeSemester(String semester) {
 		((DegreePlannerModel)getModel()).removeSemester(semester);
 	}
 	

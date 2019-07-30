@@ -75,10 +75,10 @@ public class DegreePlannerView extends JFrameView{
 		JButton removeMinorButton = new JButton("Remove Minor");
 		removeMinorButton.setToolTipText("Name (ex: Mathematics)");
 		removeMinorButton.addActionListener(removeMinorHandler);
-		ClearPlanHandler clearPlanHandler = new ClearPlanHandler();
-		JButton clearPlanButton = new JButton("Clear Plan");
-		clearPlanButton.setToolTipText("N/A");
-		clearPlanButton.addActionListener(clearPlanHandler);
+		RemoveSemesterHandler removeSemesterHandler = new RemoveSemesterHandler();
+		JButton removeSemesterButton = new JButton("Remove Semester");
+		removeSemesterButton.setToolTipText("Number (ex: 1) (WARNING: THIS FUNCTION WILL ALSO REMOVE ALL SEMESTERS AFTER THE REQUESTED SEMESTER");
+		removeSemesterButton.addActionListener(removeSemesterHandler);
 		LogoutHandler logoutHandler = new LogoutHandler();
 		JButton logoutButton = new JButton("Log Out");
 		logoutButton.setToolTipText("N/A");
@@ -86,7 +86,7 @@ public class DegreePlannerView extends JFrameView{
 		buttonPanel1.add(addCourseButton, null);
 		buttonPanel1.add(addMajorButton, null);
 		buttonPanel1.add(addMinorButton, null);
-		buttonPanel1.add(clearPlanButton, null);
+		buttonPanel1.add(removeSemesterButton, null);
 		buttonPanel2.add(removeCourseButton, null);
 		buttonPanel2.add(removeMajorButton, null);
 		buttonPanel2.add(removeMinorButton, null);
@@ -112,9 +112,9 @@ public class DegreePlannerView extends JFrameView{
 	    } 
 	}
 	
-	class ClearPlanHandler implements ActionListener { 
+	class RemoveSemesterHandler implements ActionListener { 
 		public void actionPerformed(ActionEvent e) {
-			((MainController)getController()).clearPlan(); 
+			((MainController)getController()).removeSemester(courseIDField.getText()); 
 	    } 
 	}
 	

@@ -59,6 +59,10 @@ public class DegreePlan implements Serializable{
 	public void removeSemester(Semester s) {
 		semesters.remove(s);
 	}
+	
+	public void removeSemesterAtIndex(Semester s) {
+		semesters.remove(s);
+	}
 
     @Override
     public String toString() { 
