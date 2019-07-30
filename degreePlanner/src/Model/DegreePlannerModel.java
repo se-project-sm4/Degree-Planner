@@ -59,7 +59,7 @@ public class DegreePlannerModel  extends AbstractModel{
 		String subject = split[0];
 		try {
 			int id = Integer.parseInt(split[1]);
-			int semester = Integer.parseInt(split[2]);
+			int semester = Integer.parseInt(split[2]) - 1;
 			Course course = catalog.findCourse(id, subject);
 			if(course == null)
 				return false;
@@ -91,7 +91,7 @@ public class DegreePlannerModel  extends AbstractModel{
 		String subject = split[0];
 		try {
 			int id = Integer.parseInt(split[1]);
-			int semester = Integer.parseInt(split[2]);
+			int semester = Integer.parseInt(split[2]) - 1;
 			if(plan.getSemesters().get(semester).getCourses().remove(new Course(id, subject, null, 0, null, null, false))) {
 				save();
 				return true;
