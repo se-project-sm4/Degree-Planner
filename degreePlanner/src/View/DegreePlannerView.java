@@ -27,14 +27,18 @@ public class DegreePlannerView extends JFrameView{
 		setLocation(width/2 - 400, height/2 - 181);
 
 		JPanel mainPanel = new JPanel(new GridLayout(1, 4));
-		CourseCatalogHandler courseCatalogHandler = new CourseCatalogHandler();
+		ShowCourseCatalogHandler showCourseCatalogHandler = new ShowCourseCatalogHandler();
 		JButton courseCatalogButton = new JButton("Show Course Catalog");
 		courseCatalogButton.setToolTipText("N/A");
-		courseCatalogButton.addActionListener(courseCatalogHandler);
-		DisciplineCatalogHandler disciplineCatalogHandler = new DisciplineCatalogHandler();
+		courseCatalogButton.addActionListener(showCourseCatalogHandler);
+		ShowDisciplineCatalogHandler showDisciplineCatalogHandler = new ShowDisciplineCatalogHandler();
 		JButton disciplineCatalogButton = new JButton("Show Discipline Catalog");
 		disciplineCatalogButton.setToolTipText("N/A");
-		disciplineCatalogButton.addActionListener(disciplineCatalogHandler);
+		disciplineCatalogButton.addActionListener(showDisciplineCatalogHandler);
+		ShowPlanHandler showPlanHandler = new ShowPlanHandler();
+		JButton ShowPlanButton = new JButton("Show Degree Plan");
+		ShowPlanButton.setToolTipText("N/A");
+		ShowPlanButton.addActionListener(showPlanHandler);
 		CreatePlanHandler createPlanHandler = new CreatePlanHandler();
 		JButton createPlanButton = new JButton("Create Plan");
 		createPlanButton.setToolTipText("N/A");
@@ -44,6 +48,7 @@ public class DegreePlannerView extends JFrameView{
 		mainPanel.add(welcomeLabel);
 		mainPanel.add(courseCatalogButton, null);
 		mainPanel.add(disciplineCatalogButton, null);
+		mainPanel.add(ShowPlanButton, null);
 		mainPanel.add(createPlanButton, null);
 		
 		JPanel controlPanel = new JPanel();
@@ -162,10 +167,9 @@ public class DegreePlannerView extends JFrameView{
 		for(int i = 0; i < catalog.size(); ++i) {
 			max = Math.max(max, catalog.get(i).size());
 		}
-		max /= 2;
 		for(int i = 0; i < catalog.size(); ++i) {
 			JPanel subjectPanel = new JPanel();
-			subjectPanel.setLayout(new GridLayout(max, 1));
+			subjectPanel.setLayout(new GridLayout(max/2, 1));
 			int j;
 			for(j = 0; j < catalog.get(i).size(); ++j) {
 				JLabel label = new JLabel(catalog.get(i).get(j));
@@ -174,11 +178,12 @@ public class DegreePlannerView extends JFrameView{
 				label.setToolTipText(catalog.get(i).get(++j));
 				subjectPanel.add(label);
 			}
-			while(j++ < max) {
+			while(j < max) {
 				JLabel label = new JLabel();
 				label.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
 				label.setHorizontalAlignment(JLabel.CENTER);
 				subjectPanel.add(label);
+				j += 2;
 			}
 			catalogPanel.add(subjectPanel);
 		}
@@ -192,11 +197,10 @@ public class DegreePlannerView extends JFrameView{
 		for(int i = 0; i < 3; ++i) {
 			max = Math.max(max, catalog.get(i).size());
 		}
-		max = max/2 + 1;
 		
 		for(int i = 0; i < 3; ++i) {
 			JPanel subjectPanel = new JPanel();
-			subjectPanel.setLayout(new GridLayout(max, 1));
+			subjectPanel.setLayout(new GridLayout(max/2 + 1, 1));
 			JLabel label = new JLabel(catalog.get(i).get(0));
 			label.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
 			label.setHorizontalAlignment(JLabel.CENTER);
@@ -214,22 +218,28 @@ public class DegreePlannerView extends JFrameView{
 				label.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
 				label.setHorizontalAlignment(JLabel.CENTER);
 				subjectPanel.add(label);
-				j+=2;
+				j += 2;
 			}
 			catalogPanel.add(subjectPanel);
 		}
 		return catalogPanel;
 	}
 	
-	class CourseCatalogHandler implements ActionListener{
+	class ShowCourseCatalogHandler implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			((MainController)getController()).showCourseCatalog(); 
 	    } 
 	}
 	
-	class DisciplineCatalogHandler implements ActionListener{
+	class ShowDisciplineCatalogHandler implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			((MainController)getController()).showDisciplineCatalog(); 
+	    } 
+	}
+
+	class ShowPlanHandler implements ActionListener { 
+		public void actionPerformed(ActionEvent e) {
+			((MainController)getController()).showPlan(); 
 	    } 
 	}
 	

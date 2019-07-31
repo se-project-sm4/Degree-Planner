@@ -33,6 +33,10 @@ public class MainController extends AbstractController {
 	public void showDisciplineCatalog() {
 		((DegreePlannerModel)getModel()).showDisciplineCatalog();
 	}
+	
+	public void showPlan() {
+		((DegreePlannerModel)getModel()).showPlan();
+	}
 
 	public void createPlan() {
 		((DegreePlannerModel)getModel()).createPlan();
