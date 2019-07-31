@@ -4,7 +4,6 @@ import javax.swing.border.EtchedBorder;
 
 import java.awt.*; 
 import java.awt.event.*;
-import java.util.ArrayList;
 import java.util.List;
 
 import Controller.MainController;
@@ -179,15 +178,20 @@ public class DegreePlannerView extends JFrameView{
 		for(int i = 0; i < semesters.size(); ++i) {
 			JPanel semester = new JPanel();
 			semester.setLayout(new GridLayout(9, 1));
+			JLabel label = new JLabel("Semester " + (i + 1));
+			label.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
+			label.setHorizontalAlignment(JLabel.CENTER);
+			semester.add(label);
 			int j;
 			for(j = 0; j < semesters.get(i).size(); ++j) {
-				JLabel label = new JLabel(semesters.get(i).get(j));
+				label = new JLabel(semesters.get(i).get(j));
 				label.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
 				label.setHorizontalAlignment(JLabel.CENTER);
+				label.setToolTipText(semesters.get(i).get(++j));
 				semester.add(label);
 			}
-			while(j++ < 9) {
-				JLabel label = new JLabel();
+			while(j++ < 8) {
+				label = new JLabel();
 				label.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
 				label.setHorizontalAlignment(JLabel.CENTER);
 				semester.add(label);

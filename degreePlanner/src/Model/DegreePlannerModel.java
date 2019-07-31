@@ -1,5 +1,4 @@
 package Model;
-import java.awt.GridLayout;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -8,9 +7,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 import Model.DegreePlan;
 import Model.CourseCatalog;
@@ -260,9 +256,22 @@ public class DegreePlannerModel  extends AbstractModel{
 		List<List<String>> semestersStringArr = new ArrayList<List<String>>();
 		for(int i = 0, numSems = semesters.size(); i < numSems; ++i) {
 			List<String> tempArr = new ArrayList<String>();
-			tempArr.add("Semester " + (i + 1));
-			for(int j = 0, numCourses = semesters.get(i).getCourses().size() ; j < numCourses; ++j)
+			for(int j = 0, numCourses = semesters.get(i).getCourses().size() ; j < numCourses; ++j) {
 				tempArr.add(semesters.get(i).getCourses().get(j).getSubject() + " " + semesters.get(i).getCourses().get(j).getCourseID());
+				if(semesters.get(i).getCourses().get(j).getPrerequisite() == null) {
+					tempArr.add("Class Name: " + semesters.get(i).getCourses().get(j).getClassName() + 
+					"\nDescription: " + semesters.get(i).getCourses().get(j).getClassDescription() + 
+					"\nPrerequisite: none" + 
+					"\nHours: " + Integer.valueOf(semesters.get(i).getCourses().get(j).getHours()) + 
+					"\nWriting Intensive: " + semesters.get(i).getCourses().get(j).getWritingIntensive());
+				}else {
+					tempArr.add("Class Name: " + semesters.get(i).getCourses().get(j).getClassName() + 
+					"\nDescription: " + semesters.get(i).getCourses().get(j).getClassDescription() + 
+					"\nPrerequisite: " + semesters.get(i).getCourses().get(j).getPrerequisite().getSubject() + " " + semesters.get(i).getCourses().get(j).getPrerequisite().getCourseID() +
+					"\nHours: " + Integer.valueOf(semesters.get(i).getCourses().get(j).getHours()) + 
+					"\nWriting Intensive: " + semesters.get(i).getCourses().get(j).getWritingIntensive());
+				}
+			}
 			semestersStringArr.add(tempArr);
 		}
 		return semestersStringArr;
