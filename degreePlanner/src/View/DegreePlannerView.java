@@ -27,10 +27,14 @@ public class DegreePlannerView extends JFrameView{
 		setLocation(width/2 - 400, height/2 - 181);
 
 		JPanel mainPanel = new JPanel(new GridLayout(1, 4));
+		CourseCatalogHandler courseCatalogHandler = new CourseCatalogHandler();
 		JButton courseCatalogButton = new JButton("Show Course Catalog");
 		courseCatalogButton.setToolTipText("N/A");
+		courseCatalogButton.addActionListener(courseCatalogHandler);
+		DisciplineCatalogHandler disciplineCatalogHandler = new DisciplineCatalogHandler();
 		JButton disciplineCatalogButton = new JButton("Show Discipline Catalog");
 		disciplineCatalogButton.setToolTipText("N/A");
+		disciplineCatalogButton.addActionListener(disciplineCatalogHandler);
 		CreatePlanHandler createPlanHandler = new CreatePlanHandler();
 		JButton createPlanButton = new JButton("Create Plan");
 		createPlanButton.setToolTipText("N/A");
@@ -143,6 +147,18 @@ public class DegreePlannerView extends JFrameView{
 			semestersPanel.add(semester);
 		}
 		return semestersPanel;
+	}
+	
+	class CourseCatalogHandler implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			((MainController)getController()).showCourseCatalog(); 
+	    } 
+	}
+	
+	class DisciplineCatalogHandler implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			((MainController)getController()).showDisciplineCatalog(); 
+	    } 
 	}
 	
 	class CreatePlanHandler implements ActionListener { 
