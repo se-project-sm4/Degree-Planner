@@ -26,6 +26,14 @@ public class MainController extends AbstractController {
 		((LoginModel)getModel()).register(username, password);
 	}
 
+	public void showCourseCatalog() {
+		((DegreePlannerModel)getModel()).showCourseCatalog();
+	}
+
+	public void showDisciplineCatalog() {
+		((DegreePlannerModel)getModel()).showDisciplineCatalog();
+	}
+
 	public void createPlan() {
 		((DegreePlannerModel)getModel()).createPlan();
 	}
