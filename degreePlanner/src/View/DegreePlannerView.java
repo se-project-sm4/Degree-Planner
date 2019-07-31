@@ -23,10 +23,10 @@ public class DegreePlannerView extends JFrameView{
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int width = (int)screenSize.getWidth();
 		int height = (int)screenSize.getHeight();
-		setPreferredSize(new Dimension(684 , 362));
-		setLocation(width/2 - 342, height/2 - 181);
+		setPreferredSize(new Dimension(850, 362));
+		setLocation(width/2 - 400, height/2 - 181);
 
-		JPanel mainPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		JPanel mainPanel = new JPanel(new GridLayout(1, 4));
 		JButton courseCatalogButton = new JButton("Show Course Catalog");
 		courseCatalogButton.setToolTipText("N/A");
 		JButton disciplineCatalogButton = new JButton("Show Discipline Catalog");
@@ -35,7 +35,9 @@ public class DegreePlannerView extends JFrameView{
 		JButton createPlanButton = new JButton("Create Plan");
 		createPlanButton.setToolTipText("N/A");
 		createPlanButton.addActionListener(createPlanHandler);
-		mainPanel.add(new JLabel("Welcome to the Degree Planner Menu!"), null);
+		JLabel welcomeLabel = new JLabel("Degree Planner Menu", SwingConstants.CENTER);
+		welcomeLabel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
+		mainPanel.add(welcomeLabel);
 		mainPanel.add(courseCatalogButton, null);
 		mainPanel.add(disciplineCatalogButton, null);
 		mainPanel.add(createPlanButton, null);
@@ -45,7 +47,9 @@ public class DegreePlannerView extends JFrameView{
 		
 		JPanel inputPanel = new JPanel();
 		inputPanel.setLayout(new GridLayout(1, 2));
-		inputPanel.add(new JLabel("Hover over buttons for input instructions, then input them to the right.", SwingConstants.CENTER));
+		JLabel adviceLabel = new JLabel("Hover over buttons for input instructions, then input them to the right.", SwingConstants.CENTER);
+		adviceLabel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
+		inputPanel.add(adviceLabel);
 		inputPanel.add(courseIDField);
 		
 		JPanel buttonPanel1 = new JPanel();
