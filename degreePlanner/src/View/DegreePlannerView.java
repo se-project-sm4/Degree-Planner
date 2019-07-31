@@ -112,70 +112,7 @@ public class DegreePlannerView extends JFrameView{
     }
     
 	public void modelChanged(ModelEvent event) {
-		if(event.getType() == 0) {
-			//show course catalog
-			scroll.setViewportView(getScroll(event.getSemesters()));
-	        revalidate();
-		}else if(event.getType() == 1) {
-			//show discipline catalog
-		}else if(event.getType() == 2) {
-			// create plan success
-			scroll.setViewportView(getScroll(event.getSemesters()));
-	        revalidate();
-		}else if(event.getType() == 3) {
-			// create plan fail
-			getScroll(event.getSemesters());
-	        repaint();
-		}else if(event.getType() == 4) {
-			// add course success
-			getScroll(event.getSemesters());
-	        repaint();
-		}else if(event.getType() == 5) {
-			// add course fail
-	        repaint();
-		}else if(event.getType() == 6) {
-			// remove course success
-			getScroll(event.getSemesters());
-	        repaint();
-		}else if(event.getType() == 7) {
-			// remove course fail
-	        repaint();
-		}else if(event.getType() == 8) {
-			// add major success
-			getScroll(event.getSemesters());
-	        repaint();
-		}else if(event.getType() == 9) {
-			// add major fail
-	        repaint();
-		}else if(event.getType() == 10) {
-			// remove major success
-			getScroll(event.getSemesters());
-	        repaint();
-		}else if(event.getType() == 11) {
-			// remove major fail
-	        repaint();
-		}else if(event.getType() == 12) {
-			// add minor success
-			getScroll(event.getSemesters());
-	        repaint();
-		}else if(event.getType() == 13) {
-			// add minor fail
-	        repaint();
-		}else if(event.getType() == 14) {
-			// remove minor success
-			getScroll(event.getSemesters());
-	        repaint();
-		}else if(event.getType() == 15) {
-			// remove minor fail
-	        repaint();
-		}else if(event.getType() == 16) {
-			// remove semester success
-			getScroll(event.getSemesters());
-	        repaint();
-		}else if(event.getType() == 17) {
-			// remove semester fail
-	        repaint();
-		}
+		scroll.setViewportView(getScroll(event.getSemesters()));
 	 }
 
 	private JPanel getScroll(List<List<String>> semesters) {
