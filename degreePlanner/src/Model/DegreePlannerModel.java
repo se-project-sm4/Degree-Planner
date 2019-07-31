@@ -145,13 +145,31 @@ public class DegreePlannerModel  extends AbstractModel{
 			int id = Integer.parseInt(split[1]);
 			int semester = Integer.parseInt(split[2]) - 1;
 			Course course = catalog.findCourse(id, subject);
-			if(course == null){
+			if(course == null || catalog.getMap().get(subject) == null){
 				ModelEvent me = new ModelEvent(this, 1, "", 5, getPlanForView());
 				notifyChanged(me);
 				return;
 			}
 			for(int i = 0; i < plan.getSemesters().size(); ++i) {
 				if(plan.getSemesters().get(i).getCourses().contains(new Course(id, subject, null, 0, null, null, false))){
+					ModelEvent me = new ModelEvent(this, 1, "", 5, getPlanForView());
+					notifyChanged(me);
+					return;
+				}
+			}
+			Course prerequisite = catalog.getCatalog().get(catalog.getMap().get(subject)).get(catalog.getCatalog().get(catalog.getMap().get(subject)).indexOf(new Course(id, subject, null, 0, null, null, false))).getPrerequisite();
+			if(prerequisite != null) {
+				boolean hasPrerequesite = false;
+				for(int i = 0; i < plan.getSemesters().size() && i < semester; ++i) {
+					for(int j = 0; j < plan.getSemesters().get(i).getCourses().size(); ++j) {
+						System.out.println(i + " " + j);
+						if(plan.getSemesters().get(i).getCourses().get(j).equals(prerequisite)) {
+							hasPrerequesite = true;
+							break;
+						}
+					}
+				}
+				if(!hasPrerequesite) {
 					ModelEvent me = new ModelEvent(this, 1, "", 5, getPlanForView());
 					notifyChanged(me);
 					return;
