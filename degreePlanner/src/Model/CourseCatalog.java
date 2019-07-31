@@ -1,11 +1,17 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import Model.Course;
 
 public class CourseCatalog {
-	private List<Course> catalog = new ArrayList<>();
+	//make sure courseIDs are sorted from decreasing to increasing (for prerequisite purposes)
+	private List<List<Course>> catalog = new ArrayList<List<Course>>();
+	//map is used to get index of array of courses corresponding to subject
+	Map<String, Integer> map = new HashMap<String, Integer>();
 	
 	public CourseCatalog() {
 		Course cs1428 = new Course(1428, "CS", null, 4, "Foundations of CS I", "computer science introductory course", false);
@@ -32,6 +38,9 @@ public class CourseCatalog {
 		Course phil1320 = new Course(1320, "PHIL", null, 3, "Ethics and Society", "philosophy with an emphasis on moral reasoning", true);
 
 		Course art2313 = new Course(2313, "ART", null, 3, "Introduction to Fine Arts", "introductory course of expression through the visual and performing arts", false);
+		Course art2314 = new Course(2314, "ART", null, 3, "Introduction to Music", "introductory course of expression through music", false);
+		Course art2315 = new Course(2315, "ART", null, 3, "Introduction to Dance", "introductory course of expression through dance", false);
+		Course art2316 = new Course(2316, "ART", null, 3, "Introduction to Theatre", "introductory course of expression through theatre", false);
 
 		Course math2471 = new Course(2471, "MATH", null, 3, "Calculus I", "introductory course to calculus", false);
 		Course math2358 = new Course(2358, "MATH", math2471, 3, "Discrete Mathematics I", "math encountered in computing hardware and software", false);
@@ -40,44 +49,80 @@ public class CourseCatalog {
 		Course math3305 = new Course(3305, "MATH", math2472, 3, "Introduction to Probability and Statistics", "introductory course to statistics", false);
 		Course math3373 = new Course(3373, "MATH", math2472, 3, "Calculus III", "continuation of calculus II", false);
 		Course math3377 = new Course(3377, "MATH", math2472, 3, "Linear Algebra", "introductory course for linear algebra", false);
-
+		
 		//add more
-		catalog.add(cs1428);
-		catalog.add(cs2308);
-		catalog.add(cs2318);
-		catalog.add(cs2315);
-		catalog.add(cs3339);
-		catalog.add(cs3354);
-		catalog.add(cs3358);
-		catalog.add(cs3398);
-		catalog.add(cs4398);
-		catalog.add(cs4328);
-		catalog.add(cs3320);
-		catalog.add(cs4350);
-		catalog.add(cs4381);
-		catalog.add(cs4380);
-		catalog.add(eng1310);
-		catalog.add(eng1320);
-		catalog.add(eng2330);
-		catalog.add(eng2340);
-		catalog.add(phil1305);
-		catalog.add(phil1320);
-		catalog.add(art2313);
+		
+		List<Course> cs = new ArrayList<Course>();
+		cs.add(cs1428);
+		cs.add(cs2308);
+		cs.add(cs2318);
+		cs.add(cs2315);
+		cs.add(cs3320);
+		cs.add(cs3339);
+		cs.add(cs3354);
+		cs.add(cs3358);
+		cs.add(cs3398);
+		cs.add(cs4328);
+		cs.add(cs4350);
+		cs.add(cs4380);
+		cs.add(cs4381);
+		cs.add(cs4398);
 
-		catalog.add(math2471);
-		catalog.add(math2358);
-		catalog.add(math3398);
-		catalog.add(math2472);
-		catalog.add(math3305);
-		catalog.add(math3373);
-		catalog.add(math3377);
+		List<Course> eng = new ArrayList<Course>();
+		eng.add(eng1310);
+		eng.add(eng1320);
+		eng.add(eng2330);
+		eng.add(eng2340);
+
+		List<Course> phil = new ArrayList<Course>();
+		phil.add(phil1305);
+		phil.add(phil1320);
+
+		List<Course> art = new ArrayList<Course>();
+		art.add(art2313);
+		art.add(art2314);
+		art.add(art2315);
+		art.add(art2316);
+
+		List<Course> math = new ArrayList<Course>();
+		math.add(math2358);
+		math.add(math2471);
+		math.add(math2472);
+		math.add(math3305);
+		math.add(math3373);
+		math.add(math3377);
+		math.add(math3398);
+		
+		map.put("CS", 0);
+		catalog.add(cs);
+		
+		map.put("ENG", 1);
+		catalog.add(eng);
+		
+		map.put("PHIL", 2);
+		catalog.add(phil);
+		
+		map.put("ART", 3);
+		catalog.add(art);
+		
+		map.put("MATH", 4);
+		catalog.add(math);
 	}
 	
 	public Course findCourse(int id, String subject){
-		int index  = catalog.indexOf(new Course(id, subject, null, 0, null, null, false));
+		int subjectIndex = map.get(subject);
+		int index  = catalog.get(subjectIndex).indexOf(new Course(id, subject, null, 0, null, null, false));
 		if(index == -1) {
 			return null;
 		}
-		return catalog.get(index);
+		return catalog.get(subjectIndex).get(index);
+	}
+	
+	public Map<String, Integer> getMap() {
+		return map;
+	}
+	
+	public List<List<Course>> getCatalog() {
+		return catalog;
 	}
 }

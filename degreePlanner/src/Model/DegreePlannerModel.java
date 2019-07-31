@@ -6,7 +6,9 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import Model.DegreePlan;
 import Model.CourseCatalog;
@@ -52,7 +54,38 @@ public class DegreePlannerModel  extends AbstractModel{
 			notifyChanged(me);
 			return;
 		}
-		//automate a degree plan
+		removeSemester("1");
+		addSemester();
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		for(int i = 0; i < plan.getMajors().size(); ++i)
+			for(int j = 0; j < plan.getMajors().get(i).getRequirements().size(); ++j) 
+				if(map.get(plan.getMajors().get(i).getRequirements().get(j).getSubject()) == null)
+					map.put(plan.getMajors().get(i).getRequirements().get(j).getSubject(), plan.getMajors().get(i).getRequirements().get(j).getNumHour());
+				else
+					map.put(plan.getMajors().get(i).getRequirements().get(j).getSubject(), Math.max(map.get(plan.getMajors().get(i).getRequirements().get(j).getSubject()), plan.getMajors().get(i).getRequirements().get(j).getNumHour()));
+
+		for(int i = 0; i < plan.getMinors().size(); ++i)
+			for(int j = 0; j < plan.getMinors().get(i).getRequirements().size(); ++j) 
+				if(map.get(plan.getMinors().get(i).getRequirements().get(j).getSubject()) == null)
+					map.put(plan.getMinors().get(i).getRequirements().get(j).getSubject(), plan.getMinors().get(i).getRequirements().get(j).getNumHour());
+				else
+					map.put(plan.getMinors().get(i).getRequirements().get(j).getSubject(), Math.max(map.get(plan.getMinors().get(i).getRequirements().get(j).getSubject()), plan.getMinors().get(i).getRequirements().get(j).getNumHour()));
+		
+		for(int i = 0; i < disciplines.getDefaultRequirements().size(); ++i)
+			if(map.get(disciplines.getDefaultRequirements().get(i).getSubject()) == null)
+				map.put(disciplines.getDefaultRequirements().get(i).getSubject(), disciplines.getDefaultRequirements().get(i).getNumHour());
+			else
+				map.put(disciplines.getDefaultRequirements().get(i).getSubject(), Math.max(map.get(disciplines.getDefaultRequirements().get(i).getSubject()), disciplines.getDefaultRequirements().get(i).getNumHour()));
+		
+		for (String key: map.keySet()) {
+			for(int i = 0; i < catalog.getCatalog().get(catalog.getMap().get(key)).size() && map.get(key) > 0; ++i){
+				if(catalog.getCatalog().get(catalog.getMap().get(key)).get(i).getPrerequisite() == null) {
+					
+				}
+			}
+		    System.out.println("key : " + key);
+		    System.out.println("value : " + map.get(key));
+		}
 		ModelEvent me = new ModelEvent(this, 1, "", 2, prepSemestersForView(plan.getSemesters()));
 		notifyChanged(me);
 		save();

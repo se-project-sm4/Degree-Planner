@@ -22,11 +22,10 @@ public class DisciplineCatalog {
 		defaultRequirements.add(new Requirement("SOCI", 3));
 
 		List<Requirement> csMajorReqs = new ArrayList<>();
-		csMajorReqs.add(new Requirement("ENG", 3));
+		csMajorReqs.add(new Requirement("ENG", 9));
 		csMajorReqs.add(new Requirement("MATH", 14));
 		csMajorReqs.add(new Requirement("CS", 43));
 		csMajorReqs.add(new Requirement("SCI", 16));
-		csMajorReqs.add(new Requirement(null, 2));
 		//add more
 		
 		majors.add(new Major("Computer Science", csMajorReqs, 9));
