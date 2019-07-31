@@ -23,13 +23,20 @@ public class DisciplineCatalog {
 
 		List<Requirement> csMajorReqs = new ArrayList<>();
 		csMajorReqs.add(new Requirement("ENG", 9));
-		csMajorReqs.add(new Requirement("MATH", 14));
+		csMajorReqs.add(new Requirement("MATH", 16));
 		csMajorReqs.add(new Requirement("CS", 43));
 		csMajorReqs.add(new Requirement("SCI", 16));
+
+		List<Requirement> mathMinorReqs = new ArrayList<>();
+		mathMinorReqs.add(new Requirement("MATH", 20));
+		
 		//add more
 		
 		majors.add(new Major("Computer Science", csMajorReqs, 9));
+		
 		//add more
+		
+		minors.add(new Minor("Mathematics", mathMinorReqs, 0));
 	}
 	
 	public Major findMajor(String major) {

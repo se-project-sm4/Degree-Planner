@@ -54,7 +54,7 @@ public class DegreePlannerModel  extends AbstractModel{
 			notifyChanged(me);
 			return;
 		}
-		removeSemester("1");
+		plan.setSemesters(new ArrayList<Semester>());
 		addSemester();
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		for(int i = 0; i < plan.getMajors().size(); ++i)
@@ -78,13 +78,10 @@ public class DegreePlannerModel  extends AbstractModel{
 				map.put(disciplines.getDefaultRequirements().get(i).getSubject(), Math.max(map.get(disciplines.getDefaultRequirements().get(i).getSubject()), disciplines.getDefaultRequirements().get(i).getNumHour()));
 		
 		for (String key: map.keySet()) {
-			System.out.println(key);
-			System.out.println(map.get(key));
-			System.out.println(catalog.getMap().get(key));
-			System.out.println(map.get(key));
 			for(int i = 0; i < catalog.getCatalog().get(catalog.getMap().get(key)).size() && map.get(key) > 0; ++i){
 				if(catalog.getCatalog().get(catalog.getMap().get(key)).get(i).getPrerequisite() == null) {
 					if(plan.getSemesters().get(0).getHours() + catalog.getCatalog().get(catalog.getMap().get(key)).get(i).getHours() <= plan.getSemesters().get(0).getMaxHours()) {
+						map.put(key, map.get(key) - catalog.getCatalog().get(catalog.getMap().get(key)).get(i).getHours());
 						plan.getSemesters().get(0).addCourse(catalog.getCatalog().get(catalog.getMap().get(key)).get(i));
 					}else{
 						int semesterNumber = 0;
@@ -93,6 +90,7 @@ public class DegreePlannerModel  extends AbstractModel{
 								addSemester();
 							}
 						}
+						map.put(key, map.get(key) - catalog.getCatalog().get(catalog.getMap().get(key)).get(i).getHours());
 						plan.getSemesters().get(semesterNumber).addCourse(catalog.getCatalog().get(catalog.getMap().get(key)).get(i));
 					}
 				}else{
@@ -101,6 +99,12 @@ public class DegreePlannerModel  extends AbstractModel{
 							if(plan.getSemesters().size() <= ++j) {
 								addSemester();
 							}
+							while(plan.getSemesters().get(j).getHours() + catalog.getCatalog().get(catalog.getMap().get(key)).get(i).getHours() > plan.getSemesters().get(j).getMaxHours()) {
+								if(plan.getSemesters().size() == ++j){
+									addSemester();
+								}
+							}
+							map.put(key, map.get(key) - catalog.getCatalog().get(catalog.getMap().get(key)).get(i).getHours());
 							plan.getSemesters().get(j).addCourse(catalog.getCatalog().get(catalog.getMap().get(key)).get(i));
 						}
 					}

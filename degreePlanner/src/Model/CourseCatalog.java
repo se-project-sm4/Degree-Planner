@@ -8,7 +8,7 @@ import java.util.Map;
 import Model.Course;
 
 public class CourseCatalog {
-	//make sure courseIDs are sorted from decreasing to increasing (for prerequisite purposes)
+	//make sure courses are always added to the catalog after their prerequisites
 	private List<List<Course>> catalog = new ArrayList<List<Course>>();
 	//map is used to get index of array of courses corresponding to subject
 	Map<String, Integer> map = new HashMap<String, Integer>();
@@ -102,8 +102,8 @@ public class CourseCatalog {
 		art.add(art2316);
 
 		List<Course> math = new ArrayList<Course>();
-		math.add(math2358);
 		math.add(math2471);
+		math.add(math2358);
 		math.add(math2472);
 		math.add(math3305);
 		math.add(math3373);
