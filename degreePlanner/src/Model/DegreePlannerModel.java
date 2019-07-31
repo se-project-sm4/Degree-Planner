@@ -78,7 +78,7 @@ public class DegreePlannerModel  extends AbstractModel{
 					return false;
 				}
 			}
-			while(plan.getSemesters().size() <= semester) {
+			for(int i = plan.getSemesters().size(); i <= semester; ++i) {
 					addSemester();
 			}
 			if(plan.getSemesters().get(semester).getMaxHours() < plan.getSemesters().get(semester).getHours() + course.getHours()) {
