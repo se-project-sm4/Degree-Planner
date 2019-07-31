@@ -116,7 +116,13 @@ public class DegreePlannerView extends JFrameView{
     }
     
 	public void modelChanged(ModelEvent event) {
-		scroll.setViewportView(getScroll(event.getSemesters()));
+		if(event.getType() == 1) {
+			newWindow(event.getArray());
+		}else if(event.getType() == 2) {
+			newWindow(event.getArray());
+		}else {
+			scroll.setViewportView(getScroll(event.getArray()));
+		}
 	 }
 
 	private JPanel getScroll(List<List<String>> semesters) {
