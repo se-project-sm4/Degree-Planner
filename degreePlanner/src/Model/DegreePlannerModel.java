@@ -42,122 +42,184 @@ public class DegreePlannerModel  extends AbstractModel{
 	}
 	
 	public void createPlan(){
+		if(plan.getMajors().size() == 0) {
+			ModelEvent me = new ModelEvent(this, 1, "", 3, prepSemestersForView(plan.getSemesters()));
+			notifyChanged(me);
+			return;
+		}
 		//automate a degree plan
+		ModelEvent me = new ModelEvent(this, 1, "", 2, prepSemestersForView(plan.getSemesters()));
+		notifyChanged(me);
 		save();
 	}
 
-	public boolean removeSemester(String semester){
-		String[] split = semester.split("\\s+");
-		if(split.length != 1)
-			return false;
-		try {
-			int index = Integer.parseInt(split[0]) - 1;
-			int numSemesters = plan.getSemesters().size();
-			if(numSemesters > 0 && numSemesters > index)
-				plan.setSemesters(new ArrayList<Semester>(plan.getSemesters().subList(0, Math.max(0, index))));
-			else
-				return false;
-			save();
-			return true;
-		}catch(NumberFormatException e) {
-			return false;
-		}
-	}
-
-	public boolean addCourse(String courseName){
+	public void addCourse(String courseName){
 		String[] split = courseName.split("\\s+");
-		if(split.length != 3)
-			return false;
+		if(split.length != 3) {
+			ModelEvent me = new ModelEvent(this, 1, "", 5, prepSemestersForView(plan.getSemesters()));
+			notifyChanged(me);
+			return;
+		}
 		String subject = split[0];
 		try {
 			int id = Integer.parseInt(split[1]);
 			int semester = Integer.parseInt(split[2]) - 1;
 			Course course = catalog.findCourse(id, subject);
-			if(course == null)
-				return false;
+			if(course == null){
+				ModelEvent me = new ModelEvent(this, 1, "", 5, prepSemestersForView(plan.getSemesters()));
+				notifyChanged(me);
+				return;
+			}
 			for(int i = 0; i < plan.getSemesters().size(); ++i) {
-				if(plan.getSemesters().get(i).getCourses().contains(new Course(id, subject, null, 0, null, null, false))) {
-					return false;
+				if(plan.getSemesters().get(i).getCourses().contains(new Course(id, subject, null, 0, null, null, false))){
+					ModelEvent me = new ModelEvent(this, 1, "", 5, prepSemestersForView(plan.getSemesters()));
+					notifyChanged(me);
+					return;
 				}
 			}
 			for(int i = plan.getSemesters().size(); i <= semester; ++i) {
 					addSemester();
 			}
-			if(plan.getSemesters().get(semester).getMaxHours() < plan.getSemesters().get(semester).getHours() + course.getHours()) {
-				return false;
+			if(plan.getSemesters().get(semester).getMaxHours() < plan.getSemesters().get(semester).getHours() + course.getHours()){
+				ModelEvent me = new ModelEvent(this, 1, "", 5, prepSemestersForView(plan.getSemesters()));
+				notifyChanged(me);
+				return;
 			}
 			if(plan.getSemesters().get(semester).getCourses().add(course)) {
 				save();
-				return true;
+				ModelEvent me = new ModelEvent(this, 1, "", 4, prepSemestersForView(plan.getSemesters()));
+				notifyChanged(me);
+				return;
 			}
-		}catch(NumberFormatException e) {
-			return false;
+		}catch(NumberFormatException e){
+			ModelEvent me = new ModelEvent(this, 1, "", 5, prepSemestersForView(plan.getSemesters()));
+			notifyChanged(me);
+			return;
 		}
-		return false;
+		ModelEvent me = new ModelEvent(this, 1, "", 5, prepSemestersForView(plan.getSemesters()));
+		notifyChanged(me);
+		return;
 	}
 
-	public boolean removeCourse(String course){
+	public void removeCourse(String course){
 		String[] split = course.split("\\s+");
-		if(split.length != 3)
-			return false;
+		if(split.length != 3) {
+			ModelEvent me = new ModelEvent(this, 1, "", 7, prepSemestersForView(plan.getSemesters()));
+			notifyChanged(me);
+			return;
+		}
 		String subject = split[0];
 		try {
 			int id = Integer.parseInt(split[1]);
 			int semester = Integer.parseInt(split[2]) - 1;
 			if(plan.getSemesters().get(semester).getCourses().remove(new Course(id, subject, null, 0, null, null, false))) {
 				save();
-				return true;
+				ModelEvent me = new ModelEvent(this, 1, "", 6, prepSemestersForView(plan.getSemesters()));
+				notifyChanged(me);
+				return;
 			}
 		}catch(NumberFormatException e) {
-			return false;
+			ModelEvent me = new ModelEvent(this, 1, "", 7, prepSemestersForView(plan.getSemesters()));
+			notifyChanged(me);
+			return;
 		}
-		return false;
+		ModelEvent me = new ModelEvent(this, 1, "", 7, prepSemestersForView(plan.getSemesters()));
+		notifyChanged(me);
+		return;
 	}
 
-	public boolean addMajor(String major){
+	public void addMajor(String major){
 		Major m = new Major();
 		m = disciplines.findMajor(major);
 		if(m == null){
-			return false;
+			ModelEvent me = new ModelEvent(this, 1, "", 9, prepSemestersForView(plan.getSemesters()));
+			notifyChanged(me);
+			return;
 		}
 		if(!plan.getMajors().contains(m)) {
 			if(plan.getMajors().add(m)) {
 				save();
-				return true;
+				ModelEvent me = new ModelEvent(this, 1, "", 8, prepSemestersForView(plan.getSemesters()));
+				notifyChanged(me);
+				return;
 			}
 		}
-		return false;
+		ModelEvent me = new ModelEvent(this, 1, "", 9, prepSemestersForView(plan.getSemesters()));
+		notifyChanged(me);
+		return;
 	}
 
-	public boolean removeMajor(String major){
+	public void removeMajor(String major){
 		if(plan.getMajors().remove(disciplines.findMajor(major))) {
 			save();
-			return true;
+			ModelEvent me = new ModelEvent(this, 1, "", 10, prepSemestersForView(plan.getSemesters()));
+			notifyChanged(me);
+			return;
 		}
-		return false;
+		ModelEvent me = new ModelEvent(this, 1, "", 11, prepSemestersForView(plan.getSemesters()));
+		notifyChanged(me);
+		return;
 	}
 
-	public boolean addMinor(String minor){
+	public void addMinor(String minor){
 		Minor m = new Minor();
 		m = disciplines.findMinor(minor);
 		if(m == null){
-			return false;
+			ModelEvent me = new ModelEvent(this, 1, "", 13, prepSemestersForView(plan.getSemesters()));
+			notifyChanged(me);
+			return;
 		}
 		if(!plan.getMinors().contains(m)) {
 			if(plan.getMinors().add(m)) {
 				save();
-				return true;
+				ModelEvent me = new ModelEvent(this, 1, "", 12, prepSemestersForView(plan.getSemesters()));
+				notifyChanged(me);
+				return;
 			}
 		}
-		return false;
+		ModelEvent me = new ModelEvent(this, 1, "", 13, prepSemestersForView(plan.getSemesters()));
+		notifyChanged(me);
+		return;
 	}
 
-	public boolean removeMinor(String minor){
+	public void removeMinor(String minor){
 		if(plan.getMinors().remove(disciplines.findMinor(minor))) {
 			save();
-			return true;
+			ModelEvent me = new ModelEvent(this, 1, "", 14, prepSemestersForView(plan.getSemesters()));
+			notifyChanged(me);
+			return;
 		}
-		return false;
+		ModelEvent me = new ModelEvent(this, 1, "", 15, prepSemestersForView(plan.getSemesters()));
+		notifyChanged(me);
+		return;
+	}
+	
+	public void removeSemester(String semester){
+		String[] split = semester.split("\\s+");
+		if(split.length != 1) {
+			ModelEvent me = new ModelEvent(this, 1, "", 17, prepSemestersForView(plan.getSemesters()));
+			notifyChanged(me);
+			return;
+		}
+		try {
+			int index = Integer.parseInt(split[0]) - 1;
+			int numSemesters = plan.getSemesters().size();
+			if(numSemesters > 0 && numSemesters > index)
+				plan.setSemesters(new ArrayList<Semester>(plan.getSemesters().subList(0, Math.max(0, index))));
+			else {
+				ModelEvent me = new ModelEvent(this, 1, "", 17, prepSemestersForView(plan.getSemesters()));
+				notifyChanged(me);
+				return;
+			}
+			save();
+			ModelEvent me = new ModelEvent(this, 1, "", 16, prepSemestersForView(plan.getSemesters()));
+			notifyChanged(me);
+			return;
+		}catch(NumberFormatException e) {
+			ModelEvent me = new ModelEvent(this, 1, "", 17, prepSemestersForView(plan.getSemesters()));
+			notifyChanged(me);
+			return;
+		}
 	}
 	
 	public void logout() {

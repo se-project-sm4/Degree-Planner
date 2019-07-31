@@ -2,6 +2,8 @@ package View;
 import javax.swing.*; 
 import java.awt.*; 
 import java.awt.event.*;
+import java.util.List;
+
 import Controller.MainController;
 import Model.DegreePlannerModel;
 import Model.ModelEvent;
@@ -9,10 +11,13 @@ import Model.ModelEvent;
 public class DegreePlannerView extends JFrameView{
 	private static final long serialVersionUID = 1L;
 	private JTextField courseIDField = new JTextField();
+    JScrollPane scroll = new JScrollPane();
 	
     public DegreePlannerView(DegreePlannerModel model, MainController controller){
-		super(model, controller); 
-
+		super(model, controller);
+    }
+    
+    public void paint(Graphics g) {
 		setTitle("Degree Planner Menu");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -22,8 +27,6 @@ public class DegreePlannerView extends JFrameView{
 		setLocation(width/4, height/4);
 
 		JPanel mainPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		JPanel titlePanel = new JPanel();
-		titlePanel.add(new JLabel("Welcome to the Degree Planner Menu!"));
 		JButton courseCatalogButton = new JButton("Show Course Catalog");
 		courseCatalogButton.setToolTipText("N/A");
 		JButton disciplineCatalogButton = new JButton("Show Discipline Catalog");
@@ -32,20 +35,17 @@ public class DegreePlannerView extends JFrameView{
 		JButton createPlanButton = new JButton("Create Plan");
 		createPlanButton.setToolTipText("N/A");
 		createPlanButton.addActionListener(createPlanHandler);
-		mainPanel.add(titlePanel, null);
+		mainPanel.add(new JLabel("Welcome to the Degree Planner Menu!"), null);
 		mainPanel.add(courseCatalogButton, null);
 		mainPanel.add(disciplineCatalogButton, null);
 		mainPanel.add(createPlanButton, null);
-		
-		JPanel semesterPanel = new JPanel();
-		semesterPanel.setPreferredSize(new Dimension(1000 , 0));
-        JScrollPane scroll = new JScrollPane(semesterPanel);
 		
 		JPanel controlPanel = new JPanel();
 		controlPanel.setLayout(new GridLayout(3, 1));
 		JPanel inputPanel = new JPanel();
 		inputPanel.setLayout(new GridLayout(1, 2));
 		inputPanel.add(new JLabel("Hover over buttons for input instructions, then input them to the right.", SwingConstants.CENTER));
+		courseIDField = new JTextField(courseIDField.getText());
 		inputPanel.add(courseIDField);
 		JPanel buttonPanel1 = new JPanel();
 		buttonPanel1.setLayout(new GridLayout(1, 4));
@@ -83,25 +83,25 @@ public class DegreePlannerView extends JFrameView{
 		JButton logoutButton = new JButton("Log Out");
 		logoutButton.setToolTipText("N/A");
 		logoutButton.addActionListener(logoutHandler);
-		buttonPanel1.add(addCourseButton, null);
-		buttonPanel1.add(addMajorButton, null);
-		buttonPanel1.add(addMinorButton, null);
-		buttonPanel1.add(removeSemesterButton, null);
-		buttonPanel2.add(removeCourseButton, null);
-		buttonPanel2.add(removeMajorButton, null);
-		buttonPanel2.add(removeMinorButton, null);
-		buttonPanel2.add(logoutButton, null);
-		controlPanel.add(inputPanel, null);
-		controlPanel.add(buttonPanel1, null);
-		controlPanel.add(buttonPanel2, null);
+		buttonPanel1.add(addCourseButton);
+		buttonPanel1.add(addMajorButton);
+		buttonPanel1.add(addMinorButton);
+		buttonPanel1.add(removeSemesterButton);
+		buttonPanel2.add(removeCourseButton);
+		buttonPanel2.add(removeMajorButton);
+		buttonPanel2.add(removeMinorButton);
+		buttonPanel2.add(logoutButton);
+		controlPanel.add(inputPanel);
+		controlPanel.add(buttonPanel1);
+		controlPanel.add(buttonPanel2);
 		
-		this.getContentPane().add(mainPanel, BorderLayout.NORTH);
-		this.getContentPane().add(scroll, BorderLayout.CENTER);
-		this.getContentPane().add(controlPanel, BorderLayout.SOUTH);
+		getContentPane().add(mainPanel, BorderLayout.NORTH);
+		getContentPane().add(scroll, BorderLayout.CENTER);
+		getContentPane().add(controlPanel, BorderLayout.SOUTH);
 		
 		pack();
     }
-
+    
 	public void modelChanged(ModelEvent event) {
 		if(event.getType() == 0) {
 			//show course catalog
@@ -109,38 +109,75 @@ public class DegreePlannerView extends JFrameView{
 			//show discipline catalog
 		}else if(event.getType() == 2) {
 			// create plan success
+	        repaint();
 		}else if(event.getType() == 3) {
 			// create plan fail
+	        repaint();
 		}else if(event.getType() == 4) {
 			// add course success
+	        updateScroll(event.getSemesters());
+	        repaint();
 		}else if(event.getType() == 5) {
 			// add course fail
+	        repaint();
 		}else if(event.getType() == 6) {
-			// add major success
-		}else if(event.getType() == 7) {
-			// add major fail
-		}else if(event.getType() == 8) {
-			// add minor success
-		}else if(event.getType() == 9) {
-			// add minor fail
-		}else if(event.getType() == 10) {
-			// remove semester success
-		}else if(event.getType() == 11) {
-			// remove semeste failr
-		}else if(event.getType() == 12) {
 			// remove course success
-		}else if(event.getType() == 13) {
+	        updateScroll(event.getSemesters());
+	        repaint();
+		}else if(event.getType() == 7) {
 			// remove course fail
-		}else if(event.getType() == 14) {
+	        repaint();
+		}else if(event.getType() == 8) {
+			// add major success
+	        updateScroll(event.getSemesters());
+	        repaint();
+		}else if(event.getType() == 9) {
+			// add major fail
+	        repaint();
+		}else if(event.getType() == 10) {
 			// remove major success
-		}else if(event.getType() == 15) {
+	        updateScroll(event.getSemesters());
+	        repaint();
+		}else if(event.getType() == 11) {
 			// remove major fail
-		}else if(event.getType() == 16) {
+	        repaint();
+		}else if(event.getType() == 12) {
+			// add minor success
+	        updateScroll(event.getSemesters());
+	        repaint();
+		}else if(event.getType() == 13) {
+			// add minor fail
+	        repaint();
+		}else if(event.getType() == 14) {
 			// remove minor success
-		}else if(event.getType() == 17) {
+	        updateScroll(event.getSemesters());
+	        repaint();
+		}else if(event.getType() == 15) {
 			// remove minor fail
+	        repaint();
+		}else if(event.getType() == 16) {
+			// remove semester success
+	        updateScroll(event.getSemesters());
+	        repaint();
+		}else if(event.getType() == 17) {
+			// remove semester fail
+	        repaint();
 		}
 	 }
+
+	private void updateScroll(List<List<String>> semesters) {
+		int numSemesters = semesters.size();
+		scroll.setLayout(new GridLayout(numSemesters, 1));
+		for(int i = 0; i < numSemesters; ++i) {
+			int loops = semesters.get(i).size();
+			JPanel semester = new JPanel();
+			scroll.setLayout(new GridLayout(1, loops));
+			for(int j = 0; j < loops; ++j) {
+				semester.add(new JLabel(semesters.get(i).get(j)));
+			}
+			scroll.add(semester);
+		}
+	}
 	
 	class CreatePlanHandler implements ActionListener { 
 		public void actionPerformed(ActionEvent e) {
@@ -195,4 +232,6 @@ public class DegreePlannerView extends JFrameView{
 			((MainController)getController()).logout(); 
 	    } 
 	}
+	
+	
 }
