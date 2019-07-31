@@ -193,6 +193,7 @@ public class DegreePlannerModel  extends AbstractModel{
 			int id = Integer.parseInt(split[1]);
 			int semester = Integer.parseInt(split[2]) - 1;
 			if(plan.getSemesters().get(semester).getCourses().remove(new Course(id, subject, null, 0, null, null, false))) {
+				removeCoursesWithRequirement(new Course(id, subject, null, 0, null, null, false), semester);
 				save();
 				ModelEvent me = new ModelEvent(this, 1, "", 6, getPlanForView());
 				notifyChanged(me);
@@ -440,5 +441,18 @@ public class DegreePlannerModel  extends AbstractModel{
 		}
 		catalogStringArr.add(tempArr);
 		return catalogStringArr;
+	}
+	
+	private void removeCoursesWithRequirement(Course course, int semester){
+		for(int i =  semester; i < plan.getSemesters().size(); ++i) {
+			for(int j = 0; j < plan.getSemesters().get(i).getCourses().size(); ++j) {
+				if(plan.getSemesters().get(i).getCourses().get(j).getPrerequisite() != null) {
+					if(plan.getSemesters().get(i).getCourses().get(j).getPrerequisite().equals(course)) {
+						removeCoursesWithRequirement(plan.getSemesters().get(i).getCourses().get(j), i);
+						plan.getSemesters().get(i).getCourses().remove(j--);
+					}
+				}
+			}
+		}
 	}
 }
