@@ -1,5 +1,7 @@
 package View;
-import javax.swing.*; 
+import javax.swing.*;
+import javax.swing.border.EtchedBorder;
+
 import java.awt.*; 
 import java.awt.event.*;
 import Controller.MainController;
@@ -34,7 +36,9 @@ public class LoginView extends JFrameView {
 		JPanel infoPanel = new JPanel();
 		infoPanel.setLayout(new GridLayout(2, 2));
 		JLabel usernameLabel = new JLabel("Username:", SwingConstants.CENTER);
+		usernameLabel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
 		JLabel passwordLabel = new JLabel("Password:", SwingConstants.CENTER);
+		passwordLabel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
 		infoPanel.add(usernameLabel);
 		infoPanel.add(usernameField);
 		infoPanel.add(passwordLabel);
