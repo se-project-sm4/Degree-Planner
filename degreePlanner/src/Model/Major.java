@@ -28,19 +28,19 @@ public class Major implements Serializable{
 		return majorName;
 	}
 
-	public void setMajor(ArrayList<Requirement> r) {
+	public void setRequirements(ArrayList<Requirement> r) {
 		requirements = r;
 	}
 	
-	public List<Requirement> getMajors() {
+	public List<Requirement> getRequirements() {
 		return requirements;
 	}
 	
-	public void addMajor(Requirement r) {
+	public void addRequirements(Requirement r) {
 		requirements.add(r);
 	}
 	
-	public void removeMajor(Requirement r) {
+	public void removeRequirements(Requirement r) {
 		requirements.remove(r);
 	}
 	
