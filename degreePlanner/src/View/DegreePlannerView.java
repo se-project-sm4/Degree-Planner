@@ -1,7 +1,10 @@
 package View;
-import javax.swing.*; 
+import javax.swing.*;
+import javax.swing.border.EtchedBorder;
+
 import java.awt.*; 
 import java.awt.event.*;
+import java.util.ArrayList;
 import java.util.List;
 
 import Controller.MainController;
@@ -11,20 +14,18 @@ import Model.ModelEvent;
 public class DegreePlannerView extends JFrameView{
 	private static final long serialVersionUID = 1L;
 	private JTextField courseIDField = new JTextField();
-    JScrollPane scroll = new JScrollPane();
+	private JScrollPane scroll = new JScrollPane();
 	
     public DegreePlannerView(DegreePlannerModel model, MainController controller){
 		super(model, controller);
-    }
-    
-    public void paint(Graphics g) {
+		
 		setTitle("Degree Planner Menu");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int width = (int)screenSize.getWidth();
 		int height = (int)screenSize.getHeight();
-		setPreferredSize(new Dimension(width/2 , height/2));
-		setLocation(width/4, height/4);
+		setPreferredSize(new Dimension(684 , 400));
+		setLocation(width/2 - 342, height/2 - 200);
 
 		JPanel mainPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JButton courseCatalogButton = new JButton("Show Course Catalog");
@@ -42,11 +43,12 @@ public class DegreePlannerView extends JFrameView{
 		
 		JPanel controlPanel = new JPanel();
 		controlPanel.setLayout(new GridLayout(3, 1));
+		
 		JPanel inputPanel = new JPanel();
 		inputPanel.setLayout(new GridLayout(1, 2));
 		inputPanel.add(new JLabel("Hover over buttons for input instructions, then input them to the right.", SwingConstants.CENTER));
-		courseIDField = new JTextField(courseIDField.getText());
 		inputPanel.add(courseIDField);
+		
 		JPanel buttonPanel1 = new JPanel();
 		buttonPanel1.setLayout(new GridLayout(1, 4));
 		AddCourseHandler addCourseHandler = new AddCourseHandler();
@@ -65,6 +67,7 @@ public class DegreePlannerView extends JFrameView{
 		JButton removeMajorButton = new JButton("Remove Major");
 		removeMajorButton.setToolTipText("Name (ex: Computer Science)");
 		removeMajorButton.addActionListener(removeMajorHandler);
+		
 		JPanel buttonPanel2 = new JPanel();
 		buttonPanel2.setLayout(new GridLayout(1, 4));
 		AddMinorHandler addMinorHandler = new AddMinorHandler();
@@ -83,14 +86,17 @@ public class DegreePlannerView extends JFrameView{
 		JButton logoutButton = new JButton("Log Out");
 		logoutButton.setToolTipText("N/A");
 		logoutButton.addActionListener(logoutHandler);
+		
 		buttonPanel1.add(addCourseButton);
 		buttonPanel1.add(addMajorButton);
 		buttonPanel1.add(addMinorButton);
 		buttonPanel1.add(removeSemesterButton);
+		
 		buttonPanel2.add(removeCourseButton);
 		buttonPanel2.add(removeMajorButton);
 		buttonPanel2.add(removeMinorButton);
 		buttonPanel2.add(logoutButton);
+		
 		controlPanel.add(inputPanel);
 		controlPanel.add(buttonPanel1);
 		controlPanel.add(buttonPanel2);
@@ -109,55 +115,57 @@ public class DegreePlannerView extends JFrameView{
 			//show discipline catalog
 		}else if(event.getType() == 2) {
 			// create plan success
-	        repaint();
+			scroll.setViewportView(getScroll(event.getSemesters()));
+	        revalidate();
 		}else if(event.getType() == 3) {
 			// create plan fail
+			getScroll(event.getSemesters());
 	        repaint();
 		}else if(event.getType() == 4) {
 			// add course success
-	        updateScroll(event.getSemesters());
+			getScroll(event.getSemesters());
 	        repaint();
 		}else if(event.getType() == 5) {
 			// add course fail
 	        repaint();
 		}else if(event.getType() == 6) {
 			// remove course success
-	        updateScroll(event.getSemesters());
+			getScroll(event.getSemesters());
 	        repaint();
 		}else if(event.getType() == 7) {
 			// remove course fail
 	        repaint();
 		}else if(event.getType() == 8) {
 			// add major success
-	        updateScroll(event.getSemesters());
+			getScroll(event.getSemesters());
 	        repaint();
 		}else if(event.getType() == 9) {
 			// add major fail
 	        repaint();
 		}else if(event.getType() == 10) {
 			// remove major success
-	        updateScroll(event.getSemesters());
+			getScroll(event.getSemesters());
 	        repaint();
 		}else if(event.getType() == 11) {
 			// remove major fail
 	        repaint();
 		}else if(event.getType() == 12) {
 			// add minor success
-	        updateScroll(event.getSemesters());
+			getScroll(event.getSemesters());
 	        repaint();
 		}else if(event.getType() == 13) {
 			// add minor fail
 	        repaint();
 		}else if(event.getType() == 14) {
 			// remove minor success
-	        updateScroll(event.getSemesters());
+			getScroll(event.getSemesters());
 	        repaint();
 		}else if(event.getType() == 15) {
 			// remove minor fail
 	        repaint();
 		}else if(event.getType() == 16) {
 			// remove semester success
-	        updateScroll(event.getSemesters());
+			getScroll(event.getSemesters());
 	        repaint();
 		}else if(event.getType() == 17) {
 			// remove semester fail
@@ -165,18 +173,28 @@ public class DegreePlannerView extends JFrameView{
 		}
 	 }
 
-	private void updateScroll(List<List<String>> semesters) {
-		int numSemesters = semesters.size();
-		scroll.setLayout(new GridLayout(numSemesters, 1));
-		for(int i = 0; i < numSemesters; ++i) {
-			int loops = semesters.get(i).size();
+	private JPanel getScroll(List<List<String>> semesters) {
+		JPanel semestersPanel = new JPanel();
+		semestersPanel.setLayout(new GridLayout(1, semesters.size()));
+		for(int i = 0; i < semesters.size(); ++i) {
 			JPanel semester = new JPanel();
-			scroll.setLayout(new GridLayout(1, loops));
-			for(int j = 0; j < loops; ++j) {
-				semester.add(new JLabel(semesters.get(i).get(j)));
+			semester.setLayout(new GridLayout(9, 1));
+			int j;
+			for(j = 0; j < semesters.get(i).size(); ++j) {
+				JLabel label = new JLabel(semesters.get(i).get(j));
+				label.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
+				label.setHorizontalAlignment(JLabel.CENTER);
+				semester.add(label);
 			}
-			scroll.add(semester);
+			while(j++ < 9) {
+				JLabel label = new JLabel();
+				label.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
+				label.setHorizontalAlignment(JLabel.CENTER);
+				semester.add(label);
+			}
+			semestersPanel.add(semester);
 		}
+		return semestersPanel;
 	}
 	
 	class CreatePlanHandler implements ActionListener { 

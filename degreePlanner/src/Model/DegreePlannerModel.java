@@ -1,4 +1,5 @@
 package Model;
+import java.awt.GridLayout;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -7,6 +8,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 import Model.DegreePlan;
 import Model.CourseCatalog;
@@ -257,8 +261,9 @@ public class DegreePlannerModel  extends AbstractModel{
 		for(int i = 0, numSems = semesters.size(); i < numSems; ++i) {
 			List<String> tempArr = new ArrayList<String>();
 			tempArr.add("Semester " + (i + 1));
-			for(int j = 0, numCourses = semesters.get(i).getCourses().size() ; j < numCourses; ++j) 
-				tempArr.add(semesters.get(i).getCourses().get(i).getSubject() + " " + semesters.get(i).getCourses().get(i).getCourseID());
+			for(int j = 0, numCourses = semesters.get(i).getCourses().size() ; j < numCourses; ++j)
+				tempArr.add(semesters.get(i).getCourses().get(j).getSubject() + " " + semesters.get(i).getCourses().get(j).getCourseID());
+			semestersStringArr.add(tempArr);
 		}
 		return semestersStringArr;
 	}
