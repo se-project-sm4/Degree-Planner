@@ -130,34 +130,79 @@ public class DegreePlannerView extends JFrameView{
 		}
 	 }
 
-	private JPanel makeDegreePlanPanel(List<List<String>> semesters) {
-		JPanel semestersPanel = new JPanel();
-		semestersPanel.setLayout(new GridLayout(1, semesters.size()));
-		for(int i = 0; i < semesters.size(); ++i) {
+	private JPanel makeDegreePlanPanel(List<List<String>> plan) {
+		JPanel planPanel = new JPanel(new GridLayout(1, plan.size()));
+
+		JPanel majors = new JPanel();
+		majors.setLayout(new GridLayout(8, 1));
+		JLabel label = new JLabel("Majors");
+		label.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
+		label.setHorizontalAlignment(JLabel.CENTER);
+		majors.add(label);
+		int j;
+		for(j = 0; j < plan.get(0).size(); ++j) {
+			label = new JLabel(plan.get(0).get(j));
+			label.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
+			label.setHorizontalAlignment(JLabel.CENTER);
+			label.setToolTipText(plan.get(0).get(++j));
+			majors.add(label);
+		}
+		while(j < 14) {
+			label = new JLabel();
+			label.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
+			label.setHorizontalAlignment(JLabel.CENTER);
+			majors.add(label);
+			j+=2;
+		}
+		planPanel.add(majors);
+
+		JPanel minors = new JPanel();
+		minors.setLayout(new GridLayout(8, 1));
+		label = new JLabel("Minors");
+		label.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
+		label.setHorizontalAlignment(JLabel.CENTER);
+		minors.add(label);
+		for(j = 0; j < plan.get(1).size(); ++j) {
+			label = new JLabel(plan.get(1).get(j));
+			label.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
+			label.setHorizontalAlignment(JLabel.CENTER);
+			label.setToolTipText(plan.get(1).get(++j));
+			minors.add(label);
+		}
+		while(j < 14) {
+			label = new JLabel();
+			label.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
+			label.setHorizontalAlignment(JLabel.CENTER);
+			minors.add(label);
+			j+=2;
+		}
+		planPanel.add(minors);
+		
+		for(int i = 2; i < plan.size(); ++i) {
 			JPanel semester = new JPanel();
-			semester.setLayout(new GridLayout(9, 1));
-			JLabel label = new JLabel("Semester " + (i + 1));
+			semester.setLayout(new GridLayout(8, 1));
+			label = new JLabel("Semester " + (i- 1));
 			label.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
 			label.setHorizontalAlignment(JLabel.CENTER);
 			semester.add(label);
-			int j;
-			for(j = 0; j < semesters.get(i).size(); ++j) {
-				label = new JLabel(semesters.get(i).get(j));
+			for(j = 0; j < plan.get(i).size(); ++j) {
+				label = new JLabel(plan.get(i).get(j));
 				label.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
 				label.setHorizontalAlignment(JLabel.CENTER);
-				label.setToolTipText(semesters.get(i).get(++j));
+				label.setToolTipText(plan.get(i).get(++j));
 				semester.add(label);
 			}
-			while(j < 16) {
+			while(j < 14) {
 				label = new JLabel();
 				label.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
 				label.setHorizontalAlignment(JLabel.CENTER);
 				semester.add(label);
 				j+=2;
 			}
-			semestersPanel.add(semester);
+			planPanel.add(semester);
 		}
-		return semestersPanel;
+		
+		return planPanel;
 	}
 	
 	private JPanel makeCourseCatalogPanel(List<List<String>> catalog) {

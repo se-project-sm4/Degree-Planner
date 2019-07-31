@@ -44,30 +44,30 @@ public class DegreePlannerModel  extends AbstractModel{
 	}
 	
 	public void login() {
-		ModelEvent me = new ModelEvent(this, 1, "", 0, prepSemestersForView(plan.getSemesters()));
+		ModelEvent me = new ModelEvent(this, 1, "", 0, getPlanForView());
 		notifyChanged(me);
 	}
 
 	public void showCourseCatalog() {
-		ModelEvent me = new ModelEvent(this, 1, "", 1, prepCourseCatalogForView(catalog));
+		ModelEvent me = new ModelEvent(this, 1, "", 1, getCourseCatalogForView());
 		notifyChanged(me);
 		return;
 	}
 
 	public void showDisciplineCatalog() {
-		ModelEvent me = new ModelEvent(this, 1, "", 2, prepDisciplineCatalogForView(disciplines));
+		ModelEvent me = new ModelEvent(this, 1, "", 2, getDisciplineCatalogForView());
 		notifyChanged(me);
 		return;
 	}
 	
 	public void showPlan() {
-		ModelEvent me = new ModelEvent(this, 1, "", 3, prepSemestersForView(plan.getSemesters()));
+		ModelEvent me = new ModelEvent(this, 1, "", 3, getPlanForView());
 		notifyChanged(me);
 	}
 	
 	public void createPlan(){
 		if(plan.getMajors().size() == 0) {
-			ModelEvent me = new ModelEvent(this, 1, "", 3, prepSemestersForView(plan.getSemesters()));
+			ModelEvent me = new ModelEvent(this, 1, "", 3, getPlanForView());
 			notifyChanged(me);
 			return;
 		}
@@ -128,7 +128,7 @@ public class DegreePlannerModel  extends AbstractModel{
 				}
 			}
 		}
-		ModelEvent me = new ModelEvent(this, 1, "", 3, prepSemestersForView(plan.getSemesters()));
+		ModelEvent me = new ModelEvent(this, 1, "", 3, getPlanForView());
 		notifyChanged(me);
 		save();
 	}
@@ -136,7 +136,7 @@ public class DegreePlannerModel  extends AbstractModel{
 	public void addCourse(String courseName){
 		String[] split = courseName.split("\\s+");
 		if(split.length != 3) {
-			ModelEvent me = new ModelEvent(this, 1, "", 5, prepSemestersForView(plan.getSemesters()));
+			ModelEvent me = new ModelEvent(this, 1, "", 5, getPlanForView());
 			notifyChanged(me);
 			return;
 		}
@@ -146,13 +146,13 @@ public class DegreePlannerModel  extends AbstractModel{
 			int semester = Integer.parseInt(split[2]) - 1;
 			Course course = catalog.findCourse(id, subject);
 			if(course == null){
-				ModelEvent me = new ModelEvent(this, 1, "", 5, prepSemestersForView(plan.getSemesters()));
+				ModelEvent me = new ModelEvent(this, 1, "", 5, getPlanForView());
 				notifyChanged(me);
 				return;
 			}
 			for(int i = 0; i < plan.getSemesters().size(); ++i) {
 				if(plan.getSemesters().get(i).getCourses().contains(new Course(id, subject, null, 0, null, null, false))){
-					ModelEvent me = new ModelEvent(this, 1, "", 5, prepSemestersForView(plan.getSemesters()));
+					ModelEvent me = new ModelEvent(this, 1, "", 5, getPlanForView());
 					notifyChanged(me);
 					return;
 				}
@@ -161,22 +161,22 @@ public class DegreePlannerModel  extends AbstractModel{
 					addSemester();
 			}
 			if(plan.getSemesters().get(semester).getMaxHours() < plan.getSemesters().get(semester).getHours() + course.getHours()){
-				ModelEvent me = new ModelEvent(this, 1, "", 5, prepSemestersForView(plan.getSemesters()));
+				ModelEvent me = new ModelEvent(this, 1, "", 5, getPlanForView());
 				notifyChanged(me);
 				return;
 			}
 			if(plan.getSemesters().get(semester).getCourses().add(course)) {
 				save();
-				ModelEvent me = new ModelEvent(this, 1, "", 4, prepSemestersForView(plan.getSemesters()));
+				ModelEvent me = new ModelEvent(this, 1, "", 4, getPlanForView());
 				notifyChanged(me);
 				return;
 			}
 		}catch(NumberFormatException e){
-			ModelEvent me = new ModelEvent(this, 1, "", 5, prepSemestersForView(plan.getSemesters()));
+			ModelEvent me = new ModelEvent(this, 1, "", 5, getPlanForView());
 			notifyChanged(me);
 			return;
 		}
-		ModelEvent me = new ModelEvent(this, 1, "", 5, prepSemestersForView(plan.getSemesters()));
+		ModelEvent me = new ModelEvent(this, 1, "", 5, getPlanForView());
 		notifyChanged(me);
 		return;
 	}
@@ -184,7 +184,7 @@ public class DegreePlannerModel  extends AbstractModel{
 	public void removeCourse(String course){
 		String[] split = course.split("\\s+");
 		if(split.length != 3) {
-			ModelEvent me = new ModelEvent(this, 1, "", 7, prepSemestersForView(plan.getSemesters()));
+			ModelEvent me = new ModelEvent(this, 1, "", 7, getPlanForView());
 			notifyChanged(me);
 			return;
 		}
@@ -194,16 +194,16 @@ public class DegreePlannerModel  extends AbstractModel{
 			int semester = Integer.parseInt(split[2]) - 1;
 			if(plan.getSemesters().get(semester).getCourses().remove(new Course(id, subject, null, 0, null, null, false))) {
 				save();
-				ModelEvent me = new ModelEvent(this, 1, "", 6, prepSemestersForView(plan.getSemesters()));
+				ModelEvent me = new ModelEvent(this, 1, "", 6, getPlanForView());
 				notifyChanged(me);
 				return;
 			}
 		}catch(NumberFormatException e) {
-			ModelEvent me = new ModelEvent(this, 1, "", 7, prepSemestersForView(plan.getSemesters()));
+			ModelEvent me = new ModelEvent(this, 1, "", 7, getPlanForView());
 			notifyChanged(me);
 			return;
 		}
-		ModelEvent me = new ModelEvent(this, 1, "", 7, prepSemestersForView(plan.getSemesters()));
+		ModelEvent me = new ModelEvent(this, 1, "", 7, getPlanForView());
 		notifyChanged(me);
 		return;
 	}
@@ -212,19 +212,19 @@ public class DegreePlannerModel  extends AbstractModel{
 		Major m = new Major();
 		m = disciplines.findMajor(major);
 		if(m == null){
-			ModelEvent me = new ModelEvent(this, 1, "", 9, prepSemestersForView(plan.getSemesters()));
+			ModelEvent me = new ModelEvent(this, 1, "", 9, getPlanForView());
 			notifyChanged(me);
 			return;
 		}
 		if(!plan.getMajors().contains(m)) {
 			if(plan.getMajors().add(m)) {
 				save();
-				ModelEvent me = new ModelEvent(this, 1, "", 8, prepSemestersForView(plan.getSemesters()));
+				ModelEvent me = new ModelEvent(this, 1, "", 8, getPlanForView());
 				notifyChanged(me);
 				return;
 			}
 		}
-		ModelEvent me = new ModelEvent(this, 1, "", 9, prepSemestersForView(plan.getSemesters()));
+		ModelEvent me = new ModelEvent(this, 1, "", 9, getPlanForView());
 		notifyChanged(me);
 		return;
 	}
@@ -232,11 +232,11 @@ public class DegreePlannerModel  extends AbstractModel{
 	public void removeMajor(String major){
 		if(plan.getMajors().remove(disciplines.findMajor(major))) {
 			save();
-			ModelEvent me = new ModelEvent(this, 1, "", 10, prepSemestersForView(plan.getSemesters()));
+			ModelEvent me = new ModelEvent(this, 1, "", 10, getPlanForView());
 			notifyChanged(me);
 			return;
 		}
-		ModelEvent me = new ModelEvent(this, 1, "", 11, prepSemestersForView(plan.getSemesters()));
+		ModelEvent me = new ModelEvent(this, 1, "", 11, getPlanForView());
 		notifyChanged(me);
 		return;
 	}
@@ -245,19 +245,19 @@ public class DegreePlannerModel  extends AbstractModel{
 		Minor m = new Minor();
 		m = disciplines.findMinor(minor);
 		if(m == null){
-			ModelEvent me = new ModelEvent(this, 1, "", 13, prepSemestersForView(plan.getSemesters()));
+			ModelEvent me = new ModelEvent(this, 1, "", 13, getPlanForView());
 			notifyChanged(me);
 			return;
 		}
 		if(!plan.getMinors().contains(m)) {
 			if(plan.getMinors().add(m)) {
 				save();
-				ModelEvent me = new ModelEvent(this, 1, "", 12, prepSemestersForView(plan.getSemesters()));
+				ModelEvent me = new ModelEvent(this, 1, "", 12, getPlanForView());
 				notifyChanged(me);
 				return;
 			}
 		}
-		ModelEvent me = new ModelEvent(this, 1, "", 13, prepSemestersForView(plan.getSemesters()));
+		ModelEvent me = new ModelEvent(this, 1, "", 13, getPlanForView());
 		notifyChanged(me);
 		return;
 	}
@@ -265,11 +265,11 @@ public class DegreePlannerModel  extends AbstractModel{
 	public void removeMinor(String minor){
 		if(plan.getMinors().remove(disciplines.findMinor(minor))) {
 			save();
-			ModelEvent me = new ModelEvent(this, 1, "", 14, prepSemestersForView(plan.getSemesters()));
+			ModelEvent me = new ModelEvent(this, 1, "", 14, getPlanForView());
 			notifyChanged(me);
 			return;
 		}
-		ModelEvent me = new ModelEvent(this, 1, "", 15, prepSemestersForView(plan.getSemesters()));
+		ModelEvent me = new ModelEvent(this, 1, "", 15, getPlanForView());
 		notifyChanged(me);
 		return;
 	}
@@ -277,7 +277,7 @@ public class DegreePlannerModel  extends AbstractModel{
 	public void removeSemester(String semester){
 		String[] split = semester.split("\\s+");
 		if(split.length != 1) {
-			ModelEvent me = new ModelEvent(this, 1, "", 17, prepSemestersForView(plan.getSemesters()));
+			ModelEvent me = new ModelEvent(this, 1, "", 17, getPlanForView());
 			notifyChanged(me);
 			return;
 		}
@@ -287,16 +287,16 @@ public class DegreePlannerModel  extends AbstractModel{
 			if(numSemesters > 0 && numSemesters > index)
 				plan.setSemesters(new ArrayList<Semester>(plan.getSemesters().subList(0, Math.max(0, index))));
 			else {
-				ModelEvent me = new ModelEvent(this, 1, "", 17, prepSemestersForView(plan.getSemesters()));
+				ModelEvent me = new ModelEvent(this, 1, "", 17, getPlanForView());
 				notifyChanged(me);
 				return;
 			}
 			save();
-			ModelEvent me = new ModelEvent(this, 1, "", 16, prepSemestersForView(plan.getSemesters()));
+			ModelEvent me = new ModelEvent(this, 1, "", 16, getPlanForView());
 			notifyChanged(me);
 			return;
 		}catch(NumberFormatException e) {
-			ModelEvent me = new ModelEvent(this, 1, "", 17, prepSemestersForView(plan.getSemesters()));
+			ModelEvent me = new ModelEvent(this, 1, "", 17, getPlanForView());
 			notifyChanged(me);
 			return;
 		}
@@ -332,24 +332,46 @@ public class DegreePlannerModel  extends AbstractModel{
 		}
 	}
 
-	private List<List<String>> prepSemestersForView(List<Semester> semesters){
+	private List<List<String>> getPlanForView(){
 		List<List<String>> semestersStringArr = new ArrayList<List<String>>();
-		for(int i = 0, numSems = semesters.size(); i < numSems; ++i) {
-			List<String> tempArr = new ArrayList<String>();
-			for(int j = 0, numCourses = semesters.get(i).getCourses().size() ; j < numCourses; ++j) {
-				tempArr.add(semesters.get(i).getCourses().get(j).getSubject() + " " + semesters.get(i).getCourses().get(j).getCourseID());
-				if(semesters.get(i).getCourses().get(j).getPrerequisite() == null) {
-					tempArr.add("<html><p>Class Name: " + semesters.get(i).getCourses().get(j).getClassName() + 
-					"</p><p>Description: " + semesters.get(i).getCourses().get(j).getClassDescription() + 
+		List<String> tempArr = new ArrayList<String>();
+		for(int i = 0, numMajors = plan.getMajors().size(); i < numMajors; ++i) {
+			tempArr.add(plan.getMajors().get(i).getMajorName());
+			String tempString = new String("<html>");
+			for(int j = 0, numSubjects = plan.getMajors().get(i).getRequirements().size(); j < numSubjects; ++j) {
+				tempString += "<p>" + plan.getMajors().get(i).getRequirements().get(j).getNumHour() + " hours of " + plan.getMajors().get(i).getRequirements().get(j).getSubject() + " " + "</p>";
+			}
+			tempArr.add(tempString + "</html>");
+		}
+		semestersStringArr.add(tempArr);
+
+		tempArr = new ArrayList<String>();
+		for(int i = 0, numMajors = plan.getMinors().size(); i < numMajors; ++i) {
+			tempArr.add(plan.getMinors().get(i).getMinorName());
+			String tempString = new String("<html>");
+			for(int j = 0, numSubjects = plan.getMinors().get(i).getRequirements().size(); j < numSubjects; ++j) {
+				tempString += "<p>" + plan.getMinors().get(i).getRequirements().get(j).getNumHour() + " hours of " + plan.getMinors().get(i).getRequirements().get(j).getSubject() + " " + "</p>";
+			}
+			tempArr.add(tempString + "</html>");
+		}
+		semestersStringArr.add(tempArr);
+		
+		for(int i = 0, numSems = plan.getSemesters().size(); i < numSems; ++i) {
+			tempArr = new ArrayList<String>();
+			for(int j = 0, numCourses = plan.getSemesters().get(i).getCourses().size() ; j < numCourses; ++j) {
+				tempArr.add(plan.getSemesters().get(i).getCourses().get(j).getSubject() + " " + plan.getSemesters().get(i).getCourses().get(j).getCourseID());
+				if(plan.getSemesters().get(i).getCourses().get(j).getPrerequisite() == null) {
+					tempArr.add("<html><p>Class Name: " + plan.getSemesters().get(i).getCourses().get(j).getClassName() + 
+					"</p><p>Description: " + plan.getSemesters().get(i).getCourses().get(j).getClassDescription() + 
 					"</p><p>Prerequisite: none" + 
-					"</p><p>Hours: " + Integer.valueOf(semesters.get(i).getCourses().get(j).getHours()) + 
-					"</p><p>Writing Intensive: " + semesters.get(i).getCourses().get(j).getWritingIntensive() + "</p></html>");
+					"</p><p>Hours: " + Integer.valueOf(plan.getSemesters().get(i).getCourses().get(j).getHours()) + 
+					"</p><p>Writing Intensive: " + plan.getSemesters().get(i).getCourses().get(j).getWritingIntensive() + "</p></html>");
 				}else {
-					tempArr.add("<html><p>Class Name: " + semesters.get(i).getCourses().get(j).getClassName() + 
-					"</p><p>Description: " + semesters.get(i).getCourses().get(j).getClassDescription() + 
-					"</p><p>Prerequisite: " + semesters.get(i).getCourses().get(j).getPrerequisite().getSubject() + " " + semesters.get(i).getCourses().get(j).getPrerequisite().getCourseID() +
-					"</p><p>Hours: " + Integer.valueOf(semesters.get(i).getCourses().get(j).getHours()) + 
-					"</p><p>Writing Intensive: " + semesters.get(i).getCourses().get(j).getWritingIntensive() + "</p></html>");
+					tempArr.add("<html><p>Class Name: " + plan.getSemesters().get(i).getCourses().get(j).getClassName() + 
+					"</p><p>Description: " + plan.getSemesters().get(i).getCourses().get(j).getClassDescription() + 
+					"</p><p>Prerequisite: " + plan.getSemesters().get(i).getCourses().get(j).getPrerequisite().getSubject() + " " + plan.getSemesters().get(i).getCourses().get(j).getPrerequisite().getCourseID() +
+					"</p><p>Hours: " + Integer.valueOf(plan.getSemesters().get(i).getCourses().get(j).getHours()) + 
+					"</p><p>Writing Intensive: " + plan.getSemesters().get(i).getCourses().get(j).getWritingIntensive() + "</p></html>");
 				}
 			}
 			semestersStringArr.add(tempArr);
@@ -357,24 +379,24 @@ public class DegreePlannerModel  extends AbstractModel{
 		return semestersStringArr;
 	}
 	
-	private List<List<String>> prepCourseCatalogForView(CourseCatalog c){
+	private List<List<String>> getCourseCatalogForView(){
 		List<List<String>> catalogStringArr = new ArrayList<List<String>>();
-		for(int i = 0, numSubjects = c.getCatalog().size(); i < numSubjects; ++i) {
+		for(int i = 0, numSubjects = catalog.getCatalog().size(); i < numSubjects; ++i) {
 			List<String> tempArr = new ArrayList<String>();
-			for(int j = 0, numCourses = c.getCatalog().get(i).size() ; j < numCourses; ++j) {
-				tempArr.add(c.getCatalog().get(i).get(j).getSubject() + " " + c.getCatalog().get(i).get(j).getCourseID());
-				if(c.getCatalog().get(i).get(j).getPrerequisite() == null) {
-					tempArr.add("<html><p>Class Name: " + c.getCatalog().get(i).get(j).getClassName() + 
-					"</p><p>Description: " + c.getCatalog().get(i).get(j).getClassDescription() + 
+			for(int j = 0, numCourses = catalog.getCatalog().get(i).size() ; j < numCourses; ++j) {
+				tempArr.add(catalog.getCatalog().get(i).get(j).getSubject() + " " + catalog.getCatalog().get(i).get(j).getCourseID());
+				if(catalog.getCatalog().get(i).get(j).getPrerequisite() == null) {
+					tempArr.add("<html><p>Class Name: " + catalog.getCatalog().get(i).get(j).getClassName() + 
+					"</p><p>Description: " + catalog.getCatalog().get(i).get(j).getClassDescription() + 
 					"</p><p>Prerequisite: none" + 
-					"</p><p>Hours: " + Integer.valueOf(c.getCatalog().get(i).get(j).getHours()) + 
-					"</p><p>Writing Intensive: " + c.getCatalog().get(i).get(j).getWritingIntensive() + "</p></html>");
+					"</p><p>Hours: " + Integer.valueOf(catalog.getCatalog().get(i).get(j).getHours()) + 
+					"</p><p>Writing Intensive: " + catalog.getCatalog().get(i).get(j).getWritingIntensive() + "</p></html>");
 				}else {
-					tempArr.add("<html><p>Class Name: " + c.getCatalog().get(i).get(j).getClassName() + 
-					"</p><p>Description: " + c.getCatalog().get(i).get(j).getClassDescription() + 
-					"</p><p>Prerequisite: " + c.getCatalog().get(i).get(j).getPrerequisite().getSubject() + " " + c.getCatalog().get(i).get(j).getPrerequisite().getCourseID() +
-					"</p><p>Hours: " + Integer.valueOf(c.getCatalog().get(i).get(j).getHours()) + 
-					"</p><p>Writing Intensive: " + c.getCatalog().get(i).get(j).getWritingIntensive() + "</p></html>");
+					tempArr.add("<html><p>Class Name: " + catalog.getCatalog().get(i).get(j).getClassName() + 
+					"</p><p>Description: " + catalog.getCatalog().get(i).get(j).getClassDescription() + 
+					"</p><p>Prerequisite: " + catalog.getCatalog().get(i).get(j).getPrerequisite().getSubject() + " " + catalog.getCatalog().get(i).get(j).getPrerequisite().getCourseID() +
+					"</p><p>Hours: " + Integer.valueOf(catalog.getCatalog().get(i).get(j).getHours()) + 
+					"</p><p>Writing Intensive: " + catalog.getCatalog().get(i).get(j).getWritingIntensive() + "</p></html>");
 				}
 			}
 			catalogStringArr.add(tempArr);
@@ -382,25 +404,25 @@ public class DegreePlannerModel  extends AbstractModel{
 		return catalogStringArr;
 	}
 
-	private List<List<String>> prepDisciplineCatalogForView(DisciplineCatalog d){
+	private List<List<String>> getDisciplineCatalogForView(){
 		List<List<String>> catalogStringArr = new ArrayList<List<String>>();
 		List<String> tempArr = new ArrayList<>();
 		tempArr.add("Minimum Requirements");
 		tempArr.add("Hover to see minimum requirements");
 		String tempString = new String("<html>");
-		for(int i = 0, numSubjects = d.getDefaultRequirements().size(); i < numSubjects; ++i) {
-			tempString += "<p>" + d.getDefaultRequirements().get(i).getNumHour() + " hours of " + d.getDefaultRequirements().get(i).getSubject() + " " + "</p>";
+		for(int i = 0, numSubjects = disciplines.getDefaultRequirements().size(); i < numSubjects; ++i) {
+			tempString += "<p>" + disciplines.getDefaultRequirements().get(i).getNumHour() + " hours of " + disciplines.getDefaultRequirements().get(i).getSubject() + " " + "</p>";
 		}
 		tempArr.add(tempString + "</html>");
 		catalogStringArr.add(tempArr);
 
 		tempArr = new ArrayList<>();
 		tempArr.add("Majors");
-		for(int i = 0, numMajors = d.getMajors().size(); i < numMajors; ++i) {
-			tempArr.add(d.getMajors().get(i).getMajorName());
+		for(int i = 0, numMajors = disciplines.getMajors().size(); i < numMajors; ++i) {
+			tempArr.add(disciplines.getMajors().get(i).getMajorName());
 			tempString = "<html>";
-			for(int j = 0, numSubjects = d.getMajors().get(i).getRequirements().size(); j < numSubjects; ++j) {
-				tempString += "<p>" + d.getMajors().get(i).getRequirements().get(j).getNumHour() + " hours of " + d.getMajors().get(i).getRequirements().get(j).getSubject() + " " + "</p>";
+			for(int j = 0, numSubjects = disciplines.getMajors().get(i).getRequirements().size(); j < numSubjects; ++j) {
+				tempString += "<p>" + disciplines.getMajors().get(i).getRequirements().get(j).getNumHour() + " hours of " + disciplines.getMajors().get(i).getRequirements().get(j).getSubject() + " " + "</p>";
 			}
 			tempArr.add(tempString + "</html>");
 		}
@@ -408,11 +430,11 @@ public class DegreePlannerModel  extends AbstractModel{
 
 		tempArr = new ArrayList<>();
 		tempArr.add("Minors");
-		for(int i = 0, numMajors = d.getMinors().size(); i < numMajors; ++i) {
-			tempArr.add(d.getMinors().get(i).getMinorName());
+		for(int i = 0, numMajors = disciplines.getMinors().size(); i < numMajors; ++i) {
+			tempArr.add(disciplines.getMinors().get(i).getMinorName());
 			tempString = "<html>";
-			for(int j = 0, numSubjects = d.getMinors().get(i).getRequirements().size(); j < numSubjects; ++j) {
-				tempString += "<p>" + d.getMinors().get(i).getRequirements().get(j).getNumHour() + " hours of " + d.getMinors().get(i).getRequirements().get(j).getSubject() + " " + "</p>";
+			for(int j = 0, numSubjects = disciplines.getMinors().get(i).getRequirements().size(); j < numSubjects; ++j) {
+				tempString += "<p>" + disciplines.getMinors().get(i).getRequirements().get(j).getNumHour() + " hours of " + disciplines.getMinors().get(i).getRequirements().get(j).getSubject() + " " + "</p>";
 			}
 			tempArr.add(tempString + "</html>");
 		}
