@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 import Model.DegreePlan;
 import Model.CourseCatalog;
@@ -159,16 +160,16 @@ public class DegreePlannerModel  extends AbstractModel{
 		return false;
 	}
 	
+	public void logout() {
+		save();
+	}
+	
 	private void addSemester(){
 		if(plan.getSemesters().size() % 3 == 2) {
 			plan.addSemester(new Semester(16));
 		}else {
 			plan.addSemester(new Semester(18));
 		}
-	}
-	
-	public void logout() {
-		save();
 	}
 	
 	private void save() {
@@ -187,5 +188,16 @@ public class DegreePlannerModel  extends AbstractModel{
 			System.out.println("io exception");
 			e.printStackTrace();
 		}
+	}
+
+	private List<List<String>> prepSemestersForView(List<Semester> semesters){
+		List<List<String>> semestersStringArr = new ArrayList<List<String>>();
+		for(int i = 0, numSems = semesters.size(); i < numSems; ++i) {
+			List<String> tempArr = new ArrayList<String>();
+			tempArr.add("Semester " + (i + 1));
+			for(int j = 0, numCourses = semesters.get(i).getCourses().size() ; j < numCourses; ++j) 
+				tempArr.add(semesters.get(i).getCourses().get(i).getSubject() + " " + semesters.get(i).getCourses().get(i).getCourseID());
+		}
+		return semestersStringArr;
 	}
 }
