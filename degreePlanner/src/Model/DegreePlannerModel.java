@@ -12,10 +12,10 @@ import Model.CourseCatalog;
 import Model.DisciplineCatalog;
 
 public class DegreePlannerModel  extends AbstractModel{
-	private CourseCatalog catalog = new CourseCatalog();;
-	private DisciplineCatalog disciplines = new DisciplineCatalog();;
+	private CourseCatalog catalog = new CourseCatalog();
+	private DisciplineCatalog disciplines = new DisciplineCatalog();
 	private DegreePlan plan = new DegreePlan();
-	String fileName;
+	private String fileName;
 	
 	public DegreePlannerModel(String username) {
 		for(int i = 0; i < 12; ++i) {
