@@ -108,21 +108,37 @@ public class DegreePlannerView extends JFrameView{
 		}else if(event.getType() == 1) {
 			//show discipline catalog
 		}else if(event.getType() == 2) {
-			// create plan
+			// create plan success
 		}else if(event.getType() == 3) {
-			// add course
+			// create plan fail
 		}else if(event.getType() == 4) {
-			// add major
+			// add course success
 		}else if(event.getType() == 5) {
-			// add minor
+			// add course fail
 		}else if(event.getType() == 6) {
-			// remove semester
+			// add major success
 		}else if(event.getType() == 7) {
-			// remove course
+			// add major fail
 		}else if(event.getType() == 8) {
-			// remove major
+			// add minor success
 		}else if(event.getType() == 9) {
-			// remove minor
+			// add minor fail
+		}else if(event.getType() == 10) {
+			// remove semester success
+		}else if(event.getType() == 11) {
+			// remove semeste failr
+		}else if(event.getType() == 12) {
+			// remove course success
+		}else if(event.getType() == 13) {
+			// remove course fail
+		}else if(event.getType() == 14) {
+			// remove major success
+		}else if(event.getType() == 15) {
+			// remove major fail
+		}else if(event.getType() == 16) {
+			// remove minor success
+		}else if(event.getType() == 17) {
+			// remove minor fail
 		}
 	 }
 	
