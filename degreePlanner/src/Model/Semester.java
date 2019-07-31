@@ -29,11 +29,11 @@ public class Semester implements Serializable{
 		return courses;
 	}
 	
-	public void addSemester(Course c) {
+	public void addCourse(Course c) {
 		courses.add(c);
 	}
 	
-	public void removeSemester(Course c) {
+	public void removeCourse(Course c) {
 		courses.remove(c);
 	}
 	

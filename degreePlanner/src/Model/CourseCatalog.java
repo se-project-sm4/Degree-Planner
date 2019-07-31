@@ -50,6 +50,23 @@ public class CourseCatalog {
 		Course math3373 = new Course(3373, "MATH", math2472, 3, "Calculus III", "continuation of calculus II", false);
 		Course math3377 = new Course(3377, "MATH", math2472, 3, "Linear Algebra", "introductory course for linear algebra", false);
 		
+		Course sci1330 = new Course(1330, "SCI", null, 4, "Biology I", "introductory course for cellular and molecular biology.", false);
+		Course sci1331 = new Course(1331, "SCI", sci1330, 4, "Biology II", "second introductory course for cellular and molecular biology.", false);
+		Course sci1332 = new Course(1332, "SCI", null, 4, "Chemistry I", "introductory course covering atomic and molecular structure, bonding, states of matter, solutions, and descriptive chemistry.", false);
+		Course sci1333 = new Course(1333, "SCI", sci1332, 4, "Chemistry II", "second introductory course covering atomic and molecular structure, bonding, states of matter, solutions, and descriptive chemistry.", false);
+		Course sci1334 = new Course(1334, "SCI", null, 4, "Physics I", "introductory course for the basic laws and principles of physics and includes the topics of mechanics and heat.", false);
+		Course sci1335 = new Course(1335, "SCI", sci1334, 4, "Physics II", "second introductory course for the basic laws and principles of physics and includes the topics of mechanics and heat.", false);
+		Course sci1336 = new Course(1336, "SCI", null, 4, "Geology I", "introductory course of materials making up the Earth, the processes that act upon them, and the results of these processes.", false);
+		Course sci1337 = new Course(1337, "SCI", sci1336, 4, "Geology II", "second introductory course of materials making up the Earth, the processes that act upon them, and the results of these processes.", false);
+		
+		Course posi2310 = new Course(2310, "POSI", null, 3, "Principles of American Government", "introductory course of of the principles of political science, of the American system of government, and of the origins and development of the constitutions of the United States and Texas", false);
+		Course posi2320 = new Course(2310, "POSI", posi2310, 3, "Functions of American Government", "introductory course of functions performed in the American system of government, both national and state", false);
+		
+		Course soci1310 = new Course(1310, "SOCI", null, 3, "Introduction to Sociology", "introductory course to sociology", false);
+
+		Course hist1310 = new Course(1310, "HIST", null, 3, "History of the United States to 1877", "A general survey of the history of the United States from its settlement to the end of Reconstruction.", false);
+		Course hist1320 = new Course(1320, "HIST", null, 3, "History of the United States, 1877 to Date", "A general survey of the history of the United States from Reconstruction to present.", false);
+		
 		//add more
 		
 		List<Course> cs = new ArrayList<Course>();
@@ -92,6 +109,27 @@ public class CourseCatalog {
 		math.add(math3373);
 		math.add(math3377);
 		math.add(math3398);
+
+		List<Course> sci = new ArrayList<Course>();
+		sci.add(sci1330);
+		sci.add(sci1331);
+		sci.add(sci1332);
+		sci.add(sci1333);
+		sci.add(sci1334);
+		sci.add(sci1335);
+		sci.add(sci1336);
+		sci.add(sci1337);
+
+		List<Course> posi = new ArrayList<Course>();
+		posi.add(posi2310);
+		posi.add(posi2320);
+
+		List<Course> soci = new ArrayList<Course>();
+		math.add(soci1310);
+
+		List<Course> hist = new ArrayList<Course>();
+		hist.add(hist1310);
+		hist.add(hist1320);
 		
 		map.put("CS", 0);
 		catalog.add(cs);
@@ -107,6 +145,18 @@ public class CourseCatalog {
 		
 		map.put("MATH", 4);
 		catalog.add(math);
+		
+		map.put("SCI", 5);
+		catalog.add(sci);
+		
+		map.put("POSI", 6);
+		catalog.add(posi);
+		
+		map.put("SOCI", 7);
+		catalog.add(soci);
+
+		map.put("HIST", 8);
+		catalog.add(hist);
 	}
 	
 	public Course findCourse(int id, String subject){

@@ -78,13 +78,34 @@ public class DegreePlannerModel  extends AbstractModel{
 				map.put(disciplines.getDefaultRequirements().get(i).getSubject(), Math.max(map.get(disciplines.getDefaultRequirements().get(i).getSubject()), disciplines.getDefaultRequirements().get(i).getNumHour()));
 		
 		for (String key: map.keySet()) {
+			System.out.println(key);
+			System.out.println(map.get(key));
+			System.out.println(catalog.getMap().get(key));
+			System.out.println(map.get(key));
 			for(int i = 0; i < catalog.getCatalog().get(catalog.getMap().get(key)).size() && map.get(key) > 0; ++i){
 				if(catalog.getCatalog().get(catalog.getMap().get(key)).get(i).getPrerequisite() == null) {
-					
+					if(plan.getSemesters().get(0).getHours() + catalog.getCatalog().get(catalog.getMap().get(key)).get(i).getHours() <= plan.getSemesters().get(0).getMaxHours()) {
+						plan.getSemesters().get(0).addCourse(catalog.getCatalog().get(catalog.getMap().get(key)).get(i));
+					}else{
+						int semesterNumber = 0;
+						while(plan.getSemesters().get(semesterNumber).getHours() + catalog.getCatalog().get(catalog.getMap().get(key)).get(i).getHours() > plan.getSemesters().get(semesterNumber).getMaxHours()) {
+							if(plan.getSemesters().size() == ++semesterNumber){
+								addSemester();
+							}
+						}
+						plan.getSemesters().get(semesterNumber).addCourse(catalog.getCatalog().get(catalog.getMap().get(key)).get(i));
+					}
+				}else{
+					for(int j = 0; j < plan.getSemesters().size(); ++j) {
+						if(plan.getSemesters().get(j).getCourses().contains(catalog.getCatalog().get(catalog.getMap().get(key)).get(i).getPrerequisite())) {
+							if(plan.getSemesters().size() <= ++j) {
+								addSemester();
+							}
+							plan.getSemesters().get(j).addCourse(catalog.getCatalog().get(catalog.getMap().get(key)).get(i));
+						}
+					}
 				}
 			}
-		    System.out.println("key : " + key);
-		    System.out.println("value : " + map.get(key));
 		}
 		ModelEvent me = new ModelEvent(this, 1, "", 2, prepSemestersForView(plan.getSemesters()));
 		notifyChanged(me);
