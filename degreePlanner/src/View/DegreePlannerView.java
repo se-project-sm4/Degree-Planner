@@ -69,7 +69,7 @@ public class DegreePlannerView extends JFrameView{
 		addCourseButton.addActionListener(addCourseHandler);
 		RemoveCourseHandler removeCourseHandler = new RemoveCourseHandler();
 		JButton removeCourseButton = new JButton("Remove Course");
-		removeCourseButton.setToolTipText("Subject ID Semester (ex: CS 1428 1)");
+		removeCourseButton.setToolTipText("<html><p>WARNING: THIS FUNCTION WILL ALSO REMOVE ALL CLASSES THAT REQUIRE THIS CLASS</p><p>Subject ID Semester (ex: CS 1428 1)</p></html>");
 		removeCourseButton.addActionListener(removeCourseHandler);
 		AddMajorHandler addMajorHandler = new AddMajorHandler();
 		JButton addMajorButton = new JButton("Add Major");
@@ -92,7 +92,7 @@ public class DegreePlannerView extends JFrameView{
 		removeMinorButton.addActionListener(removeMinorHandler);
 		RemoveSemesterHandler removeSemesterHandler = new RemoveSemesterHandler();
 		JButton removeSemesterButton = new JButton("Remove Semester");
-		removeSemesterButton.setToolTipText("Number (ex: 1) (WARNING: THIS FUNCTION WILL ALSO REMOVE ALL SEMESTERS AFTER THE REQUESTED SEMESTER)");
+		removeSemesterButton.setToolTipText("<html><p>WARNING: THIS FUNCTION WILL ALSO REMOVE ALL SEMESTERS AFTER THE REQUESTED SEMESTER</p><p>Number (ex: 1)</p></html>");
 		removeSemesterButton.addActionListener(removeSemesterHandler);
 		LogoutHandler logoutHandler = new LogoutHandler();
 		JButton logoutButton = new JButton("Log Out");
