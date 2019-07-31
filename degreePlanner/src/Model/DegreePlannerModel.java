@@ -162,7 +162,6 @@ public class DegreePlannerModel  extends AbstractModel{
 				boolean hasPrerequesite = false;
 				for(int i = 0; i < plan.getSemesters().size() && i < semester; ++i) {
 					for(int j = 0; j < plan.getSemesters().get(i).getCourses().size(); ++j) {
-						System.out.println(i + " " + j);
 						if(plan.getSemesters().get(i).getCourses().get(j).equals(prerequisite)) {
 							hasPrerequesite = true;
 							break;
