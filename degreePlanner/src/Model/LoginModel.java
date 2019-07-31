@@ -33,26 +33,26 @@ public class LoginModel extends AbstractModel {
 	public boolean login(String username, String password){
 		try {
 			if(students.get(username).contentEquals(password)) {
-				ModelEvent me = new ModelEvent(this, 1, "", 0);
+				ModelEvent me = new ModelEvent(this, 1, "", 0, null);
 				notifyChanged(me);
 				return true;
 			}
 		}catch(NullPointerException e) {
 			//not actually a problem
 		}
-		ModelEvent me = new ModelEvent(this, 1, "", 1);
+		ModelEvent me = new ModelEvent(this, 1, "", 1, null);
 		notifyChanged(me);
 		return false;
 	}
 
 	public boolean register(String username, String password){
 		if(username.equals("")) {
-			ModelEvent me = new ModelEvent(this, 1, "", 3);
+			ModelEvent me = new ModelEvent(this, 1, "", 3, null);
 			notifyChanged(me);
 			return false;
 		}
 		if (students.containsKey(username)) {
-			ModelEvent me = new ModelEvent(this, 1, "", 3);
+			ModelEvent me = new ModelEvent(this, 1, "", 3, null);
 			notifyChanged(me);
 			return false;
 		}
@@ -65,11 +65,11 @@ public class LoginModel extends AbstractModel {
 			oos.close();
 			fos.close();
 		}catch(FileNotFoundException e) {
-			ModelEvent me = new ModelEvent(this, 1, "", 3);
+			ModelEvent me = new ModelEvent(this, 1, "", 3, null);
 			notifyChanged(me);
 			return false;
 		}catch(IOException e) {
-			ModelEvent me = new ModelEvent(this, 1, "", 3);
+			ModelEvent me = new ModelEvent(this, 1, "", 3, null);
 			notifyChanged(me);
 			return false;
 		}
@@ -82,15 +82,15 @@ public class LoginModel extends AbstractModel {
 			oos.close();
 			fos.close();
 		}catch(FileNotFoundException e) {
-			ModelEvent me = new ModelEvent(this, 1, "", 3);
+			ModelEvent me = new ModelEvent(this, 1, "", 3, null);
 			notifyChanged(me);
 			return false;
 		}catch(IOException e) {
-			ModelEvent me = new ModelEvent(this, 1, "", 3);
+			ModelEvent me = new ModelEvent(this, 1, "", 3, null);
 			notifyChanged(me);
 			return false;
 		}
-		ModelEvent me = new ModelEvent(this, 1, "", 2);
+		ModelEvent me = new ModelEvent(this, 1, "", 2, null);
 		notifyChanged(me);
 		return true;
 	}
