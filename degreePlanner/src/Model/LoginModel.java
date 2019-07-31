@@ -38,7 +38,7 @@ public class LoginModel extends AbstractModel {
 				return true;
 			}
 		}catch(NullPointerException e) {
-			//not actually a problem
+			// do nothing
 		}
 		ModelEvent me = new ModelEvent(this, 1, "", 1, null);
 		notifyChanged(me);
