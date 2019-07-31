@@ -23,8 +23,8 @@ public class DegreePlannerView extends JFrameView{
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int width = (int)screenSize.getWidth();
 		int height = (int)screenSize.getHeight();
-		setPreferredSize(new Dimension(684 , 400));
-		setLocation(width/2 - 342, height/2 - 200);
+		setPreferredSize(new Dimension(684 , 362));
+		setLocation(width/2 - 342, height/2 - 181);
 
 		JPanel mainPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JButton courseCatalogButton = new JButton("Show Course Catalog");
@@ -190,11 +190,12 @@ public class DegreePlannerView extends JFrameView{
 				label.setToolTipText(semesters.get(i).get(++j));
 				semester.add(label);
 			}
-			while(j++ < 8) {
+			while(j < 16) {
 				label = new JLabel();
 				label.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
 				label.setHorizontalAlignment(JLabel.CENTER);
 				semester.add(label);
+				j+=2;
 			}
 			semestersPanel.add(semester);
 		}
