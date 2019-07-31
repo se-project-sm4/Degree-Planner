@@ -103,7 +103,27 @@ public class DegreePlannerView extends JFrameView{
     }
 
 	public void modelChanged(ModelEvent event) {
-		///add degreePlanner change reactions
+		if(event.getType() == 0) {
+			//show course catalog
+		}else if(event.getType() == 1) {
+			//show discipline catalog
+		}else if(event.getType() == 2) {
+			// create plan
+		}else if(event.getType() == 3) {
+			// add course
+		}else if(event.getType() == 4) {
+			// add major
+		}else if(event.getType() == 5) {
+			// add minor
+		}else if(event.getType() == 6) {
+			// remove semester
+		}else if(event.getType() == 7) {
+			// remove course
+		}else if(event.getType() == 8) {
+			// remove major
+		}else if(event.getType() == 9) {
+			// remove minor
+		}
 	 }
 	
 	class CreatePlanHandler implements ActionListener { 
