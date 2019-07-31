@@ -259,17 +259,17 @@ public class DegreePlannerModel  extends AbstractModel{
 			for(int j = 0, numCourses = semesters.get(i).getCourses().size() ; j < numCourses; ++j) {
 				tempArr.add(semesters.get(i).getCourses().get(j).getSubject() + " " + semesters.get(i).getCourses().get(j).getCourseID());
 				if(semesters.get(i).getCourses().get(j).getPrerequisite() == null) {
-					tempArr.add("Class Name: " + semesters.get(i).getCourses().get(j).getClassName() + 
-					"\nDescription: " + semesters.get(i).getCourses().get(j).getClassDescription() + 
-					"\nPrerequisite: none" + 
-					"\nHours: " + Integer.valueOf(semesters.get(i).getCourses().get(j).getHours()) + 
-					"\nWriting Intensive: " + semesters.get(i).getCourses().get(j).getWritingIntensive());
+					tempArr.add("<html><p>Class Name: " + semesters.get(i).getCourses().get(j).getClassName() + 
+					"</p><p>Description: " + semesters.get(i).getCourses().get(j).getClassDescription() + 
+					"</p><p>Prerequisite: none" + 
+					"</p><p>Hours: " + Integer.valueOf(semesters.get(i).getCourses().get(j).getHours()) + 
+					"</p><p>Writing Intensive: " + semesters.get(i).getCourses().get(j).getWritingIntensive() + "</p></html>");
 				}else {
-					tempArr.add("Class Name: " + semesters.get(i).getCourses().get(j).getClassName() + 
-					"\nDescription: " + semesters.get(i).getCourses().get(j).getClassDescription() + 
-					"\nPrerequisite: " + semesters.get(i).getCourses().get(j).getPrerequisite().getSubject() + " " + semesters.get(i).getCourses().get(j).getPrerequisite().getCourseID() +
-					"\nHours: " + Integer.valueOf(semesters.get(i).getCourses().get(j).getHours()) + 
-					"\nWriting Intensive: " + semesters.get(i).getCourses().get(j).getWritingIntensive());
+					tempArr.add("<html><p>Class Name: " + semesters.get(i).getCourses().get(j).getClassName() + 
+					"</p><p>Description: " + semesters.get(i).getCourses().get(j).getClassDescription() + 
+					"</p><p>Prerequisite: " + semesters.get(i).getCourses().get(j).getPrerequisite().getSubject() + " " + semesters.get(i).getCourses().get(j).getPrerequisite().getCourseID() +
+					"</p><p>Hours: " + Integer.valueOf(semesters.get(i).getCourses().get(j).getHours()) + 
+					"</p><p>Writing Intensive: " + semesters.get(i).getCourses().get(j).getWritingIntensive() + "</p></html>");
 				}
 			}
 			semestersStringArr.add(tempArr);
