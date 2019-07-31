@@ -51,7 +51,8 @@ public class DegreePlannerModel  extends AbstractModel{
 			return false;
 		try {
 			int index = Integer.parseInt(split[0]) - 1;
-			if(plan.getSemesters().size() > index)
+			int numSemesters = plan.getSemesters().size();
+			if(numSemesters > 0 && numSemesters > index)
 				plan.setSemesters(new ArrayList<Semester>(plan.getSemesters().subList(0, Math.max(0, index))));
 			else
 				return false;
