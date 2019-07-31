@@ -77,7 +77,7 @@ public class DegreePlannerView extends JFrameView{
 		removeMinorButton.addActionListener(removeMinorHandler);
 		RemoveSemesterHandler removeSemesterHandler = new RemoveSemesterHandler();
 		JButton removeSemesterButton = new JButton("Remove Semester");
-		removeSemesterButton.setToolTipText("Number (ex: 1) (WARNING: THIS FUNCTION WILL ALSO REMOVE ALL SEMESTERS AFTER THE REQUESTED SEMESTER");
+		removeSemesterButton.setToolTipText("Number (ex: 1) (WARNING: THIS FUNCTION WILL ALSO REMOVE ALL SEMESTERS AFTER THE REQUESTED SEMESTER)");
 		removeSemesterButton.addActionListener(removeSemesterHandler);
 		LogoutHandler logoutHandler = new LogoutHandler();
 		JButton logoutButton = new JButton("Log Out");
