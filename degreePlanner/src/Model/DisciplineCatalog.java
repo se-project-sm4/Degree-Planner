@@ -58,4 +58,12 @@ public class DisciplineCatalog {
 	public List<Requirement> getDefaultRequirements(){
 		return defaultRequirements;
 	}
+	
+	public List<Major> getMajors(){
+		return majors;
+	}
+	
+	public List<Minor> getMinors(){
+		return minors;
+	}
 }

@@ -47,6 +47,18 @@ public class DegreePlannerModel  extends AbstractModel{
 		ModelEvent me = new ModelEvent(this, 1, "", 0, prepSemestersForView(plan.getSemesters()));
 		notifyChanged(me);
 	}
+
+	public void showCourseCatalog() {
+		ModelEvent me = new ModelEvent(this, 1, "", 1, prepCourseCatalogForView(catalog));
+		notifyChanged(me);
+		return;
+	}
+
+	public void showDisciplineCatalog() {
+		ModelEvent me = new ModelEvent(this, 1, "", 2, prepDisciplineCatalogForView(disciplines));
+		notifyChanged(me);
+		return;
+	}
 	
 	public void createPlan(){
 		if(plan.getMajors().size() == 0) {
@@ -111,7 +123,7 @@ public class DegreePlannerModel  extends AbstractModel{
 				}
 			}
 		}
-		ModelEvent me = new ModelEvent(this, 1, "", 2, prepSemestersForView(plan.getSemesters()));
+		ModelEvent me = new ModelEvent(this, 1, "", 3, prepSemestersForView(plan.getSemesters()));
 		notifyChanged(me);
 		save();
 	}
@@ -338,5 +350,65 @@ public class DegreePlannerModel  extends AbstractModel{
 			semestersStringArr.add(tempArr);
 		}
 		return semestersStringArr;
+	}
+	
+	private List<List<String>> prepCourseCatalogForView(CourseCatalog c){
+		List<List<String>> catalogStringArr = new ArrayList<List<String>>();
+		for(int i = 0, numSubjects = c.getCatalog().size(); i < numSubjects; ++i) {
+			List<String> tempArr = new ArrayList<String>();
+			for(int j = 0, numCourses = c.getCatalog().get(i).size() ; j < numCourses; ++j) {
+				tempArr.add(c.getCatalog().get(i).get(j).getSubject() + " " + c.getCatalog().get(i).get(j).getCourseID());
+				if(c.getCatalog().get(i).get(j).getPrerequisite() == null) {
+					tempArr.add("<html><p>Class Name: " + c.getCatalog().get(i).get(j).getClassName() + 
+					"</p><p>Description: " + c.getCatalog().get(i).get(j).getClassDescription() + 
+					"</p><p>Prerequisite: none" + 
+					"</p><p>Hours: " + Integer.valueOf(c.getCatalog().get(i).get(j).getHours()) + 
+					"</p><p>Writing Intensive: " + c.getCatalog().get(i).get(j).getWritingIntensive() + "</p></html>");
+				}else {
+					tempArr.add("<html><p>Class Name: " + c.getCatalog().get(i).get(j).getClassName() + 
+					"</p><p>Description: " + c.getCatalog().get(i).get(j).getClassDescription() + 
+					"</p><p>Prerequisite: " + c.getCatalog().get(i).get(j).getPrerequisite().getSubject() + " " + c.getCatalog().get(i).get(j).getPrerequisite().getCourseID() +
+					"</p><p>Hours: " + Integer.valueOf(c.getCatalog().get(i).get(j).getHours()) + 
+					"</p><p>Writing Intensive: " + c.getCatalog().get(i).get(j).getWritingIntensive() + "</p></html>");
+				}
+			}
+			catalogStringArr.add(tempArr);
+		}
+		return catalogStringArr;
+	}
+
+	private List<List<String>> prepDisciplineCatalogForView(DisciplineCatalog d){
+		List<List<String>> catalogStringArr = new ArrayList<List<String>>();
+		List<String> tempArr = new ArrayList<>();
+		tempArr.add("Minimum Requirements");
+		String tempString = new String("<html>");
+		for(int i = 0, numSubjects = d.getDefaultRequirements().size(); i < numSubjects; ++i) {
+			tempString += "<p>" + d.getDefaultRequirements().get(i).getNumHour() + " hours of " + d.getDefaultRequirements().get(i).getSubject() + " " + "</p>";
+		}
+		tempArr.add(tempString + "</html>");
+		catalogStringArr.add(tempArr);
+
+		tempArr = new ArrayList<>();
+		for(int i = 0, numMajors = d.getMajors().size(); i < numMajors; ++i) {
+			tempArr.add(d.getMajors().get(i).getMajorName());
+			tempString = "<html>";
+			for(int j = 0, numSubjects = d.getMajors().get(i).getRequirements().size(); j < numSubjects; ++j) {
+				tempString += "<p>" + d.getMajors().get(i).getRequirements().get(j).getNumHour() + " hours of " + d.getMajors().get(i).getRequirements().get(j).getSubject() + " " + "</p>";
+			}
+			tempArr.add(tempString + "</html>");
+		}
+		catalogStringArr.add(tempArr);
+
+		tempArr = new ArrayList<>();
+		for(int i = 0, numMajors = d.getMinors().size(); i < numMajors; ++i) {
+			tempArr.add(d.getMinors().get(i).getMinorName());
+			tempString = "<html>";
+			for(int j = 0, numSubjects = d.getMinors().get(i).getRequirements().size(); j < numSubjects; ++j) {
+				tempString += "<p>" + d.getMinors().get(i).getRequirements().get(j).getNumHour() + " hours of " + d.getMinors().get(i).getRequirements().get(j).getSubject() + " " + "</p>";
+			}
+			tempArr.add(tempString + "</html>");
+		}
+		catalogStringArr.add(tempArr);
+		return catalogStringArr;
 	}
 }
