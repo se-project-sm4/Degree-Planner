@@ -117,15 +117,15 @@ public class DegreePlannerView extends JFrameView{
     
 	public void modelChanged(ModelEvent event) {
 		if(event.getType() == 1) {
-			newWindow(event.getArray());
+			scroll.setViewportView(makeCourseCatalogPanel(event.getArray()));
 		}else if(event.getType() == 2) {
-			newWindow(event.getArray());
+			scroll.setViewportView(makeDisciplineCatalogPanel(event.getArray()));
 		}else {
-			scroll.setViewportView(getScroll(event.getArray()));
+			scroll.setViewportView(makeDegreePlanPanel(event.getArray()));
 		}
 	 }
 
-	private JPanel getScroll(List<List<String>> semesters) {
+	private JPanel makeDegreePlanPanel(List<List<String>> semesters) {
 		JPanel semestersPanel = new JPanel();
 		semestersPanel.setLayout(new GridLayout(1, semesters.size()));
 		for(int i = 0; i < semesters.size(); ++i) {
@@ -153,6 +153,72 @@ public class DegreePlannerView extends JFrameView{
 			semestersPanel.add(semester);
 		}
 		return semestersPanel;
+	}
+	
+	private JPanel makeCourseCatalogPanel(List<List<String>> catalog) {
+		JPanel catalogPanel = new JPanel();
+		catalogPanel.setLayout(new GridLayout(1, catalog.size()));
+		int max = 0;
+		for(int i = 0; i < catalog.size(); ++i) {
+			max = Math.max(max, catalog.get(i).size());
+		}
+		max /= 2;
+		for(int i = 0; i < catalog.size(); ++i) {
+			JPanel subjectPanel = new JPanel();
+			subjectPanel.setLayout(new GridLayout(max, 1));
+			int j;
+			for(j = 0; j < catalog.get(i).size(); ++j) {
+				JLabel label = new JLabel(catalog.get(i).get(j));
+				label.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
+				label.setHorizontalAlignment(JLabel.CENTER);
+				label.setToolTipText(catalog.get(i).get(++j));
+				subjectPanel.add(label);
+			}
+			while(j++ < max) {
+				JLabel label = new JLabel();
+				label.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
+				label.setHorizontalAlignment(JLabel.CENTER);
+				subjectPanel.add(label);
+			}
+			catalogPanel.add(subjectPanel);
+		}
+		return catalogPanel;
+	}
+	
+	private JPanel makeDisciplineCatalogPanel(List<List<String>> catalog) {
+		JPanel catalogPanel = new JPanel();
+		catalogPanel.setLayout(new GridLayout(1, 3));
+		int max = 0;
+		for(int i = 0; i < 3; ++i) {
+			max = Math.max(max, catalog.get(i).size());
+		}
+		max = max/2 + 1;
+		
+		for(int i = 0; i < 3; ++i) {
+			JPanel subjectPanel = new JPanel();
+			subjectPanel.setLayout(new GridLayout(max, 1));
+			JLabel label = new JLabel(catalog.get(i).get(0));
+			label.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
+			label.setHorizontalAlignment(JLabel.CENTER);
+			subjectPanel.add(label);
+			int j;
+			for(j = 1; j < catalog.get(i).size(); ++j) {
+				label = new JLabel(catalog.get(i).get(j));
+				label.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
+				label.setHorizontalAlignment(JLabel.CENTER);
+				label.setToolTipText(catalog.get(i).get(++j));
+				subjectPanel.add(label);
+			}
+			while(j < max) {
+				label = new JLabel();
+				label.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
+				label.setHorizontalAlignment(JLabel.CENTER);
+				subjectPanel.add(label);
+				j+=2;
+			}
+			catalogPanel.add(subjectPanel);
+		}
+		return catalogPanel;
 	}
 	
 	class CourseCatalogHandler implements ActionListener{

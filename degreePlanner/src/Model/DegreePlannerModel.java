@@ -123,7 +123,7 @@ public class DegreePlannerModel  extends AbstractModel{
 				}
 			}
 		}
-		ModelEvent me = new ModelEvent(this, 1, "", 3, prepSemestersForView(plan.getSemesters()));
+		ModelEvent me = new ModelEvent(this, 1, "", 2, prepSemestersForView(plan.getSemesters()));
 		notifyChanged(me);
 		save();
 	}
@@ -381,6 +381,7 @@ public class DegreePlannerModel  extends AbstractModel{
 		List<List<String>> catalogStringArr = new ArrayList<List<String>>();
 		List<String> tempArr = new ArrayList<>();
 		tempArr.add("Minimum Requirements");
+		tempArr.add("Hover to see minimum requirements");
 		String tempString = new String("<html>");
 		for(int i = 0, numSubjects = d.getDefaultRequirements().size(); i < numSubjects; ++i) {
 			tempString += "<p>" + d.getDefaultRequirements().get(i).getNumHour() + " hours of " + d.getDefaultRequirements().get(i).getSubject() + " " + "</p>";
@@ -389,6 +390,7 @@ public class DegreePlannerModel  extends AbstractModel{
 		catalogStringArr.add(tempArr);
 
 		tempArr = new ArrayList<>();
+		tempArr.add("Majors");
 		for(int i = 0, numMajors = d.getMajors().size(); i < numMajors; ++i) {
 			tempArr.add(d.getMajors().get(i).getMajorName());
 			tempString = "<html>";
@@ -400,6 +402,7 @@ public class DegreePlannerModel  extends AbstractModel{
 		catalogStringArr.add(tempArr);
 
 		tempArr = new ArrayList<>();
+		tempArr.add("Minors");
 		for(int i = 0, numMajors = d.getMinors().size(); i < numMajors; ++i) {
 			tempArr.add(d.getMinors().get(i).getMinorName());
 			tempString = "<html>";

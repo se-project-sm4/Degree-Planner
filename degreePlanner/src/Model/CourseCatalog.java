@@ -125,7 +125,7 @@ public class CourseCatalog {
 		posi.add(posi2320);
 
 		List<Course> soci = new ArrayList<Course>();
-		math.add(soci1310);
+		soci.add(soci1310);
 
 		List<Course> hist = new ArrayList<Course>();
 		hist.add(hist1310);
