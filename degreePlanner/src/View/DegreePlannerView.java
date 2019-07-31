@@ -110,6 +110,8 @@ public class DegreePlannerView extends JFrameView{
 	public void modelChanged(ModelEvent event) {
 		if(event.getType() == 0) {
 			//show course catalog
+			scroll.setViewportView(getScroll(event.getSemesters()));
+	        revalidate();
 		}else if(event.getType() == 1) {
 			//show discipline catalog
 		}else if(event.getType() == 2) {

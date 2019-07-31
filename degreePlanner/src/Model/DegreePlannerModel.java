@@ -41,6 +41,11 @@ public class DegreePlannerModel  extends AbstractModel{
 		}
 	}
 	
+	public void login() {
+		ModelEvent me = new ModelEvent(this, 1, "", 0, prepSemestersForView(plan.getSemesters()));
+		notifyChanged(me);
+	}
+	
 	public void createPlan(){
 		if(plan.getMajors().size() == 0) {
 			ModelEvent me = new ModelEvent(this, 1, "", 3, prepSemestersForView(plan.getSemesters()));
