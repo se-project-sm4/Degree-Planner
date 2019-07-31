@@ -52,7 +52,7 @@ public class DegreePlannerModel  extends AbstractModel{
 		try {
 			int index = Integer.parseInt(split[0]) - 1;
 			if(plan.getSemesters().size() > index)
-				plan.getSemesters().remove(index);
+				plan.setSemesters(new ArrayList<Semester>(plan.getSemesters().subList(0, Math.max(0, index))));
 			else
 				return false;
 			save();

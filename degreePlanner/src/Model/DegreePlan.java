@@ -12,7 +12,7 @@ public class DegreePlan implements Serializable{
 	private List<Minor> minors = new ArrayList<>();
 	private List<Semester> semesters = new ArrayList<>();
 	
-	public void setMajors(ArrayList<Major> m) {
+	public void setMajors(List<Major> m) {
 		majors = m;
 	}
 	
@@ -28,7 +28,7 @@ public class DegreePlan implements Serializable{
 		majors.remove(m);
 	}
 
-	public void setMinors(ArrayList<Minor> m) {
+	public void setMinors(List<Minor> m) {
 		minors = m;
 	}
 
@@ -44,7 +44,7 @@ public class DegreePlan implements Serializable{
 		minors.remove(m);
 	}
 
-	public void setSemesters(ArrayList<Semester> s) {
+	public void setSemesters(List<Semester> s) {
 		semesters = s;
 	}
 	
