@@ -11,7 +11,7 @@ public class Major implements Serializable{
 	private int writingIntensiveHours;
 
 	public Major() {
-		majorName = null;
+		majorName = "";
 		requirements = null;
 		writingIntensiveHours = 0;
 	}

@@ -29,11 +29,11 @@ public class MajorTest {
 	@Test
 	void testConstructor() {
 		Major major = new Major();
-		assertEquals(null, major.getMajorName());
+		assertEquals("", major.getMajorName());
 		assertEquals(null, major.getRequirements());
 		assertEquals(0, major.getWritingIntensiveHours());
-		Major major1 = new Major(null, null, 0);
-		assertEquals(null, major1.getMajorName());
+		Major major1 = new Major("", null, 0);
+		assertEquals("", major1.getMajorName());
 		assertEquals(null, major1.getRequirements());
 		assertEquals(0, major1.getWritingIntensiveHours());
 		List<Requirement> requirements = new ArrayList<Requirement>();
@@ -50,7 +50,7 @@ public class MajorTest {
 	@Test
 	void testToString() {
 		Major major = new Major();
-		assertEquals("[majorName=null, requirements=null, writingIntensiveHours=0]", major.toString());
+		assertEquals("[majorName=, requirements=null, writingIntensiveHours=0]", major.toString());
 		List<Requirement> requirements = new ArrayList<Requirement>();
 		Requirement requirement = new Requirement(null, 0);
 		Requirement requirement1 = new Requirement("n1", 1);
@@ -72,8 +72,8 @@ public class MajorTest {
 
 		assertEquals(true, major.equals(major));
 		assertEquals(true, major.equals(new Major()));
-		assertEquals(true, major.equals(new Major(null, null, 0)));
-		assertEquals(true, major.equals(new Major(null, requirements, 1)));
+		assertEquals(true, major.equals(new Major("", null, 0)));
+		assertEquals(true, major.equals(new Major("", requirements, 1)));
 		assertEquals(false, major.equals(null));
 		assertEquals(false, major.equals(new Major("1", null, 0)));
 		assertEquals(false, major.equals(new Major("1", requirements, 1)));
@@ -82,8 +82,8 @@ public class MajorTest {
 		assertEquals(true, major1.equals(new Major("name", requirements, 1)));
 		assertEquals(true, major1.equals(new Major("name", null, 0)));
 		assertEquals(false, major1.equals(null));
-		assertEquals(false, major1.equals(new Major(null, requirements, 1)));
-		assertEquals(false, major1.equals(new Major(null, null, 0)));
+		assertEquals(false, major1.equals(new Major("", requirements, 1)));
+		assertEquals(false, major1.equals(new Major("", null, 0)));
 		assertEquals(false, major1.equals(major));
 	}
 }

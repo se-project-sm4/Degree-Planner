@@ -11,7 +11,7 @@ public class Minor implements Serializable{
 	private int writingIntensiveHours;
 
 	public Minor() {
-		minorName = null;
+		minorName = "";
 		requirements = null;
 		writingIntensiveHours = 0;
 	}

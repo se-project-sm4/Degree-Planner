@@ -29,11 +29,11 @@ public class MinorTest {
 	@Test
 	void testConstructor() {
 		Minor minor = new Minor();
-		assertEquals(null, minor.getMinorName());
+		assertEquals("", minor.getMinorName());
 		assertEquals(null, minor.getRequirements());
 		assertEquals(0, minor.getWritingIntensiveHours());
-		Minor minor1 = new Minor(null, null, 0);
-		assertEquals(null, minor1.getMinorName());
+		Minor minor1 = new Minor("", null, 0);
+		assertEquals("", minor1.getMinorName());
 		assertEquals(null, minor1.getRequirements());
 		assertEquals(0, minor1.getWritingIntensiveHours());
 		List<Requirement> requirements = new ArrayList<Requirement>();
@@ -50,7 +50,7 @@ public class MinorTest {
 	@Test
 	void testToString() {
 		Minor minor = new Minor();
-		assertEquals("[minorName=null, requirements=null, writingIntensiveHours=0]", minor.toString());
+		assertEquals("[minorName=, requirements=null, writingIntensiveHours=0]", minor.toString());
 		List<Requirement> requirements = new ArrayList<Requirement>();
 		Requirement requirement = new Requirement(null, 0);
 		Requirement requirement1 = new Requirement("n1", 1);
@@ -72,8 +72,8 @@ public class MinorTest {
 
 		assertEquals(true, minor.equals(minor));
 		assertEquals(true, minor.equals(new Minor()));
-		assertEquals(true, minor.equals(new Minor(null, null, 0)));
-		assertEquals(true, minor.equals(new Minor(null, requirements, 1)));
+		assertEquals(true, minor.equals(new Minor("", null, 0)));
+		assertEquals(true, minor.equals(new Minor("", requirements, 1)));
 		assertEquals(false, minor.equals(null));
 		assertEquals(false, minor.equals(new Minor("1", null, 0)));
 		assertEquals(false, minor.equals(new Minor("1", requirements, 1)));
@@ -82,8 +82,8 @@ public class MinorTest {
 		assertEquals(true, minor1.equals(new Minor("name", requirements, 1)));
 		assertEquals(true, minor1.equals(new Minor("name", null, 0)));
 		assertEquals(false, minor1.equals(null));
-		assertEquals(false, minor1.equals(new Minor(null, requirements, 1)));
-		assertEquals(false, minor1.equals(new Minor(null, null, 0)));
+		assertEquals(false, minor1.equals(new Minor("", requirements, 1)));
+		assertEquals(false, minor1.equals(new Minor("", null, 0)));
 		assertEquals(false, minor1.equals(minor));
 	}
 }
