@@ -91,6 +91,9 @@ public class Course implements Serializable{
     	if (obj == null || obj.getClass() != this.getClass()) { 
     		return false; 
     	}
+    	if(((Course)obj).getSubject() == null) {
+    		return false;
+    	}
     	if(((Course)obj).getCourseID() == this.getCourseID() && ((Course)obj).getSubject().equals(this.getSubject())) {
     		return true;
     	}

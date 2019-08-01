@@ -28,5 +28,6 @@ public class DegreePlannerModelTest {
 	 */
 	@Test
 	void test() {
+		DegreePlannerModel degreePlannerModel = new DegreePlannerModel("1");
 	}
 }

@@ -463,7 +463,7 @@ public class DegreePlannerModel  extends AbstractModel{
 	}
 	
 	private void removeCoursesWithRequirement(Course course, int semester){
-		for(int i =  semester; i < plan.getSemesters().size(); ++i) {
+		for(int i =  semester + 1; i < plan.getSemesters().size(); ++i) {
 			for(int j = 0; j < plan.getSemesters().get(i).getCourses().size(); ++j) {
 				if(plan.getSemesters().get(i).getCourses().get(j).getPrerequisite() != null) {
 					if(plan.getSemesters().get(i).getCourses().get(j).getPrerequisite().equals(course)) {

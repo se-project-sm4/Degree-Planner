@@ -1,14 +1,8 @@
 package test.Model;
 
 import degreePlanner.Model.Course;
-import degreePlanner.Model.DegreePlan;
-import degreePlanner.Model.Major;
-import degreePlanner.Model.Requirement;
 
 import static org.junit.Assert.assertEquals;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -35,50 +29,43 @@ public class CourseTest {
 	
 	@Test
 	void testConstructor() {
-		Major major = new Major();
-		assertEquals(null, major.getMajorName());
-		assertEquals(null, major.getRequirements());
-		assertEquals(0, major.getWritingIntensiveHours());
-		Major major1 = new Major(null, null, 0);
-		assertEquals(null, major1.getMajorName());
-		assertEquals(null, major1.getRequirements());
-		assertEquals(0, major1.getWritingIntensiveHours());
-		List<Requirement> requirements = new ArrayList<Requirement>();
-		Requirement requirement = new Requirement(null, 0);
-		Requirement requirement1 = new Requirement("n1", 1);
-		requirements.add(requirement);
-		requirements.add(requirement1);
-		Major major2 = new Major("name", requirements, 1);
-		assertEquals("name", major2.getMajorName());
-		assertEquals(requirements, major2.getRequirements());
-		assertEquals(1, major2.getWritingIntensiveHours());
+		Course course = new Course(0, null, null, 0, null, null, false);
+		assertEquals(0, course.getCourseID());
+		assertEquals(null, course.getSubject());
+		assertEquals(null, course.getPrerequisite());
+		assertEquals(0, course.getHours());
+		assertEquals(null, course.getClassName());
+		assertEquals(null, course.getClassDescription());
+		assertEquals(false, course.getWritingIntensive());
+		Course course1 = new Course(1, "s1", null, 1, "c1", "d1", false);
+		Course course2 = new Course(2, "s2", course1, 2, "c2", "d2", true);
+		assertEquals(2, course2.getCourseID());
+		assertEquals("s2", course2.getSubject());
+		assertEquals(course1, course2.getPrerequisite());
+		assertEquals(2, course2.getHours());
+		assertEquals("c2", course2.getClassName());
+		assertEquals("d2", course2.getClassDescription());
+		assertEquals(true, course2.getWritingIntensive());
 	}
 	
 	@Test
 	void testEquals() {
-		List<Requirement> requirements = new ArrayList<Requirement>();
-		Requirement requirement = new Requirement(null, 0);
-		Requirement requirement1 = new Requirement("n1", 1);
-		requirements.add(requirement);
-		requirements.add(requirement1);
-		Major major = new Major();
-		Major major1 = new Major("name", requirements, 1);
+		Course course = new Course(0, null, null, 0, null, null, false);
+		Course course1 = new Course(1, "s", course, 1, "c1", "d1", false);
 
-		assertEquals(true, major.equals(major));
-		assertEquals(true, major.equals(new Major()));
-		assertEquals(true, major.equals(new Major(null, null, 0)));
-		assertEquals(true, major.equals(new Major(null, requirements, 1)));
-		assertEquals(false, major.equals(null));
-		assertEquals(false, major.equals(new Major("1", null, 0)));
-		assertEquals(false, major.equals(new Major("1", requirements, 1)));
-		assertEquals(false, major.equals(major1));
-		
-		assertEquals(true, major1.equals(new Major("name", requirements, 1)));
-		assertEquals(true, major1.equals(new Major("name", null, 0)));
-		assertEquals(false, major1.equals(null));
-		assertEquals(false, major1.equals(new Major(null, requirements, 1)));
-		assertEquals(false, major1.equals(new Major(null, null, 0)));
-		assertEquals(false, major1.equals(major));
+		assertEquals(true, course.equals(course));
+		assertEquals(false, course.equals(null));
+		assertEquals(false, course.equals(new Course(1, null, null, 0, null, null, false)));
+		assertEquals(false, course.equals(new Course(0, "s", null, 0, null, null, false)));
+		assertEquals(false, course.equals(course1));
+
+		assertEquals(true, course1.equals(course1));
+		assertEquals(false, course1.equals(null));
+		assertEquals(false, course1.equals(new Course(0, null, null, 0, null, null, false)));
+		assertEquals(false, course1.equals(new Course(0, "s", null, 0, null, null, false)));
+		assertEquals(false, course1.equals(new Course(1, null, null, 0, null, null, false)));
+		assertEquals(true, course1.equals(new Course(1, "s", null, 0, null, null, false)));
+		assertEquals(false, course1.equals(course));
 	}
 	
 	@Test
