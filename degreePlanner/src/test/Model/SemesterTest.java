@@ -3,8 +3,7 @@ package test.Model;
 import degreePlanner.Model.Semester;
 import degreePlanner.Model.Course;
 
-import java.util.ArrayList;
-import java.util.List;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,17 +21,38 @@ public class SemesterTest {
 	 */
 
 	@Test
-	void test() {
+	void testConstructor() {
+	 	Semester semester = new Semester(18);
+		assertEquals(0, semester.getCourses().size());
+		assertEquals(18, semester.getMaxHours());
+	}
+
+	@Test
+	void testGetHours() {
 		//need to add asserts
 	 	Semester semester = new Semester(18);
-	 	semester.setMaxHours(16);
-		int maxHours = semester.getMaxHours();
-		List<Course> courses = new ArrayList<>();
-		semester.setCourses((ArrayList<Course>)courses);
-		courses = semester.getCourses();
-		semester.addCourse(new Course(1428, "CS", null, 4, "Foundations of CS I", "computer science introductory course", false));
-		semester.removeCourse(new Course(1428, "CS", null, 4, "Foundations of CS I", "computer science introductory course", false));
-		int hours = semester.getHours();
-		String string = semester.toString();
+		assertEquals(0, semester.getHours());
+		semester.addCourse(new Course(1, "id1", null, 4, "cn1", "cd1", false));
+		assertEquals(4, semester.getHours());
+		semester.addCourse(new Course(2, "id2", null, 3, "cn2", "cd2", false));
+		assertEquals(7, semester.getHours());
+		semester.removeCourse(new Course(1, "id1", null, 4, "cn1", "cd1", false));
+		assertEquals(3, semester.getHours());
+		semester.removeCourse(new Course(2, "id2", null, 3, "cn2", "cd2", false));
+		assertEquals(0, semester.getHours());
+	}
+	
+	@Test
+	void testToString() {
+	 	Semester semester = new Semester(18);
+		assertEquals("[maxHours=18, courses=[]]", semester.toString());
+		semester.addCourse(new Course(1, "id1", null, 4, "cn1", "cd1", false));
+		assertEquals("[maxHours=18, courses=" + semester.getCourses().toString() + "]", semester.toString());
+		semester.addCourse(new Course(2, "id2", null, 3, "cn2", "cd2", false));
+		assertEquals("[maxHours=18, courses=" + semester.getCourses().toString() + "]", semester.toString());
+		semester.removeCourse(new Course(1, "id1", null, 4, "cn1", "cd1", false));
+		assertEquals("[maxHours=18, courses=" + semester.getCourses().toString() + "]", semester.toString());
+		semester.removeCourse(new Course(2, "id2", null, 3, "cn2", "cd2", false));
+		assertEquals("[maxHours=18, courses=" + semester.getCourses().toString() + "]", semester.toString());
 	}
 }
