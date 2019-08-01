@@ -334,7 +334,7 @@ public class DegreePlannerModel  extends AbstractModel{
 	}
 	
 	private void save() {
-		System.out.println(plan);
+		//System.out.println(plan);
 		try {
 			FileOutputStream fos = new FileOutputStream(fileName);
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
