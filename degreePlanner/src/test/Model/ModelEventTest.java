@@ -2,6 +2,8 @@ package test.Model;
 
 import degreePlanner.Model.ModelEvent;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,10 +17,21 @@ public class ModelEventTest {
 	*/
 
 	@Test
-	void test() {
-		List<List<String>> strings = new ArrayList<List<String>>();
-		ModelEvent modelEvent = new ModelEvent(null, 0, null, 1, strings);
-		int type = modelEvent.getType();
-		strings = (ArrayList<List<String>>) modelEvent.getArray();
+	void testConstructor() {
+		ModelEvent modelEvent = new ModelEvent(null, 0, null, 0, null);
+		assertEquals(0, modelEvent.getType());
+		assertEquals(null, modelEvent.getArray());
+		List<List<String>> arr2d = new ArrayList<List<String>>();
+		List<String> arr1 = new ArrayList<String>();
+		arr1.add("string 1");
+		arr1.add("string 2");
+		List<String> arr2 = new ArrayList<String>();
+		arr2.add("string 3");
+		arr2.add("string 4");
+		arr2d.add(arr1);
+		arr2d.add(arr2);
+		ModelEvent modelEvent1 = new ModelEvent(null, 0, null, 1, arr2d);
+		assertEquals(1, modelEvent1.getType());
+		assertEquals(arr2d, modelEvent1.getArray());
 	}
 }

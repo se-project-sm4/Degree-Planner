@@ -160,6 +160,8 @@ public class CourseCatalog {
 	}
 	
 	public Course findCourse(int id, String subject){
+		if(subject == "" || subject == null)
+			return null;
 		int subjectIndex = map.get(subject);
 		int index  = catalog.get(subjectIndex).indexOf(new Course(id, subject, null, 0, null, null, false));
 		if(index == -1) {

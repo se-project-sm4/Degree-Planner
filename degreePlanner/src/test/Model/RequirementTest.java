@@ -2,6 +2,8 @@ package test.Model;
 
 import degreePlanner.Model.Requirement;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
 public class RequirementTest {
@@ -16,13 +18,23 @@ public class RequirementTest {
     */
 	
 	@Test
-	void test() {
+	void testConstructor() {
 		Requirement requirement = new Requirement();
-		Requirement requirement1 = new Requirement("subject1", 10);
-		requirement.setSubject("subject");
-		String subject = requirement.getSubject();
-		requirement.setNumHour(5);
-		int hours = requirement.getNumHour();
-	    String string = requirement.toString();
+		assertEquals(null, requirement.getSubject());
+		assertEquals(0, requirement.getNumHour());
+		Requirement requirement1 = new Requirement("s1", 1);
+		assertEquals("s1", requirement1.getSubject());
+		assertEquals(1, requirement1.getNumHour());
+		Requirement requirement2 = new Requirement("s2", 2);
+		assertEquals("s2", requirement2.getSubject());
+		assertEquals(2, requirement2.getNumHour());
+	}
+	
+	@Test
+	void testToString() {
+		Requirement requirement = new Requirement();
+		assertEquals("[subject=null, numHours=0]", requirement.toString());
+		Requirement requirement1 = new Requirement("s1", 1);
+		assertEquals("[subject=s1, numHours=1]", requirement1.toString());
 	}
 }

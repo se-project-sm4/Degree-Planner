@@ -1,11 +1,7 @@
 package test.Model;
 
 import degreePlanner.Model.DegreePlan;
-
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.util.List;
-
+import static org.junit.Assert.assertEquals;
 import org.junit.jupiter.api.Test;
 
 public class DegreePlanTest {
@@ -26,6 +22,8 @@ public class DegreePlanTest {
 	    public String toString();
 	 */
 	@Test
-	void test() {
+	void testToString() {
+		DegreePlan degreePlan = new DegreePlan();
+		assertEquals("[majors=" + degreePlan.getMajors().toString() + ", minors=" + degreePlan.getMinors().toString() + ", semesters=" + degreePlan.getSemesters().toString() + "]", degreePlan.toString());
 	}
 }

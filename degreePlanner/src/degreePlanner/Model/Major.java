@@ -11,7 +11,9 @@ public class Major implements Serializable{
 	private int writingIntensiveHours;
 
 	public Major() {
-		
+		majorName = null;
+		requirements = null;
+		writingIntensiveHours = 0;
 	}
 	
 	public Major(String m, List<Requirement> r, int w ) {
@@ -65,7 +67,7 @@ public class Major implements Serializable{
     	if (obj == null || obj.getClass() != this.getClass()) { 
     		return false; 
     	}
-    	if(((Major)obj).getMajorName().equals(this.getMajorName())) {
+    	if(((Major)obj).getMajorName() == (this.getMajorName())) {
     		return true;
     	}
     	return false;

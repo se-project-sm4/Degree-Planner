@@ -3,10 +3,8 @@ package test.Model;
 import degreePlanner.Model.DisciplineCatalog;
 import degreePlanner.Model.Major;
 import degreePlanner.Model.Minor;
-import degreePlanner.Model.Requirement;
 
-import java.util.ArrayList;
-import java.util.List;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
@@ -20,6 +18,15 @@ public class DisciplineCatalogTest {
 	public List<Minor> getMinors();
 	 */
 	@Test
-	void test() {
+	void testAll() {
+		DisciplineCatalog disciplineCatalog = new DisciplineCatalog();
+		assertEquals(new Major("Computer Science", null, 0), disciplineCatalog.findMajor("Computer Science"));
+		assertEquals(null, disciplineCatalog.findMajor(null));
+		assertEquals(null, disciplineCatalog.findMajor(""));
+		assertEquals(null, disciplineCatalog.findMajor("a"));
+		assertEquals(new Minor("Mathematics", null, 0), disciplineCatalog.findMinor("Mathematics"));
+		assertEquals(null, disciplineCatalog.findMinor(null));
+		assertEquals(null, disciplineCatalog.findMinor(""));
+		assertEquals(null, disciplineCatalog.findMajor("a"));
 	}
 }
