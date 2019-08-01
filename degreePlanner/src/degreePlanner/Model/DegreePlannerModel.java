@@ -474,4 +474,17 @@ public class DegreePlannerModel  extends AbstractModel{
 			}
 		}
 	}
+	
+	// The following getter methods are for testing only
+	public CourseCatalog getCourseCatalog() {
+		return catalog;
+	}
+
+	public DisciplineCatalog getDisciplineCatalog() {
+		return disciplines;
+	}
+	
+	public DegreePlan getDegreePlan() {
+		return plan;
+	}
 }
