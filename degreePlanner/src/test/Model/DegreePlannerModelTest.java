@@ -1,6 +1,11 @@
 package test.Model;
 
 import degreePlanner.Model.DegreePlannerModel;
+import degreePlanner.Model.Major;
+import degreePlanner.Model.Minor;
+import degreePlanner.Model.Semester;
+
+import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
@@ -27,7 +32,11 @@ public class DegreePlannerModelTest {
 		private void removeCoursesWithRequirement(Course course, int semester);
 	 */
 	@Test
-	void test() {
+	void testCreatePlan() {
 		DegreePlannerModel degreePlannerModel = new DegreePlannerModel("1");
+		new ArrayList<Major>();
+		degreePlannerModel.getDegreePlan().setMajors(new ArrayList<Major>());
+		degreePlannerModel.getDegreePlan().setMinors(new ArrayList<Minor>());
+		degreePlannerModel.getDegreePlan().setSemesters(new ArrayList<Semester>());
 	}
 }

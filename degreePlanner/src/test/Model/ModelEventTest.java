@@ -18,7 +18,7 @@ public class ModelEventTest {
 
 	@Test
 	void testConstructor() {
-		ModelEvent modelEvent = new ModelEvent(null, 0, null, 0, null);
+		ModelEvent modelEvent = new ModelEvent(this, 0, null, 0, null);
 		assertEquals(0, modelEvent.getType());
 		assertEquals(null, modelEvent.getArray());
 		List<List<String>> arr2d = new ArrayList<List<String>>();
@@ -30,7 +30,7 @@ public class ModelEventTest {
 		arr2.add("string 4");
 		arr2d.add(arr1);
 		arr2d.add(arr2);
-		ModelEvent modelEvent1 = new ModelEvent(null, 0, null, 1, arr2d);
+		ModelEvent modelEvent1 = new ModelEvent(this, 0, null, 1, arr2d);
 		assertEquals(1, modelEvent1.getType());
 		assertEquals(arr2d, modelEvent1.getArray());
 	}
