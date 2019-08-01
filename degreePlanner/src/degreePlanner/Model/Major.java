@@ -67,7 +67,7 @@ public class Major implements Serializable{
     	if (obj == null || obj.getClass() != this.getClass()) { 
     		return false; 
     	}
-    	if(((Major)obj).getMajorName() == (this.getMajorName())) {
+    	if(((Major)obj).getMajorName().equals((this.getMajorName()))) {
     		return true;
     	}
     	return false;

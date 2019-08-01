@@ -41,6 +41,7 @@ public class DisciplineCatalog {
 	
 	public Major findMajor(String major) {
 		int index  = majors.indexOf(new Major(major, null, 0));
+		System.out.println(majors.get(0).getMajorName().contentEquals(major) + " " + majors.get(0).equals(new Major(major, null, 0)));
 		if(index == -1) {
 			return null;
 		}

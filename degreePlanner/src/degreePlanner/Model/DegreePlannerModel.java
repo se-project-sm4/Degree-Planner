@@ -235,6 +235,7 @@ public class DegreePlannerModel  extends AbstractModel{
 			notifyChanged(me);
 			return;
 		}
+		System.out.println("Got here");
 		if(!plan.getMajors().contains(m)) {
 			if(plan.getMajors().add(m)) {
 				save();

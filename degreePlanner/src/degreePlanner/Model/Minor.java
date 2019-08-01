@@ -67,7 +67,7 @@ public class Minor implements Serializable{
     	if (obj == null || obj.getClass() != this.getClass()) { 
     		return false; 
     	}
-    	if(((Minor)obj).getMinorName() == (this.getMinorName())) {
+    	if(((Minor)obj).getMinorName().equals(this.getMinorName())) {
     		return true;
     	}
     	return false;
