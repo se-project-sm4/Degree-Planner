@@ -212,6 +212,9 @@ public class DegreePlannerModel  extends AbstractModel{
 			int semester = Integer.parseInt(split[2]) - 1;
 			if(plan.getSemesters().get(semester).getCourses().remove(new Course(id, subject, null, 0, null, null, false))) {
 				removeCoursesWithRequirement(new Course(id, subject, null, 0, null, null, false), semester);
+				int end = plan.getSemesters().size();
+				while(--end >= 0 && plan.getSemesters().get(end).getCourses().size() == 0);
+				removeSemester(Integer.toString(end + 2));
 				save();
 				ModelEvent me = new ModelEvent(this, 1, "", 6, getPlanForView());
 				notifyChanged(me);
