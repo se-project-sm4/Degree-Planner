@@ -91,9 +91,13 @@ public class DegreePlannerModelTest {
 	void testRemoveCourse() {
 		DegreePlannerModel degreePlannerModel = new DegreePlannerModel("1");
 		degreePlannerModel.getDegreePlan().setSemesters(new ArrayList<Semester>());
+		degreePlannerModel.removeCourse("gibberish");
+		assertEquals(0, degreePlannerModel.getDegreePlan().getSemesters().size());
 		degreePlannerModel.removeCourse("CS 1428 1");
 		assertEquals(0, degreePlannerModel.getDegreePlan().getSemesters().size());
 		degreePlannerModel.addCourse("CS 1428 1");
+		degreePlannerModel.removeCourse("gibberish");
+		assertEquals(1, degreePlannerModel.getDegreePlan().getSemesters().size());
 		degreePlannerModel.addCourse("CS 2308 2");
 		degreePlannerModel.addCourse("CS 2315 2");
 		degreePlannerModel.addCourse("CS 2318 3");
@@ -156,6 +160,8 @@ public class DegreePlannerModelTest {
 		DegreePlannerModel degreePlannerModel = new DegreePlannerModel("1");
 		degreePlannerModel.getDegreePlan().setSemesters(new ArrayList<Semester>());
 		degreePlannerModel.addCourse("CS 1428 10");
+		degreePlannerModel.removeSemester("gibberish");
+		assertEquals(10, degreePlannerModel.getDegreePlan().getSemesters().size());
 		degreePlannerModel.removeSemester("11");
 		assertEquals(10, degreePlannerModel.getDegreePlan().getSemesters().size());
 		degreePlannerModel.removeSemester("10");
