@@ -60,6 +60,8 @@ public class DegreePlannerModelTest {
 	void testAddCourse() {
 		DegreePlannerModel degreePlannerModel = new DegreePlannerModel("1");
 		degreePlannerModel.getDegreePlan().setSemesters(new ArrayList<Semester>());
+		degreePlannerModel.addCourse("gibberish");
+		assertEquals(0, degreePlannerModel.getDegreePlan().getSemesters().size());
 		degreePlannerModel.addCourse("CS 1 1");
 		assertEquals(0, degreePlannerModel.getDegreePlan().getSemesters().size());
 		degreePlannerModel.addCourse("CS 2308 1");
