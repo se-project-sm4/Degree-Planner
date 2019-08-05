@@ -148,4 +148,23 @@ public class DegreePlannerModelTest {
 		degreePlannerModel.removeMinor("Mathematics");
 		assertEquals(0, degreePlannerModel.getDegreePlan().getMinors().size());
 	}
+	
+	@Test
+	void testRemoveSemester() {
+		DegreePlannerModel degreePlannerModel = new DegreePlannerModel("1");
+		degreePlannerModel.getDegreePlan().setSemesters(new ArrayList<Semester>());
+		degreePlannerModel.addCourse("CS 1428 10");
+		degreePlannerModel.removeSemester("11");
+		assertEquals(10, degreePlannerModel.getDegreePlan().getSemesters().size());
+		degreePlannerModel.removeSemester("10");
+		assertEquals(9, degreePlannerModel.getDegreePlan().getSemesters().size());
+		degreePlannerModel.removeSemester("1");
+		assertEquals(0, degreePlannerModel.getDegreePlan().getSemesters().size());
+		degreePlannerModel.addCourse("CS 1428 10");
+		degreePlannerModel.removeSemester("0");
+		assertEquals(0, degreePlannerModel.getDegreePlan().getSemesters().size());
+		degreePlannerModel.addCourse("CS 1428 10");
+		degreePlannerModel.removeSemester("-1");
+		assertEquals(0, degreePlannerModel.getDegreePlan().getSemesters().size());
+	}
 }
