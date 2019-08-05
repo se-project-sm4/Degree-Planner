@@ -100,4 +100,26 @@ public class DegreePlannerModelTest {
 		degreePlannerModel.removeCourse("CS 1428 1");
 		assertEquals(0, degreePlannerModel.getDegreePlan().getSemesters().size());
 	}
+	
+	@Test
+	void testAddMajor() {
+		DegreePlannerModel degreePlannerModel = new DegreePlannerModel("1");
+		degreePlannerModel.getDegreePlan().setMajors(new ArrayList<Major>());
+		degreePlannerModel.addMajor("doesn't exist");
+		assertEquals(0, degreePlannerModel.getDegreePlan().getMajors().size());
+		degreePlannerModel.addMajor("Computer Science");
+		assertEquals(1, degreePlannerModel.getDegreePlan().getMajors().size());
+		assertEquals(new Major("Computer Science", null, 0), degreePlannerModel.getDegreePlan().getMajors().get(0));
+	}
+	
+	@Test
+	void testAddMinor() {
+		DegreePlannerModel degreePlannerModel = new DegreePlannerModel("1");
+		degreePlannerModel.getDegreePlan().setMinors(new ArrayList<Minor>());
+		degreePlannerModel.addMinor("doesn't exist");
+		assertEquals(0, degreePlannerModel.getDegreePlan().getMinors().size());
+		degreePlannerModel.addMinor("Mathematics");
+		assertEquals(1, degreePlannerModel.getDegreePlan().getMinors().size());
+		assertEquals(new Minor("Mathematics", null, 0), degreePlannerModel.getDegreePlan().getMinors().get(0));
+	}
 }
