@@ -87,6 +87,8 @@ public class DegreePlannerModelTest {
 	void testRemoveCourse() {
 		DegreePlannerModel degreePlannerModel = new DegreePlannerModel("1");
 		degreePlannerModel.getDegreePlan().setSemesters(new ArrayList<Semester>());
+		degreePlannerModel.removeCourse("CS 1428 1");
+		assertEquals(0, degreePlannerModel.getDegreePlan().getSemesters().size());
 		degreePlannerModel.addCourse("CS 1428 1");
 		degreePlannerModel.addCourse("CS 2308 2");
 		degreePlannerModel.addCourse("CS 2315 2");
