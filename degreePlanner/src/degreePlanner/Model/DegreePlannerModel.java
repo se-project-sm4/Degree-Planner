@@ -210,6 +210,11 @@ public class DegreePlannerModel  extends AbstractModel{
 		try {
 			int id = Integer.parseInt(split[1]);
 			int semester = Integer.parseInt(split[2]) - 1;
+			if(semester >= plan.getSemesters().size()) {
+				ModelEvent me = new ModelEvent(this, 1, "", 7, getPlanForView());
+				notifyChanged(me);
+				return;
+			}
 			if(plan.getSemesters().get(semester).getCourses().remove(new Course(id, subject, null, 0, null, null, false))) {
 				removeCoursesWithRequirement(new Course(id, subject, null, 0, null, null, false), semester);
 				int end = plan.getSemesters().size();
