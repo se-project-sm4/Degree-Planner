@@ -115,6 +115,18 @@ public class DegreePlannerModelTest {
 	}
 	
 	@Test
+	void testRemoveMajor() {
+		DegreePlannerModel degreePlannerModel = new DegreePlannerModel("1");
+		degreePlannerModel.getDegreePlan().setMajors(new ArrayList<Major>());
+		degreePlannerModel.addMajor("Computer Science");
+		degreePlannerModel.removeMajor("doesn't exist");
+		assertEquals(1, degreePlannerModel.getDegreePlan().getMajors().size());
+		assertEquals(new Major("Computer Science", null, 0), degreePlannerModel.getDegreePlan().getMajors().get(0));
+		degreePlannerModel.removeMajor("Computer Science");
+		assertEquals(0, degreePlannerModel.getDegreePlan().getMajors().size());
+	}
+	
+	@Test
 	void testAddMinor() {
 		DegreePlannerModel degreePlannerModel = new DegreePlannerModel("1");
 		degreePlannerModel.getDegreePlan().setMinors(new ArrayList<Minor>());
