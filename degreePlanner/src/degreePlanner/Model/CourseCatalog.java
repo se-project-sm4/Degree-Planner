@@ -41,6 +41,10 @@ public class CourseCatalog {
 		Course art2314 = new Course(2314, "ART", null, 3, "Introduction to Music", "introductory course of expression through music", false);
 		Course art2315 = new Course(2315, "ART", null, 3, "Introduction to Dance", "introductory course of expression through dance", false);
 		Course art2316 = new Course(2316, "ART", null, 3, "Introduction to Theatre", "introductory course of expression through theatre", false);
+		Course art1301 = new Course(1301, "ART", null, 3, "2-D Design", "Description", false);
+		Course art1302 = new Course(1302, "ART", art1301, 3, "Basic Drawing", "Description", false);
+		Course art1303 = new Course(1303, "ART", art1302, 3, "3-D Design", "Description", false);
+		Course art1305 = new Course(1305, "ART", art1303, 3, "Digital Studio Foundations", "Description", false);
 
 		Course math2471 = new Course(2471, "MATH", null, 3, "Calculus I", "introductory course to calculus", false);
 		Course math2358 = new Course(2358, "MATH", math2471, 3, "Discrete Mathematics I", "math encountered in computing hardware and software", false);
@@ -49,7 +53,12 @@ public class CourseCatalog {
 		Course math3305 = new Course(3305, "MATH", math2472, 3, "Introduction to Probability and Statistics", "introductory course to statistics", false);
 		Course math3373 = new Course(3373, "MATH", math2472, 3, "Calculus III", "continuation of calculus II", false);
 		Course math3377 = new Course(3377, "MATH", math2472, 3, "Linear Algebra", "introductory course for linear algebra", false);
-		
+		Course math3330 = new Course(3330, "MATH", math2472, 3, "Introduction to Advanced Mathematics", "Description", false);
+		Course math3380 = new Course(3380, "MATH", math3330, 3, "Analysis I", "Description", false);
+		Course math3383 = new Course(3383, "MATH", math2472, 3, "Numerical Analysis I", "Description", false);
+		Course math4305 = new Course(4305, "MATH", math3305, 3, "Probability and Statistics", "Description", false);
+		Course math3348 = new Course(3348, "MATH", math2472, 3, "Deterministic Operations Research", "Description", false);
+
 		Course sci1330 = new Course(1330, "SCI", null, 4, "Biology I", "introductory course for cellular and molecular biology.", false);
 		Course sci1331 = new Course(1331, "SCI", sci1330, 4, "Biology II", "second introductory course for cellular and molecular biology.", false);
 		Course sci1332 = new Course(1332, "SCI", null, 4, "Chemistry I", "introductory course covering atomic and molecular structure, bonding, states of matter, solutions, and descriptive chemistry.", false);
@@ -67,7 +76,37 @@ public class CourseCatalog {
 		Course hist1310 = new Course(1310, "HIST", null, 3, "History of the United States to 1877", "A general survey of the history of the United States from its settlement to the end of Reconstruction.", false);
 		Course hist1320 = new Course(1320, "HIST", null, 3, "History of the United States, 1877 to Date", "A general survey of the history of the United States from Reconstruction to present.", false);
 		
+		Course bus2310 = new Course(2310, "BUS", null, 3, "Introduction to Business in a Global Environment", "Description", false);
+		Course bus2361 = new Course(2361, "BUS", null, 3, "Introduction to Financial Accounting", "Description", false);
+		Course bus2362 = new Course(2362, "BUS", bus2361, 3, "Introduction to Managerial Accounting", "Description", false);
+		Course bus1323 = new Course(1323, "BUS", null, 3, "Introduction to Microcomputer Applications", "Description", false);
+		Course bus2314 = new Course(2314, "BUS", null, 3, "Principles of Microeconomics", "Description", false);
+		Course bus2315 = new Course(2315, "BUS", bus2314, 3, "Principles of Macroeconomics", "Description", false);
+		Course bus2363 = new Course(2363, "BUS", null, 3, "Legal Environment of Business", "Description", false);
+		Course bus2333 = new Course(2333, "BUS", null, 3, "Business Statistics", "Description", false);
+		Course bus3303 = new Course(3303, "BUS", null, 3, "Management of Organizations", "Description", false);
+		Course bus3343 = new Course(3343, "BUS", null, 3, "Principles of Marketing", "Description", false);
+		Course bus3380 = new Course(3380, "BUS", bus2333, 3, "Enterprise Information Technology and Business Intelligence", "Description", false);
+		Course bus3312 = new Course(3312, "BUS", bus2333, 3, "Business Finance", "Description", false);
+		Course bus3453 = new Course(3453, "BUS", null, 3, "Business Communication and Professional Development", "Description", false);
+		Course bus4335 = new Course(4335, "BUS", bus3303, 3, "Strategic Management and Business Policy", "Description", false);
+
 		//add more
+		List<Course> bus = new ArrayList<Course>();
+		bus.add(bus2310);
+		bus.add(bus2361);
+		bus.add(bus2362);
+		bus.add(bus1323);
+		bus.add(bus2314);
+		bus.add(bus2315);
+		bus.add(bus2363);
+		bus.add(bus2333);
+		bus.add(bus3303);
+		bus.add(bus3343);
+		bus.add(bus3380);
+		bus.add(bus3312);
+		bus.add(bus3453);
+		bus.add(bus4335);
 		
 		List<Course> cs = new ArrayList<Course>();
 		cs.add(cs1428);
@@ -100,6 +139,10 @@ public class CourseCatalog {
 		art.add(art2314);
 		art.add(art2315);
 		art.add(art2316);
+		art.add(art1301);
+		art.add(art1302);
+		art.add(art1303);
+		art.add(art1305);
 
 		List<Course> math = new ArrayList<Course>();
 		math.add(math2471);
@@ -109,7 +152,11 @@ public class CourseCatalog {
 		math.add(math3373);
 		math.add(math3377);
 		math.add(math3398);
-
+		math.add(math3380);
+		math.add(math3383);
+		math.add(math4305);
+		math.add(math3348);
+		
 		List<Course> sci = new ArrayList<Course>();
 		sci.add(sci1330);
 		sci.add(sci1331);
@@ -157,6 +204,9 @@ public class CourseCatalog {
 
 		map.put("HIST", 8);
 		catalog.add(hist);
+		
+		map.put("BUS", 9);
+		catalog.add(bus);
 	}
 	
 	public Course findCourse(int id, String subject){

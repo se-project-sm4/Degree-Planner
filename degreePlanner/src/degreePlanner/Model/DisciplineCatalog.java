@@ -26,17 +26,29 @@ public class DisciplineCatalog {
 		csMajorReqs.add(new Requirement("MATH", 16));
 		csMajorReqs.add(new Requirement("CS", 43));
 		csMajorReqs.add(new Requirement("SCI", 16));
-
+		
+		List<Requirement> busMajorReqs = new ArrayList<>();
+		busMajorReqs.add(new Requirement("BUS", 43));
+		
+		List<Requirement> mathMajorReqs = new ArrayList<>();
+		mathMajorReqs.add(new Requirement("MATH", 36));
+		
 		List<Requirement> mathMinorReqs = new ArrayList<>();
 		mathMinorReqs.add(new Requirement("MATH", 20));
 		
+		List<Requirement> artMinorReqs = new ArrayList<>();
+		artMinorReqs.add(new Requirement("ART", 24));
+		
 		//add more
 		
-		majors.add(new Major("Computer Science", csMajorReqs, 9));
+		majors.add(new Major("Computer Science", csMajorReqs, 0));
+		majors.add(new Major("Business Administration", busMajorReqs, 0));
+		majors.add(new Major("Mathematics", mathMajorReqs, 0));
 		
 		//add more
 		
 		minors.add(new Minor("Mathematics", mathMinorReqs, 0));
+		minors.add(new Minor("Art", artMinorReqs, 0));
 	}
 	
 	public Major findMajor(String major) {
