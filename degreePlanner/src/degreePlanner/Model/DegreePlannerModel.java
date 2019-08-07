@@ -116,10 +116,11 @@ public class DegreePlannerModel  extends AbstractModel{
 						if(plan.getSemesters().get(j).getCourses().contains(catalog.getCatalog().get(catalog.getMap().get(key)).get(i).getPrerequisite())) {
 							if(plan.getSemesters().size() <= ++j) {
 								addSemester();
-							}
-							while(plan.getSemesters().get(j).getHours() + catalog.getCatalog().get(catalog.getMap().get(key)).get(i).getHours() > plan.getSemesters().get(j).getMaxHours()) {
-								if(plan.getSemesters().size() == ++j){
-									addSemester();
+							}else {
+								while(plan.getSemesters().get(j).getHours() + catalog.getCatalog().get(catalog.getMap().get(key)).get(i).getHours() > plan.getSemesters().get(j).getMaxHours()) {
+									if(plan.getSemesters().size() == ++j){
+										addSemester();
+									}
 								}
 							}
 							map.put(key, map.get(key) - catalog.getCatalog().get(catalog.getMap().get(key)).get(i).getHours());
