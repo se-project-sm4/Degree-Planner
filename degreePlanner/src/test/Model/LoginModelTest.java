@@ -16,7 +16,7 @@ public class LoginModelTest {
 	@Test
 	void testAll() {
 		LoginModel loginModel = new LoginModel();
-		String username = "user10";
+		String username = "user1000";
 		assertEquals(false, loginModel.login(username, "password"));
 		assertEquals(true, loginModel.register(username, "password"));
 		assertEquals(false, loginModel.register(username, "password"));

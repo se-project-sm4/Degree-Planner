@@ -146,7 +146,7 @@ public class DegreePlannerModelTest {
 	@Test
 	void testRemoveMinor() {
 		DegreePlannerModel degreePlannerModel = new DegreePlannerModel("1");
-		degreePlannerModel.getDegreePlan().setMajors(new ArrayList<Major>());
+		degreePlannerModel.getDegreePlan().setMinors(new ArrayList<Minor>());
 		degreePlannerModel.addMinor("Mathematics");
 		degreePlannerModel.removeMinor("doesn't exist");
 		assertEquals(1, degreePlannerModel.getDegreePlan().getMinors().size());
